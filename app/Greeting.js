@@ -45,6 +45,3 @@ export default class Greeting extends React.Component {
   };
 }
 
-// Update the Greeting component to be a `class` with a state Object that has a `counter` property
-// Show the counter value as a heading e.g. “Counter: 0”
-// Update the button to increment the counter
