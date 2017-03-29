@@ -16,7 +16,7 @@ export default function Root() {
      <Topbar/>
 
      <Explore/>
-     <Playlists/>
+     {/*<Playlists/>*/}
 
      <Player/>
    </div>
