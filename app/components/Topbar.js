@@ -5,7 +5,7 @@ export default function Topbar() {
     <header className="headerStyle">
       <nav className="nav-style">
         <a href="#" className="logo-style">
-          <img src="#" alt="#"/>
+          <i className="logo-icon fa fa-mixcloud" aria-hidden="true"/>
         </a>
         <div className="nav-tabs">
           <div className="tab">
@@ -21,8 +21,8 @@ export default function Topbar() {
         </div>
         <div className="search-log">
           <div className="search-nav">
-            <i>♀</i>
-            <input type="text" className="nav-search-input"/>
+            <i className="fa fa-search"></i>
+            <input type="text" className="nav-search-input" value={'search'}/>
           </div>
 
           <a href="#" className="nav-log">Sign Out</a>

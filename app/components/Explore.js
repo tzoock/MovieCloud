@@ -4,12 +4,12 @@ export default function Explore() {
     <div>
       <div>
         <ul className="genere-style">
-          <li className="genere-style"><a href="#">Jazz</a></li>
-          <li className="genere-style"><a href="#">Classic</a></li>
-          <li className="genere-style"><a href="#">Rock</a></li>
-          <li className="genere-style"><a href="#">Metal</a></li>
-          <li className="genere-style"><a href="#">ballads</a></li>
-          <li className="genere-style"><a href="#">Shity Music</a></li>
+          <li><a href="#">Jazz</a></li>
+          <li><a href="#">Classic</a></li>
+          <li><a href="#">Rock</a></li>
+          <li><a href="#">Metal</a></li>
+          <li><a href="#">ballads</a></li>
+          <li><a href="#">Shity Music</a></li>
         </ul>
       </div>
       <div>

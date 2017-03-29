@@ -10,15 +10,15 @@ import Player from './Player';
 export default function Root() {
   return (
    <div>
-     {/*<Signup/>*/}
+     <Signup/>
      {/*<Signin/>*/}
 
-     <Topbar/>
+     {/*<Topbar/>*/}
 
-     <Explore/>
+     {/*<Explore/>*/}
      {/*<Playlists/>*/}
 
-     <Player/>
+     {/*<Player/>*/}
    </div>
   );
 }
