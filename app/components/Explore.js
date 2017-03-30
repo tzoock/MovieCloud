@@ -42,24 +42,15 @@ export default class Explore extends React.Component {
           <div>
             <div>
               <div>
-
-              <ul className="genere-style">
-
-                <li><a href="#">Jazz</a></li>
-
-                <li><a href="#">Classic</a></li>
-
-                <li><a href="#">Rock</a></li>
-
-                <li><a href="#">Metal</a></li>
-
-                <li><a href="#">ballads</a></li>
-
-                <li><a href="#">Shity Music</a></li>
-
-              </ul>
-
-            </div>
+                <ul className="genere-style">
+                  <li><a href="#">Jazz</a></li>
+                  <li><a href="#">Classic</a></li>
+                  <li><a href="#">Rock</a></li>
+                  <li><a href="#">Metal</a></li>
+                  <li><a href="#">ballads</a></li>
+                  <li><a href="#">Shity Music</a></li>
+                </ul>
+              </div>
               <h2>Genre:</h2>
               <div className="song-cards-wrapper">
                 {this.state.songs.map((song, i) => <div key={song.id} className="song-card">

@@ -129,12 +129,13 @@ input[type=text].nav-search-input {
 .song-cards-wrapper {
   padding: 30px;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 
 }
 
 .song-card {
-  //margin: 10px;
+  margin: 10px;
+  position: relative;
   padding: 10px;
   border: 1px solid #D8D8D8;
   background-color: #fff;
@@ -158,6 +159,16 @@ input[type=text].nav-search-input {
   font-size: 0.69rem;
   width: 100%;
 }
+
+.song-card .love-it {
+
+  color: #D8D8D8;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+
 
 .signin {
   background-color: #FFFFFF;
