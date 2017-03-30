@@ -1,4 +1,5 @@
 import React from "react"
+import MDSpinner from "react-md-spinner";
 import SongCard from "./SongCard"
 
 export default class Explore extends React.Component {
@@ -29,19 +30,43 @@ export default class Explore extends React.Component {
   render() {
     switch (this.state.loading) {
       case 'loading':
-        return <div>Loading...</div>;
+        return (
+          <div className="midMe">
+            <MDSpinner size={100} duration={2000} singleColor="#03a9f4"/>
+          </div>
+        );
       case 'error':
         return <div>Error!</div>;
       case 'loaded':
         return (
           <div>
             <div>
-              <ul>
-                {this.state.songs.map((song, i) => <li key={song.id} className="song-card">
-                    <SongCard props={this.state.songs[i]}/>
-                  </li>
-                )}
+              <div>
+
+              <ul className="genere-style">
+
+                <li><a href="#">Jazz</a></li>
+
+                <li><a href="#">Classic</a></li>
+
+                <li><a href="#">Rock</a></li>
+
+                <li><a href="#">Metal</a></li>
+
+                <li><a href="#">ballads</a></li>
+
+                <li><a href="#">Shity Music</a></li>
+
               </ul>
+
+            </div>
+              <h2>Genre:</h2>
+              <div className="song-cards-wrapper">
+                {this.state.songs.map((song, i) => <div key={song.id} className="song-card">
+                    <SongCard props={this.state.songs[i]}/>
+                  </div>
+                )}
+              </div>
             </div>
             <div>
               <h5>Current page number</h5>
@@ -56,23 +81,5 @@ export default class Explore extends React.Component {
 ;
 
 
-{/*<div>*/
-}
-{/*<ul className="genere-style">*/
-}
-{/*<li><a href="#">Jazz</a></li>*/
-}
-{/*<li><a href="#">Classic</a></li>*/
-}
-{/*<li><a href="#">Rock</a></li>*/
-}
-{/*<li><a href="#">Metal</a></li>*/
-}
-{/*<li><a href="#">ballads</a></li>*/
-}
-{/*<li><a href="#">Shity Music</a></li>*/
-}
-{/*</ul>*/
-}
-{/*</div>*/
-}
+
+

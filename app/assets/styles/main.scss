@@ -39,14 +39,81 @@ li {
   list-style: none;
 }
 
+.top-bar {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  background-color: #2196F3;
+  width: 100%;
+  padding: 20px;
+}
 
+.nav-style {
+  display: flex;
+  align-items: center;
+}
 
+.logo-style {
 
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
 
+.logo-style i {
+  font-size: 30px;
+  margin-left: 10px;
+}
 
+.logo-style p {
+  padding-left: 10px;
+  font-size: 20px;
+  margin-right: 30px;
+}
 
+.tab {
+  text-align: center;
+  color: #fff;
+  height: 64px;
+  padding: 22px 10px;
+  font-size: 15px;
+}
 
+.selected {
+  height: 64px;
+  background-color: #1E88E5;
+}
 
+.search-nav {
+  margin-left: 387px;
+  background-color: #1E88E5;
+  border: 1px solid #FFFFFF;
+  border-radius: 25px;
+  order: 4;
+}
+
+.search-nav i {
+  margin: 2px 4px;
+  color: #FFFFFF;
+}
+
+input[type=text].nav-search-input {
+  border: none;
+  width: 235px;
+  padding: 3px 32px 3px 10px;
+  color: #e3e3e3;
+  font-weight: 300;
+  background-color: transparent;
+}
+
+.nav-log {
+  order: 5;
+}
+
+.midMe {
+  padding-top: 10%;
+  padding-left: 45%;
+}
 
 .genere-style {
   display: flex;
@@ -55,99 +122,23 @@ li {
   margin-right: 5px;
 }
 
-.genere-style li > a{
+.genere-style li > a {
   color: black;
 }
 
-.logo-icon {
-  color: #fff;
-  font-size: 20px;
-}
+.song-cards-wrapper {
+  padding: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
-.nav-tabs {
-  float: left;
-  height: 50px;
-  padding: 11px;
-
-}
-
-.tab {
-  display: table-cell;
-  //vertical-align: middle;
-  padding: 3px;
-  color: #fff;
-  height: 50px;
-}
-
-.selected {
-  height: 50px;
-  color: red;
-  border: 2px solid red;
-}
-
-.search-log {
-  float: right;
-  margin-top: 10px;
-}
-
-
-.search-nav{
-  position: relative;
-background-color: #2b2b2b;
-border-radius: 3px;
-
-  vertical-align: middle;
-}
-
-input[type=text].nav-search-input {
-  width: 250px;
-  height: auto;
-  padding: 6px 10px 6px 30px;
-  color: #e3e3e3;
-  font-weight: 300;
-  background-color: transparent;
-  display: table-cell;
-}
-
-.nav-log {
-  display: table-cell;
-  vertical-align: middle;
-  display: table-cell;
-}
-
-.logo-style {
-  padding: 11px 0;
-  color: #fff;
-  fontSize: 20px;
-  float: left;
-
-}
-
-.nav-style {
-  //height: 100%;
-  display: block;
-  width: 100vw;
-  margin: 0 auto;
-
-}
-
-.headerStyle {
-  flex-direction: row;
-  height: 50px;
-  background-color: #3a3f41;
-  box-sizing: border-box;
-  position: static;
-  top: 0;
-  left: 0;
-  right: 0;
 }
 
 .song-card {
-  margin: 10px;
+  //margin: 10px;
   padding: 10px;
-  border: 1px solid #e3e3e3;
+  border: 1px solid #D8D8D8;
   background-color: #fff;
-  display: block;
+  display: inline-flex;
   width: 220px;
   height: 140px;
 }
@@ -157,7 +148,7 @@ input[type=text].nav-search-input {
   border: 1px solid #0a0b0d;
   width: 200px;
   height: 85px;
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
   background-size: cover;
 
 }
@@ -177,15 +168,13 @@ input[type=text].nav-search-input {
 }
 
 .sign-container {
-width: 30%;
+  width: 30%;
   margin: 0 auto;
   display: flex;
   padding-top: 40px;
 
   flex-direction: column;
 }
-
-
 
 .sign-logo {
   color: #2196F3;
