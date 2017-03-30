@@ -5,20 +5,37 @@ import Topbar from './Topbar';
 import Explore from './Explore';
 import Playlists from './Playlists';
 import Player from './Player';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'
 
 
-export default function Root() {
-  return (
-   <div>
-     <Signup/>
-     {/*<Signin/>*/}
+export default class Root extends React.Component{
+  constructor() {
+    super();
+    this.state = {}
+  }
 
-     {/*<Topbar/>*/}
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          {/*<Signup/>*/}
+          {/*<Signin/>*/}
 
-     {/*<Explore/>*/}
-     {/*<Playlists/>*/}
+          <Topbar/>
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to="/Explore"/>} component={Explore}/>
+            <Route path={"/Explore"} component={Explore}/>
+            <Route path={"/Playlists"} component={Playlists}/>
 
-     {/*<Player/>*/}
-   </div>
-  );
+          </Switch>
+          {/*<Player/>*/}
+        </div>
+      </BrowserRouter>
+    );
+  }
 }

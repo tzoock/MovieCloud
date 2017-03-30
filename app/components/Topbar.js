@@ -1,31 +1,35 @@
-export default function Topbar() {
+import {
+  NavLink,
+  Link
+} from "react-router-dom"
 
+export default function Topbar() {
 
   return (
     <header className="headerStyle">
       <nav className="nav-style">
-        <a href="#" className="logo-style">
-          <i className="logo-icon fa fa-mixcloud" aria-hidden="true"/>
-        </a>
+        <Link to="/" className="logo-style">
+          <i className="logo-icon fa fa-mixcloud"/>
+        </Link>
         <div className="nav-tabs">
           <div className="tab">
-            <a href="#">
+            <NavLink to="/Explore" activeClassName='selected'>
               Explore
-            </a>
+            </NavLink>
           </div>
           <div className="tab">
-            <a href="#">
+            <NavLink to="/Playlists" activeClassName='selected'>
               Play Lists
-            </a>
+            </NavLink>
           </div>
         </div>
         <div className="search-log">
           <div className="search-nav">
             <i className="fa fa-search"></i>
-            <input type="text" className="nav-search-input" value={'search'}/>
+            <input type="text" className="nav-search-input" />
           </div>
 
-          <a href="#" className="nav-log">Sign Out</a>
+          <Link to="#" className="nav-log">Sign Out</Link>
         </div>
       </nav>
     </header>

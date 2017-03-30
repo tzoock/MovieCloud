@@ -66,16 +66,23 @@ li {
 
 .nav-tabs {
   float: left;
-  height: 100%;
+  height: 50px;
   padding: 11px;
 
 }
 
 .tab {
   display: table-cell;
-  vertical-align: middle;
+  //vertical-align: middle;
   padding: 3px;
   color: #fff;
+  height: 50px;
+}
+
+.selected {
+  height: 50px;
+  color: red;
+  border: 2px solid red;
 }
 
 .search-log {
@@ -88,21 +95,24 @@ li {
   position: relative;
 background-color: #2b2b2b;
 border-radius: 3px;
-  display: table-cell;
+
   vertical-align: middle;
 }
 
 input[type=text].nav-search-input {
-  width: 290px;
+  width: 250px;
+  height: auto;
   padding: 6px 10px 6px 30px;
   color: #e3e3e3;
   font-weight: 300;
   background-color: transparent;
+  display: table-cell;
 }
 
 .nav-log {
   display: table-cell;
   vertical-align: middle;
+  display: table-cell;
 }
 
 .logo-style {
@@ -116,7 +126,7 @@ input[type=text].nav-search-input {
 .nav-style {
   //height: 100%;
   display: block;
-  width: 1170px;
+  width: 100vw;
   margin: 0 auto;
 
 }
@@ -133,26 +143,28 @@ input[type=text].nav-search-input {
 }
 
 .song-card {
+  margin: 10px;
   padding: 10px;
   border: 1px solid #e3e3e3;
   background-color: #fff;
   display: block;
-  width: 215px;
-  height: 130px;
+  width: 220px;
+  height: 140px;
 }
 
 .song-card-img {
   display: block;
   border: 1px solid #0a0b0d;
-  width: 100%;
-  height: 70px;
+  width: 200px;
+  height: 85px;
   margin-bottom: 10px;
   background-size: cover;
 
 }
 
 .song-card-info {
-  display: block;
+  //display: block;
+  font-size: 0.69rem;
   width: 100%;
 }
 
