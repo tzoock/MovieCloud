@@ -1,4 +1,4 @@
-export default function Signup() {
+export default function Login() {
   return (
     <div className="signin ">
       <div className="sign-container">
@@ -7,7 +7,7 @@ export default function Signup() {
           <p>SongCloud</p>
         </div>
         <form action="submit" className="signin-form">
-          <h3>Create account</h3>
+          <h3>Log in</h3>
           <label htmlFor="user-name">User Name</label>
           <br/>
           <input type="text" id="user-name" className="signin-input"/>
@@ -15,13 +15,13 @@ export default function Signup() {
           <label htmlFor="password">Password</label>
           <br/>
           <input type="text" id="password" className="signin-input"/>
-          <button className="continue-btn">CONTINUE</button>
           <div className="ca-holder">
-            <p>Already have an account?
-              <a href="#" className="ca-link">Sign In</a>
+            <p>Don’t have an account yet?
+              <a href="#" className="ca-link">Create Account</a>
             </p>
           </div>
         </form>
+
       </div>
     </div>
   );

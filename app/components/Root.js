@@ -1,6 +1,6 @@
 import React from 'react';
 import Signup from './Signup';
-import Signin from './Signin';
+import Login from './Login';
 import Topbar from './Topbar';
 import Explore from './Explore';
 import Playlists from './Playlists';
@@ -24,7 +24,7 @@ export default class Root extends React.Component{
       <BrowserRouter>
         <div>
           {/*<Signup/>*/}
-          {/*<Signin/>*/}
+          {/*<Login/>*/}
 
           <Topbar/>
           <Switch>
@@ -33,7 +33,7 @@ export default class Root extends React.Component{
             <Route path={"/Playlists"} component={Playlists}/>
 
           </Switch>
-          {/*<Player/>*/}
+
         </div>
       </BrowserRouter>
     );

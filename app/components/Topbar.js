@@ -19,15 +19,15 @@ export default function Topar() {
           Play Lists
         </NavLink>
       </nav>
-
+<div className="right-top-bar">
       <div className="search-nav">
         <i className="fa fa-search"/>
-        <input type="text" className="nav-search-input"/>
+        <input type="text" className="nav-search-input" placeholder="SEARCH"/>
       </div>
       <div className="nav-log">
         <Link to="#">Sign Out</Link>
       </div>
-
+</div>
       {/*<nav className="nav-style">*/}
       {/*<Link to="/" className="logo-style">*/}
       {/*<i className="logo-icon fa fa-mixcloud"/>*/}
