@@ -30,20 +30,19 @@ export default class SongCard extends React.Component {
     }
   }
 
-  toggleHeart (classname) {
-    if (classname==='heart-font fa fa-heart-o') {
-      this.heart.className="heart-font fa fa-heart check-h";
+  toggleHeart(classname) {
+    if (classname === 'heart-font fa fa-heart-o') {
+      this.heart.className = "heart-font fa fa-heart check-h";
     }
-    if (classname==="heart-font fa fa-heart check-h") {
-      this.heart.className='heart-font fa fa-heart-o';
+    if (classname === "heart-font fa fa-heart check-h") {
+      this.heart.className = 'heart-font fa fa-heart-o';
     }
   }
 
-  addToPlaylistMnu(event) {
+  addToPlaylistMnu() {
     this.toggleHeart(this.heart.className);
+    this.heart.querySelector('.drop-heart').style.display='block'
 
-    console.info(event.target);
-    console.info('click');
   }
 
   render() {
@@ -61,8 +60,8 @@ export default class SongCard extends React.Component {
         <i className="heart-font fa fa-heart-o" ref={(heartDomElm) => {
           this.heart = heartDomElm
         }} onClick={() => {
-           this.addToPlaylistMnu(event)
-        }}/>
+          this.addToPlaylistMnu()
+        }}>
           <div className="drop-heart">
             <div className="drop-heart-header">
               <h6>Add to Playlist</h6>
@@ -75,7 +74,7 @@ export default class SongCard extends React.Component {
               </li>
             </ul>
           </div>
-
+        </i>
 
       </div>
     )
