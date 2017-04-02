@@ -72,6 +72,7 @@ li {
   width: 100%;
   padding: 20px;
   position: fixed;
+  top: 0;
   z-index: 25;
 }
 
@@ -113,6 +114,8 @@ li {
 
 .right-top-bar {
   display: flex;
+
+  justify-content: space-between;
 }
 
 .search-nav {
@@ -120,6 +123,7 @@ li {
   border: 1px solid #FFFFFF;
   border-radius: 25px;
   order: 4;
+  margin-right: 25px;
 }
 
 .search-nav i {
@@ -134,6 +138,10 @@ input[type=text].nav-search-input {
   color: #e3e3e3;
   font-weight: 300;
   background-color: transparent;
+}
+
+.nav-search-input::placeholder {
+  color: #fff;
 }
 
 .nav-log {
@@ -153,6 +161,10 @@ input[type=text].nav-search-input {
 .genres-section {
   display: flex;
   background-color:  #DDE4E6;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 20;
 }
 
 .genres-section p {
@@ -238,7 +250,47 @@ padding: 0;
 
 .heart-font:hover {
   color: #2196F3;
-  transform: scale(1.10);
+
+}
+
+
+.drop-heart {
+  //display: none;
+  padding: 10px;
+  position: absolute;
+  z-index: 15;
+  width: 130px;
+  color: #000;
+  right: 0;
+  box-shadow: 0px 2px 8px 0px #000000;
+  background-color: #fff;
+}
+
+.drop-heart-header {
+  border-bottom: 1px solid #E0E0E0 ;
+  padding: 3px;
+}
+
+.drop-heart h6 {
+  color: #4A4A4A;
+  font-size: 11px;
+  margin: 0;
+}
+
+.drop-heart a {
+  color: #2196F3;
+  font-size: 9px;
+}
+
+.check-h {
+  color: #2196F3;
+}
+
+.playlist-list {
+  padding: 0;
+  font-size: 9px;
+  color: #4A4A4A;
+  margin: 5px;
 }
 
 .pager {

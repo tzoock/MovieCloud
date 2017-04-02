@@ -2,7 +2,7 @@ import React from 'react';
 import Signup from './Signup';
 import Login from './Login';
 import Topbar from './Topbar';
-import Explore from './Explore';
+import Explore from './Explore/Explore';
 import Playlists from './Playlists';
 import Player from './Player';
 import {
@@ -16,7 +16,10 @@ import {
 export default class Root extends React.Component{
   constructor() {
     super();
-    this.state = {}
+    this.state = {
+
+    }
+
   }
 
   render() {
@@ -28,12 +31,16 @@ export default class Root extends React.Component{
 
           <Topbar/>
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/Explore"/>} component={Explore}/>
-            <Route path={"/Explore"} component={Explore}/>
+            <Route exact path="/" component={() => {return <Redirect to="/Explore/trance"/>}}/>
+
+            <Route exact path="/Explore" component={() => {return <Redirect to="/Explore/trance"/>}}/>
+
+            <Route path="/Explore/:genre"  component={ Explore }/>
+
             <Route path={"/Playlists"} component={Playlists}/>
 
           </Switch>
-
+          <Player/>
         </div>
       </BrowserRouter>
     );
