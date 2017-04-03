@@ -11,10 +11,10 @@ export default function GenreChooser () {
     <div className="genres-section">
       <p>Genres:</p>
       <ul className="genere-style">
-        <li><NavLink to="/Explore/trance">Trance</NavLink></li>
+        <li><NavLink to="/Explore/trance" className="genre-tab">Trance</NavLink></li>
         <li><NavLink to="/Explore/dubstep">Dub-Step</NavLink></li>
         <li><NavLink to="/Explore/house">House</NavLink></li>
-        <li><NavLink to="/">Metal</NavLink></li>
+        <li><NavLink to="/Explore/metal">Metal</NavLink></li>
         <li><NavLink to="">ballads</NavLink></li>
         <li><NavLink to="">Shity Music</NavLink></li>
       </ul>

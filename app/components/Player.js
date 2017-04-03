@@ -19,7 +19,7 @@ render() {
       {/*</div>*/}
       <div>
         <audio controls
-               src="https://api.soundcloud.com/tracks/79973942/stream?client_id=e582b63d83a5fb2997d1dbf2f62705da"
+               src="https://api.soundcloud.com/tracks/79973942/stream?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z"
                type="audio/ogg"/>
       </div>
     </footer>

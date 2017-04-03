@@ -45,16 +45,25 @@ export default class SongCard extends React.Component {
 
   }
 
+  playMe() {
+    console.info(this.cardImg);
+    const kk = this.props.data.id;
+    this.props.ola(kk)
+  }
+
+
+
   render() {
     return (<div>
-
-        <div className="song-card-img-holder">
-          <img src={this.props.props.artwork_url.replace("large", "t300x300")} className="song-card-img"/>
+        <div className="song-card-img-holder" ref={(cardImg)=>{
+          this.cardImg=cardImg
+        }} onClick={()=>{this.playMe()}}>
+          <img src={this.props.data.artwork_url? this.props.data.artwork_url.replace("large", "t300x300") : this.props.data.artwork_url} className="song-card-img"/>
         </div>
         <div className="song-card-info">
-          <div className="song-title">{SongCard.songTitleLimiter(this.props.props.title)}</div>
+          <div className="song-title">{SongCard.songTitleLimiter(this.props.data.title)}</div>
           <div className="song-duration">
-            <i className="fa fa-clock-o"/> {SongCard.msToTime(this.props.props.duration)}
+            <i className="fa fa-clock-o"/> {SongCard.msToTime(this.props.data.duration)}
           </div>
         </div>
         <i className="heart-font fa fa-heart-o" ref={(heartDomElm) => {
@@ -62,6 +71,7 @@ export default class SongCard extends React.Component {
         }} onClick={() => {
           this.addToPlaylistMnu()
         }}>
+        </i>
           <div className="drop-heart">
             <div className="drop-heart-header">
               <h6>Add to Playlist</h6>
@@ -74,7 +84,7 @@ export default class SongCard extends React.Component {
               </li>
             </ul>
           </div>
-        </i>
+
 
       </div>
     )
