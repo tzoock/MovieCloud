@@ -1,6 +1,5 @@
 import React from 'react';
-import Signup from './Signup';
-import Login from './Login';
+
 import Topbar from './Topbar';
 import Explore from './Explore/Explore';
 import Playlists from './Playlists';
@@ -17,76 +16,86 @@ export default class Root extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentTrack: {}
-    }
+      currentTrack: {},
+      playlists: [
+        {
+          id: 111,
+          title: 'my 1st playlist',
+          songs: [
+            {
+              id: 250711755,
+              title: "The Chainsmokers - Don't Let Me Down (Illenium Remix)",
+              duration: 219082,
+              stream_url: "https://api.soundcloudcom/tracks/250711755/stream",
+              uri: "https://api.soundcloud.com/tracks/250711755",
+              artwork_url: "https://i1.sndcdn.com/artworks-000150027827-4exjil-large.jpg"
+            }]
+        },
+        {
+          id: 222,
+          title: 'my 2nd playlist',
+          songs: [
+            {
+              id: 250711755,
+              title: "The Chainsmokers - Don't Let Me Down (Illenium Remix)",
+              duration: 219082,
+              stream_url: "https://api.soundcloud.com/tracks/250711755/stream",
+              uri: "https://api.soundcloud.com/tracks/250711755",
+              artwork_url: "https://i1.sndcdn.com/artworks-000150027827-4exjil-large.jpg"
+            }]
+        }
+      ]
+    };
+
+    this.updateCurrentTrack = this.updateCurrentTrack.bind(this)
   }
 
-  // GetXhr() {
-  //
-  //   const genre = this.props.match.params.genre;
-  //   const clientId = '2t9loNQH90kzJcsFCODdigxfp325aq4z';
-  //
-  //   const xhr = new XMLHttpRequest();
-  //
-  //   xhr.open('GET', `https://api.soundcloud.com/tracks?client_id=${clientId}&limit=15&offset=0&tags=${genre}`);
-  //   console.info('url', `https://api.soundcloud.com/tracks?client_id=${clientId}&limit=15&offset=0&tags=${genre}`);
-  //
-  //   xhr.addEventListener('load', () => {
-  //     this.setState({tracks: JSON.parse(xhr.responseText), Loading: 'loaded'});
-  //   });
-  //   xhr.addEventListener('error', () => {
-  //     this.setState({Loading: 'error'});
-  //   });
-  //   xhr.send();
-  // }
-  //
-  // componentDidMount() {
-  //   this.GetXhr();
-  //
-  // }
-  //
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.match.params.genre === this.props.match.params.genre)
-  //     return;
-  //   this.GetXhr();
-  // }
-  updateCurrentTrack() {
-    this.setState({})
+
+  updateCurrentTrack(song) {
+    const newSong = Object.assign({}, song);
+    this.setState({currentTrack: newSong})
   }
+
 
   render() {
-
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/signup" component={ Signup }/>
-          <Route exact path="/login" component={ Login }/>
+          <Route path="/" render={ () => {
+            return (
+              <div>
 
-          <Route path="/" component={ () => {
-            return <div>
-              <Topbar/>
+                <Topbar/>
 
-              <main>
-                <Switch>
-                  <Route exact path="/" render={() => {
-                    return <Redirect to="/Explore"/>
-                  }}/>
-                  <Route path="/Explore/:genre" component={ Explore }/>
-                  <Route exact path="/Explore" component={() => {
-                    return <Redirect to="/Explore/trance"/>
-                  }}/>
+                <main>
 
-                  <Route path={"/Playlists"} component={Playlists}/>
+                  <Switch>
 
-                </Switch>
-              </main>
+                    <Route exact path="/" render={() => {
+                      return <Redirect to="/Explore"/>
+                    }}/>
 
-              <Player/>
-            </div>
+                    <Route path="/Explore/:genre" render={(props) => {
+                      return <Explore updateCurrentTrack={this.updateCurrentTrack} {...props} />
+                    }}/>
+
+                    <Route exact path="/Explore" component={() => {
+                      return <Redirect to="/Explore/trance"/>
+                    }}/>
+
+                    <Route path={"/Playlists"} render={() => {
+                      return < Playlists playlists={this.state.playlists} updateCurrentTrack={this.updateCurrentTrack}/>
+                    }}/>
+
+                  </Switch>
+                </main>
+
+                <Player currentTrack={this.state.currentTrack}/>
+              </div>
+            )
           }}/>
         </Switch>
       </BrowserRouter>
-
     );
   }
 }

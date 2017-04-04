@@ -15,13 +15,13 @@ export default function Login() {
           <label htmlFor="password">Password</label>
           <br/>
           <input type="text" id="password" className="signin-input"/>
+          <button className="continue-btn">CONTINUE</button>
           <div className="ca-holder">
             <p>Don’t have an account yet?
               <a href="#" className="ca-link">Create Account</a>
             </p>
           </div>
         </form>
-
       </div>
     </div>
   );

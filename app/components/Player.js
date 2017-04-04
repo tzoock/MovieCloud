@@ -1,28 +1,22 @@
 import React from "react"
 
-export default class Player extends React.Component {
-constructor(){
-  super()
+export default function Player (props) {
 
-}
 
-componentDidMount() {
-
-}
-
-render() {
+  const songUrl = `${props.currentTrack.stream_url}?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z`;
   return (
     <footer className="player-footer">
-      {/*<div className="playing-info">*/}
-      {/*<img src={props.props.artwork_url}/>*/}
-      {/*<div>{props.props.title}</div>*/}
-      {/*</div>*/}
+      <div className="playing-info">
+      <img src={props.currentTrack.artwork_url}/>
+      <div>{props.currentTrack.title}</div>
+      </div>
       <div>
         <audio controls
-               src="https://api.soundcloud.com/tracks/79973942/stream?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z"
-               type="audio/ogg"/>
+               src= {songUrl}
+               type="audio/ogg"
+                autoPlay/>
       </div>
     </footer>
   );
 }
-};
+

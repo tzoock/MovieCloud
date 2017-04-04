@@ -18,8 +18,6 @@ export default class Explore extends React.Component {
       limit: 20
     };
 
-    // const genre = this.props.match.params.genre;
-    this.olala = this.olala.bind(this)
   }
 
   nextPage() {
@@ -46,7 +44,7 @@ export default class Explore extends React.Component {
     const xhr = new XMLHttpRequest();
 
     xhr.open('GET', `https://api.soundcloud.com/tracks?client_id=${clientId}&limit=${this.state.limit}&offset=${this.state.offset}&tags=${genre}`);
-    console.info('url', `https://api.soundcloud.com/tracks?client_id=${clientId}&limit=${this.state.limit}&offset=${this.state.offset}&tags=${genre}`);
+
 
     xhr.addEventListener('load', () => {
       this.setState({tracks: JSON.parse(xhr.responseText), Loading: 'loaded'});
@@ -58,11 +56,12 @@ export default class Explore extends React.Component {
   }
 
   componentDidMount() {
+
     this.GetXhr();
   }
 
   componentDidUpdate(prevProps, prevState) {
-
+    // console.info(this.props.updateCurrentTrack);
     if (prevProps.match.params.genre !== this.props.match.params.genre) {
       this.setState({offset: 0}, ()=>{
         this.GetXhr();
@@ -71,18 +70,6 @@ export default class Explore extends React.Component {
     if (prevState.offset !== this.state.offset) {
       this.GetXhr();
     }
-  }
-
-
-  olala(kk) {
-    let index;
-    this.state.tracks.forEach((v, i) => {
-      if (v.id === kk) {
-        index = i;
-        const changin = Object.assign({}, v, {playing: true});
-        this.state.tracks[i].setState(changin)
-      }
-    })
   }
 
 
@@ -109,7 +96,7 @@ export default class Explore extends React.Component {
             <div>
               <div className="song-cards-wrapper">
                 {this.state.tracks.map((song, i) => <div key={song.id} className="song-card">
-                    <SongCard data={this.state.tracks[i]} ola={this.olala}/>
+                    <SongCard data={this.state.tracks[i]} updateCurrentTrack={this.props.updateCurrentTrack}  />
                   </div>
                 )}
               </div>

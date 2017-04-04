@@ -6,16 +6,16 @@ import {
 
 export default class SongCard extends React.Component {
   constructor(props) {
-    super();
+    super(props);
 
 
   }
 
   componentDidMount() {
-    this.heart.onClick
+  console.info(this);
   }
 
-  static msToTime(duration) {
+   static msToTime(duration) {
     const seconds = parseInt((duration / 1000) % 60);
     const minutes = parseInt((duration / (1000 * 60)) % 60);
     return (((minutes < 10) ? "0" + minutes : minutes) + ":" + ((seconds < 10) ? "0" + seconds : seconds));
@@ -45,11 +45,6 @@ export default class SongCard extends React.Component {
 
   }
 
-  playMe() {
-    console.info(this.cardImg);
-    const kk = this.props.data.id;
-    this.props.ola(kk)
-  }
 
 
 
@@ -57,7 +52,7 @@ export default class SongCard extends React.Component {
     return (<div>
         <div className="song-card-img-holder" ref={(cardImg)=>{
           this.cardImg=cardImg
-        }} onClick={()=>{this.playMe()}}>
+        }} onClick={()=>{this.props.updateCurrentTrack(this.props.data)}}>
           <img src={this.props.data.artwork_url? this.props.data.artwork_url.replace("large", "t300x300") : this.props.data.artwork_url} className="song-card-img"/>
         </div>
         <div className="song-card-info">
