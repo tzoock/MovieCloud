@@ -95,7 +95,7 @@ li {
 
 .logo-style p {
   padding-left: 10px;
-  font-size: 20px;
+  font-size: 1.25rem;
   margin-right: 30px;
 }
 
@@ -104,7 +104,7 @@ li {
   color: #fff;
   height: 64px;
   padding: 22px 10px;
-  font-size: 15px;
+  font-size: 0.93rem;
 }
 
 .selected {
@@ -255,9 +255,12 @@ padding: 0;
 
 }
 
-
-.drop-heart {
+.dropdown-heart-hide {
   display: none;
+}
+
+.dropdown-heart {
+  //display: none;
   padding: 10px;
   position: absolute;
   z-index: 15;
@@ -273,13 +276,13 @@ padding: 0;
   padding: 3px;
 }
 
-.drop-heart h6 {
+.dropdown-heart h6 {
   color: #4A4A4A;
   font-size: 11px;
   margin: 0;
 }
 
-.drop-heart a {
+.dropdown-heart a {
   color: #2196F3;
   font-size: 9px;
 }
@@ -288,7 +291,7 @@ padding: 0;
   color: #2196F3;
 }
 
-.playlist-list {
+.playlist-list-of-checkbox {
   padding: 0;
   font-size: 9px;
   color: #4A4A4A;
@@ -339,17 +342,50 @@ width: 100%;
 
 .playlist-header {
   display: flex;
+  align-content: center;
   height: 64px;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12);
   padding: 0 20px;
 }
 
-.playlist-header p {
+.playlist-name {
+
+  align-self: center;
   font-family: Roboto-Light, serif;
   font-size: 22px;
   color: #000000;
 }
 
+.playlist-name-hide {
+  display: none;
+}
+
+.song-count {
+  //align-self: center;
+  text-align: center;
+  background-color: #2196F3;
+  width: 22px;
+  height: 22px;
+  border-radius: 25px;
+  font-size: 12px;
+  color: #FFFFFF;
+  line-height: 22px;
+  margin-top: 10px;
+}
+
+
+input[type=text].input-playlist-name {
+  display: block;
+  border: 0;
+  border-bottom: 1px solid #2196F3;
+  outline: none;
+  width: 415px;
+  font-size: 16px;
+}
+
+.input-playlist-name-hide {
+  display: none;
+}
 //.signin {
 //  background-color: #FFFFFF;
 //  width: 100%;

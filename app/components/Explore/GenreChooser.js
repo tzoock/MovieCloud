@@ -15,8 +15,7 @@ export default function GenreChooser () {
         <li><NavLink to="/Explore/dubstep">Dub-Step</NavLink></li>
         <li><NavLink to="/Explore/house">House</NavLink></li>
         <li><NavLink to="/Explore/metal">Metal</NavLink></li>
-        <li><NavLink to="">ballads</NavLink></li>
-        <li><NavLink to="">Shity Music</NavLink></li>
+        <li><NavLink to="/Explore/ballads">ballads</NavLink></li>
       </ul>
     </div>
   )

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import uuid from 'uuid';
 import Topbar from './Topbar';
 import Explore from './Explore/Explore';
 import Playlists from './Playlists';
@@ -19,7 +19,7 @@ export default class Root extends React.Component {
       currentTrack: {},
       playlists: [
         {
-          id: 111,
+          id: uuid(),
           title: 'my 1st playlist',
           songs: [
             {
@@ -32,11 +32,11 @@ export default class Root extends React.Component {
             }]
         },
         {
-          id: 222,
+          id: uuid(),
           title: 'my 2nd playlist',
           songs: [
             {
-              id: 250711755,
+              id: 25071445,
               title: "The Chainsmokers - Don't Let Me Down (Illenium Remix)",
               duration: 219082,
               stream_url: "https://api.soundcloud.com/tracks/250711755/stream",
@@ -47,7 +47,9 @@ export default class Root extends React.Component {
       ]
     };
 
-    this.updateCurrentTrack = this.updateCurrentTrack.bind(this)
+    this.updateCurrentTrack = this.updateCurrentTrack.bind(this);
+    this.createPlaylist = this.createPlaylist.bind(this);
+    this.changePlaylistName = this.changePlaylistName.bind(this);
   }
 
 
@@ -56,6 +58,22 @@ export default class Root extends React.Component {
     this.setState({currentTrack: newSong})
   }
 
+  createPlaylist() {
+    const newPlaylist = {
+      id: uuid(),
+      title: 'nameLess playlist',
+      songs: []
+    };
+
+    const copyOfPlaylist = [...this.state.playlists];
+    copyOfPlaylist.push(newPlaylist);
+    this.setState({playlists:copyOfPlaylist})
+
+  }
+
+  changePlaylistName(uuu) {
+console.info('uuu');
+  }
 
   render() {
     return (
@@ -76,7 +94,7 @@ export default class Root extends React.Component {
                     }}/>
 
                     <Route path="/Explore/:genre" render={(props) => {
-                      return <Explore updateCurrentTrack={this.updateCurrentTrack} {...props} />
+                      return <Explore updateCurrentTrack={this.updateCurrentTrack} {...props} playlists={this.state.playlists} />
                     }}/>
 
                     <Route exact path="/Explore" component={() => {
@@ -84,7 +102,7 @@ export default class Root extends React.Component {
                     }}/>
 
                     <Route path={"/Playlists"} render={() => {
-                      return < Playlists playlists={this.state.playlists} updateCurrentTrack={this.updateCurrentTrack}/>
+                      return < Playlists playlists={this.state.playlists} updateCurrentTrack={this.updateCurrentTrack} createPlaylist={this.createPlaylist} changePlaylistName={Root.changePlaylistName}/>
                     }}/>
 
                   </Switch>

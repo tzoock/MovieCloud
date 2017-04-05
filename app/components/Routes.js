@@ -1,7 +1,7 @@
 import React from 'react';
 import Signup from './Signup';
 import Login from './Login';
-import Root from './root';
+import Root from './Root';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 export default function Routes () {

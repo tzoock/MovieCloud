@@ -3,6 +3,7 @@ import {
   NavLink,
   Link
 } from "react-router-dom"
+import Heart from "./Heart";
 
 export default class SongCard extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class SongCard extends React.Component {
   }
 
   componentDidMount() {
-  console.info(this);
+
   }
 
    static msToTime(duration) {
@@ -30,22 +31,42 @@ export default class SongCard extends React.Component {
     }
   }
 
-  toggleHeart(classname) {
-    if (classname === 'heart-font fa fa-heart-o') {
-      this.heart.className = "heart-font fa fa-heart check-h";
+  static toggleDropHeart(elm) {
+
+
+    if (elm.className === 'dropdown-heart-hide') {
+      elm.className = "dropdown-heart";
     }
-    if (classname === "heart-font fa fa-heart check-h") {
-      this.heart.className = 'heart-font fa fa-heart-o';
+    else  {
+      elm.className = 'dropdown-heart-hide';
     }
   }
 
-  addToPlaylistMnu() {
-    this.toggleHeart(this.heart.className);
-    this.heart.querySelector('.drop-heart').style.display='block'
+  heartClick() {
+    SongCard.toggleDropHeart(this.dropHeartElm);
+
 
   }
 
-
+  // Heart() {
+  //
+  //   return(
+  //     <div>
+  //       <div className="dropdown-heart">
+  //         <div className="drop-heart-header">
+  //           <h6>Add to Playlist</h6>
+  //           <Link to='/Playlist'>Create playlist +</Link>
+  //         </div>
+  //         <ul className="playlist-list-of checkbox">
+  //           <li>
+  //             <input type="checkbox" id="playlist-checkbox"/>
+  //             <label htmlFor="playlist-checkbox">Rock&roll</label>
+  //           </li>
+  //         </ul>
+  //       </div>
+  //     </div>
+  //   )
+  // }
 
 
   render() {
@@ -61,25 +82,29 @@ export default class SongCard extends React.Component {
             <i className="fa fa-clock-o"/> {SongCard.msToTime(this.props.data.duration)}
           </div>
         </div>
+
         <i className="heart-font fa fa-heart-o" ref={(heartDomElm) => {
           this.heart = heartDomElm
         }} onClick={() => {
-          this.addToPlaylistMnu()
-        }}>
-        </i>
-          <div className="drop-heart">
+          this.heartClick()
+        }}/>
+
+          <div className="dropdown-heart-hide" ref={(dropHeart)=>{this.dropHeartElm = dropHeart}}>
             <div className="drop-heart-header">
               <h6>Add to Playlist</h6>
-              <Link to='/Playlist'>Create playlist +</Link>
+              <Link to='/Playlists'>Create playlist +</Link>
             </div>
-            <ul className="playlist-list">
-              <li>
-                <input type="checkbox" id="cbox1"/>
-                <label htmlFor="cbox1">Rock&roll</label>
-              </li>
+            <ul className="playlist-list-of-checkbox">
+
+              {this.props.playlists.map((playlist)=> {
+                return <li key={playlist.id}>
+                  <input type="checkbox" id="playlist-checkbox"/>
+                  <label htmlFor="playlist-checkbox">{playlist.title}</label>
+                </li>
+              })}
+
             </ul>
           </div>
-
 
       </div>
     )

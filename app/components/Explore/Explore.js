@@ -96,7 +96,7 @@ export default class Explore extends React.Component {
             <div>
               <div className="song-cards-wrapper">
                 {this.state.tracks.map((song, i) => <div key={song.id} className="song-card">
-                    <SongCard data={this.state.tracks[i]} updateCurrentTrack={this.props.updateCurrentTrack}  />
+                    <SongCard data={song} updateCurrentTrack={this.props.updateCurrentTrack} playlists={this.props.playlists} />
                   </div>
                 )}
               </div>

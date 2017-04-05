@@ -20,3 +20,4 @@ export default function Player (props) {
   );
 }
 
+// when get no props make it hide
