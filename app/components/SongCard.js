@@ -8,7 +8,10 @@ import Heart from "./Heart";
 export default class SongCard extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      heartMode: '',
+      dropDownMode: false
+    }
 
   }
 
@@ -16,95 +19,128 @@ export default class SongCard extends React.Component {
 
   }
 
-   static msToTime(duration) {
+  msToTime(duration) {
     const seconds = parseInt((duration / 1000) % 60);
     const minutes = parseInt((duration / (1000 * 60)) % 60);
     return (((minutes < 10) ? "0" + minutes : minutes) + ":" + ((seconds < 10) ? "0" + seconds : seconds));
   }
 
-  static songTitleLimiter(title) {
+  songTitleLimiter(title) {
     if (title.length > 35) {
-      return title.slice(0, 34) + '...'
+      return title.slice(0, 32) + '...'
     }
     else {
       return title;
     }
   }
 
-  static toggleDropHeart(elm) {
+  toggleDropHeart() {
 
+    this.setState({dropDownMode: !this.state.dropDownMode})
 
-    if (elm.className === 'dropdown-heart-hide') {
-      elm.className = "dropdown-heart";
-    }
-    else  {
-      elm.className = 'dropdown-heart-hide';
-    }
   }
 
   heartClick() {
-    SongCard.toggleDropHeart(this.dropHeartElm);
 
+
+    this.toggleDropHeart();
 
   }
 
-  // Heart() {
+  // componentDidMount() {
+  //   if (this.state.dropDownMode) {
+  //     this.droper.focus();
   //
-  //   return(
-  //     <div>
-  //       <div className="dropdown-heart">
-  //         <div className="drop-heart-header">
-  //           <h6>Add to Playlist</h6>
-  //           <Link to='/Playlist'>Create playlist +</Link>
-  //         </div>
-  //         <ul className="playlist-list-of checkbox">
-  //           <li>
-  //             <input type="checkbox" id="playlist-checkbox"/>
-  //             <label htmlFor="playlist-checkbox">Rock&roll</label>
-  //           </li>
-  //         </ul>
-  //       </div>
-  //     </div>
-  //   )
+  //   }
+  // }
+  //
+  // componentDidUpdate() {
+  //   if (this.state.dropDownMode) {
+  //     this.droper.blur();
+  //   }
   // }
 
+  handleNewPlaylist() {
+
+    this.props.createPlaylist(this.props.song)
+  }
+
+  whereFrom() {
+    if (this.props.from === '/Playlists') {
+      return (
+        <div className="drop-heart-header">
+          <h6>Edit Playlists</h6>
+        </div>)
+    }
+    else {
+      return (
+        <div className="drop-heart-header">
+          <h6>Add to Playlist</h6>
+          <Link to='/Playlists'
+                onClick={() => {
+                  this.handleNewPlaylist()
+                }}>
+            Create playlist +
+          </Link>
+        </div>)
+    }
+  }
+
+  blurDrop() {
+
+    this.setState({dropDownMode: !this.state.dropDownMode})
+  }
 
   render() {
+
     return (<div>
-        <div className="song-card-img-holder" ref={(cardImg)=>{
-          this.cardImg=cardImg
-        }} onClick={()=>{this.props.updateCurrentTrack(this.props.data)}}>
-          <img src={this.props.data.artwork_url? this.props.data.artwork_url.replace("large", "t300x300") : this.props.data.artwork_url} className="song-card-img"/>
+        <div className="song-card-img-holder"
+             onClick={() => {
+               this.props.updateCurrentTrack(this.props.song)
+             }}>
+          <img className="song-card-img"
+               src={this.props.song.artwork_url ?
+                 this.props.song.artwork_url.replace("large", "t300x300") :
+                 this.props.song.artwork_url}/>
         </div>
         <div className="song-card-info">
-          <div className="song-title">{SongCard.songTitleLimiter(this.props.data.title)}</div>
+          <div className="song-title">{this.songTitleLimiter(this.props.song.title)}</div>
           <div className="song-duration">
-            <i className="fa fa-clock-o"/> {SongCard.msToTime(this.props.data.duration)}
+            <i className="fa fa-clock-o"/> {this.msToTime(this.props.song.duration)}
           </div>
         </div>
 
-        <i className="heart-font fa fa-heart-o" ref={(heartDomElm) => {
-          this.heart = heartDomElm
-        }} onClick={() => {
-          this.heartClick()
-        }}/>
+        <i className="heart-font fa fa-heart-o"
+           onClick={(u) => {
+             this.heartClick(u)
+           }}/>
 
-          <div className="dropdown-heart-hide" ref={(dropHeart)=>{this.dropHeartElm = dropHeart}}>
-            <div className="drop-heart-header">
-              <h6>Add to Playlist</h6>
-              <Link to='/Playlists'>Create playlist +</Link>
-            </div>
+
+        {this.state.dropDownMode ?
+          <div className='dropdown-heart'
+               tabIndex="0"
+                onBlur={() => {
+              this.blurDrop()
+             }}
+               ref={(droper) => (this.droper = droper)}>
+
+            {this.whereFrom()}
+
             <ul className="playlist-list-of-checkbox">
 
-              {this.props.playlists.map((playlist)=> {
+              {this.props.playlists.map((playlist) => {
                 return <li key={playlist.id}>
-                  <input type="checkbox" id="playlist-checkbox"/>
-                  <label htmlFor="playlist-checkbox">{playlist.title}</label>
+                  <label htmlFor={playlist.id}>
+                    {playlist.title}
+                  </label>
+                  <input type="checkbox" id={playlist.id}/>
                 </li>
               })}
 
             </ul>
           </div>
+        :
+        null}
 
       </div>
     )

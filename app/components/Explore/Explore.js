@@ -74,7 +74,7 @@ export default class Explore extends React.Component {
 
 
   render() {
-    // console.info(this.state.tracks);
+
     switch (this.state.Loading) {
       case 'loading':
         return (
@@ -96,7 +96,11 @@ export default class Explore extends React.Component {
             <div>
               <div className="song-cards-wrapper">
                 {this.state.tracks.map((song, i) => <div key={song.id} className="song-card">
-                    <SongCard data={song} updateCurrentTrack={this.props.updateCurrentTrack} playlists={this.props.playlists} />
+                    <SongCard song={song}
+                              updateCurrentTrack={this.props.updateCurrentTrack}
+                              playlists={this.props.playlists}
+                              createPlaylist={this.props.createPlaylist}
+                              from={this.props.match.path}/>
                   </div>
                 )}
               </div>

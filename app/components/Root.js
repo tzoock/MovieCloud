@@ -2,7 +2,7 @@ import React from 'react';
 import uuid from 'uuid';
 import Topbar from './Topbar';
 import Explore from './Explore/Explore';
-import Playlists from './Playlists';
+import Playlists from './Playlists/Playlists';
 import Player from './Player';
 import {
   BrowserRouter,
@@ -19,6 +19,7 @@ export default class Root extends React.Component {
       currentTrack: {},
       playlists: [
         {
+          editMode: false,
           id: uuid(),
           title: 'my 1st playlist',
           songs: [
@@ -32,6 +33,7 @@ export default class Root extends React.Component {
             }]
         },
         {
+          editMode: false,
           id: uuid(),
           title: 'my 2nd playlist',
           songs: [
@@ -50,29 +52,50 @@ export default class Root extends React.Component {
     this.updateCurrentTrack = this.updateCurrentTrack.bind(this);
     this.createPlaylist = this.createPlaylist.bind(this);
     this.changePlaylistName = this.changePlaylistName.bind(this);
+    this.changeEditMode = this.changeEditMode.bind(this)
   }
 
+  componentDidMount() {
+
+  }
 
   updateCurrentTrack(song) {
     const newSong = Object.assign({}, song);
     this.setState({currentTrack: newSong})
   }
 
-  createPlaylist() {
+
+  createPlaylist(song) {
+
     const newPlaylist = {
-      id: uuid(),
-      title: 'nameLess playlist',
-      songs: []
+      editMode: true,
+      id: song? song.id : uuid(),
+      title: 'Untitled playlist',
+      songs: song? [song] : []
     };
 
     const copyOfPlaylist = [...this.state.playlists];
     copyOfPlaylist.push(newPlaylist);
-    this.setState({playlists:copyOfPlaylist})
+
+    this.setState({playlists: copyOfPlaylist})
 
   }
 
-  changePlaylistName(uuu) {
-console.info('uuu');
+
+  changePlaylistName(playlistName, playlistIndex) {
+
+    const playlists = [...this.state.playlists];
+    playlists[playlistIndex].title = playlistName===''? 'Untitled playlist' : playlistName;
+
+    this.setState({playlists: playlists})
+  }
+
+  changeEditMode(playlistIndex) {
+    const playlists = [...this.state.playlists];
+    playlists[playlistIndex].editMode = !this.state.playlists[playlistIndex].editMode;
+
+    this.setState({playlists: playlists})
+
   }
 
   render() {
@@ -94,15 +117,24 @@ console.info('uuu');
                     }}/>
 
                     <Route path="/Explore/:genre" render={(props) => {
-                      return <Explore updateCurrentTrack={this.updateCurrentTrack} {...props} playlists={this.state.playlists} />
+                      return <Explore updateCurrentTrack={this.updateCurrentTrack}
+                                      playlists={this.state.playlists}
+                                      createPlaylist={this.createPlaylist}
+                                      {...props}/>
                     }}/>
 
                     <Route exact path="/Explore" component={() => {
                       return <Redirect to="/Explore/trance"/>
                     }}/>
 
-                    <Route path={"/Playlists"} render={() => {
-                      return < Playlists playlists={this.state.playlists} updateCurrentTrack={this.updateCurrentTrack} createPlaylist={this.createPlaylist} changePlaylistName={Root.changePlaylistName}/>
+                    <Route path={"/Playlists"} render={(props) => {
+                      return < Playlists playlists={this.state.playlists}
+                                         updateCurrentTrack={this.updateCurrentTrack}
+                                         createEmptyPlaylist={this.createEmptyPlaylist}
+                                         createPlaylist={this.createPlaylist}
+                                         changePlaylistName={this.changePlaylistName}
+                                         changeEditMode={this.changeEditMode}
+                                         {...props}/>
                     }}/>
 
                   </Switch>
