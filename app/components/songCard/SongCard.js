@@ -79,7 +79,8 @@ export default class SongCard extends React.Component {
       return (
         <div className="drop-heart-header">
           <h6>Add to Playlist</h6>
-          <Link to='/Playlists'
+          <Link className='create-playlist'
+                to='/Playlists'
                 onClick={() => {
                   this.handleNewPlaylist()
                 }}>
@@ -89,23 +90,30 @@ export default class SongCard extends React.Component {
     }
   }
 
-  blurDrop() {
 
-    this.setState({dropDownMode: !this.state.dropDownMode})
-  }
+//   isInPlaylist(songs) {
+// console.info(songs);
+//     songs.forEach((song) => {
+//
+//       if (song.id === this.props.song.id) {
+//         this.setState({ checkMe: true})
+//
+//       }
+//       else {
+//         this.setState({ checkMe: false})
+//       }
+//     });
+//
+//   }
 
-  isInPlaylist(playlist) {
+// componentDidUpdate() {
+//
+// }
 
-    playlist.songs.forEach((song) => {
-
-      if (song.id === this.props.song.id) {
-        this.setState({checkMe: true})
-      }
-      else {
-        this.setState({checkMe: false})
-      }
-    });
-  }
+  // hendleCheckChange(songs) {
+  //   console.info(songs);
+  //  this.isInPlaylist(songs)
+  // }
 
   render() {
 
@@ -134,32 +142,28 @@ export default class SongCard extends React.Component {
 
         {this.state.dropDownMode ?
           <div className='dropdown-heart'
-               tabIndex="0"
-               onBlur={() => {
-                 this.blurDrop()
-               }}
                ref={(droper) => (this.droper = droper)}>
 
             {this.whereFrom()}
 
-            <ul className="playlist-list-of-checkbox">
+            <div className="playlist-list-of-checkbox">
 
               {this.props.playlists.map((playlist) => {
-                return <li key={playlist.id}>
+                return <div key={playlist.id}>
                   <label htmlFor={playlist.id}>
                     {playlist.title}
-                  </label>
+
                   <input type="checkbox"
                          id={playlist.id}
-                         checked={playlist.songs.forEach((song)=>{
-                           song.id===this.props.song.id? true : false
-                         })}
+                         // onChange={this.hendleCheckChange(playlist.songs)}
+                         checked={this.state.checkMe}
                   ref={(checkboxElm)=>{this.checkboxElm = checkboxElm}}/>
-                </li>;
+                  </label>
+                </div>;
 
               })}
 
-            </ul>
+            </div>
           </div>
           :
           null}
@@ -168,3 +172,13 @@ export default class SongCard extends React.Component {
     )
   }
 }
+
+//
+// <label>
+//   Is going:
+//   <input
+//     name="isGoing"
+//     type="checkbox"
+//     checked={this.state.isGoing}
+//     onChange={this.handleInputChange} />
+// </label>
