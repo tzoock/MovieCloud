@@ -3,14 +3,17 @@ import {
   NavLink,
   Link
 } from "react-router-dom"
-import Heart from "./Heart";
+
+
+import './songCard.scss'
 
 export default class SongCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       heartMode: '',
-      dropDownMode: false
+      dropDownMode: false,
+      checkMe: false
     }
 
   }
@@ -91,6 +94,19 @@ export default class SongCard extends React.Component {
     this.setState({dropDownMode: !this.state.dropDownMode})
   }
 
+  isInPlaylist(playlist) {
+
+    playlist.songs.forEach((song) => {
+
+      if (song.id === this.props.song.id) {
+        this.setState({checkMe: true})
+      }
+      else {
+        this.setState({checkMe: false})
+      }
+    });
+  }
+
   render() {
 
     return (<div>
@@ -119,9 +135,9 @@ export default class SongCard extends React.Component {
         {this.state.dropDownMode ?
           <div className='dropdown-heart'
                tabIndex="0"
-                onBlur={() => {
-              this.blurDrop()
-             }}
+               onBlur={() => {
+                 this.blurDrop()
+               }}
                ref={(droper) => (this.droper = droper)}>
 
             {this.whereFrom()}
@@ -133,14 +149,20 @@ export default class SongCard extends React.Component {
                   <label htmlFor={playlist.id}>
                     {playlist.title}
                   </label>
-                  <input type="checkbox" id={playlist.id}/>
-                </li>
+                  <input type="checkbox"
+                         id={playlist.id}
+                         checked={playlist.songs.forEach((song)=>{
+                           song.id===this.props.song.id? true : false
+                         })}
+                  ref={(checkboxElm)=>{this.checkboxElm = checkboxElm}}/>
+                </li>;
+
               })}
 
             </ul>
           </div>
-        :
-        null}
+          :
+          null}
 
       </div>
     )

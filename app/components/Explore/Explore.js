@@ -4,8 +4,9 @@ import {
   Link
 } from "react-router-dom"
 import MDSpinner from "react-md-spinner";
-import SongCard from "../SongCard"
-import GenreChooser from "./GenreChooser"
+import SongCard from "../songCard/SongCard"
+
+import "./explore.scss";
 
 
 export default class Explore extends React.Component {
@@ -23,7 +24,8 @@ export default class Explore extends React.Component {
   nextPage() {
     console.info('next');
     this.setState({
-      offset: this.state.offset + this.state.limit
+      offset: this.state.offset + this.state.limit,
+      Loading: "loading"
     })
 
   }
@@ -31,7 +33,8 @@ export default class Explore extends React.Component {
   prevPage() {
     console.info('prev');
     this.setState({
-      offset: this.state.offset - this.state.limit
+      offset: this.state.offset - this.state.limit,
+      Loading: "loading"
     })
 
   }
@@ -63,7 +66,10 @@ export default class Explore extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     // console.info(this.props.updateCurrentTrack);
     if (prevProps.match.params.genre !== this.props.match.params.genre) {
-      this.setState({offset: 0}, ()=>{
+      this.setState( {
+        offset: 0,
+        Loading: "loading"
+      }, ()=>{
         this.GetXhr();
       })
     }
@@ -85,13 +91,24 @@ export default class Explore extends React.Component {
       case 'error':
         return (
           <div className="midMe">
-            <h1>Error!</h1>
+
+              <h1>Error!</h1>
+
           </div>
         );
       case 'loaded':
         return (
           <div className="explore-wrap">
-            <GenreChooser />
+            <div className="genres-section">
+              <p>Genres:</p>
+              <ul className="genere-style">
+                <li><NavLink to="/Explore/trance" className="genre-tab">Trance</NavLink></li>
+                <li><NavLink to="/Explore/dubstep">Dub-Step</NavLink></li>
+                <li><NavLink to="/Explore/house">House</NavLink></li>
+                <li><NavLink to="/Explore/metal">Metal</NavLink></li>
+                <li><NavLink to="/Explore/ballads">ballads</NavLink></li>
+              </ul>
+            </div>
             <p>Genre:</p>
             <div>
               <div className="song-cards-wrapper">
@@ -106,10 +123,12 @@ export default class Explore extends React.Component {
               </div>
             </div>
             <div className="pager">
+              <div>
               <button className="page-btn" onClick={ this.prevPage.bind(this)} disabled={this.state.offset === 0}>Prev
               </button>
               <p>page: {(this.state.offset / this.state.limit) + 1}</p>
               <button className="page-btn" onClick={ this.nextPage.bind(this)}>Next</button>
+              </div>
             </div>
 
           </div>

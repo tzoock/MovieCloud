@@ -3,6 +3,8 @@ import {
   Link
 } from "react-router-dom"
 
+import './topBar.scss'
+
 export default function Topar() {
 
   return (

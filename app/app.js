@@ -6,7 +6,7 @@ import './assets/styles/main.scss';
 
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Root from './components/Root';
-import Routes from "./components/Routes";
+import Root from './components/root/Root';
+import Routes from "./components/routes/Routes";
 
 ReactDOM.render(<Routes/>, document.querySelector('#root'));

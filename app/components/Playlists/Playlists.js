@@ -1,6 +1,8 @@
 import React from "react";
-import Playlist from "./Playlist";
+import Playlist from "../playlist/Playlist";
 import uuid from "uuid";
+
+import './playlists.scss'
 
 export default class Playlists extends React.Component {
   constructor(props) {
@@ -20,7 +22,7 @@ createPlaylistHandler() {
   render() {
 
     return (
-      <div className="playlist-body">
+      <div className="playlists-wrap">
         <div className="playlists-bar">
 
           <div className="playlists-bar-top">
@@ -36,7 +38,7 @@ createPlaylistHandler() {
           </div>
         </div>
         <div className="right-playlists">
-          {this.props.playlists.map((playlist, i) => <div key={playlist.id? playlist.id : uuid()} className="user-playlist">
+          {this.props.playlists.map((playlist, i) => <div key={playlist.id} className="user-playlist">
 
               < Playlist
               playlist = {playlist}
@@ -46,6 +48,7 @@ createPlaylistHandler() {
               playlists={this.props.playlists}
               updateCurrentTrack={this.props.updateCurrentTrack}
               from={this.props.match.path}
+              deletePlaylist={this.props.deletePlaylist}
               />
 
 

@@ -1,0 +1,122 @@
+
+@import "assets/styles/colors";
+@import "assets/styles/general";
+
+
+.explore-wrap {
+  padding-top: 64px;
+  padding-bottom: 60px;
+}
+
+.genres-section {
+  display: flex;
+  background-color: $genereBg;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  height: 40px;
+  align-content: center;
+}
+
+.genres-section p {
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.genere-style {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  //height: 40px;
+  //align-items: center;
+
+}
+
+.genere-style li {
+  margin: 16px 10px 0 10px;
+}
+
+.genere-style li:hover {
+  //color: #2d2d11;
+  box-shadow: inset 0 -2px 0 ;
+  transition: all .2s ease-in-out;
+}
+
+.genere-style li > a {
+  color: $allmostBlack;
+}
+
+
+.pager {
+  margin-top: 40px;
+  display: flex;
+  align-content: center;
+  height: 40px;
+
+}
+
+.pager>div {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+//.page-btn {
+//  background: #2196F3;
+//  border-radius: 2px;
+//  color: #fff;
+//  border: none;
+//  width: 87px;
+//  height: 30px;
+//}
+
+.page-btn {
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 2px;
+  font-size: 0.81rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
+  background: #2196F3;
+}
+
+/* Ripple magic */
+.page-btn{
+  position: relative;
+  overflow: hidden;
+}
+
+.page-btn:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: #2062ac;
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+.page-btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}

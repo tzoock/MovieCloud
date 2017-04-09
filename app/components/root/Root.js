@@ -1,9 +1,9 @@
 import React from 'react';
 import uuid from 'uuid';
-import Topbar from './Topbar';
-import Explore from './Explore/Explore';
-import Playlists from './Playlists/Playlists';
-import Player from './Player';
+import Topbar from '../topBar/Topbar';
+import Explore from '../Explore/Explore';
+import Playlists from '../Playlists/Playlists';
+import Player from '../player/Player';
 import {
   BrowserRouter,
   Switch,
@@ -52,7 +52,8 @@ export default class Root extends React.Component {
     this.updateCurrentTrack = this.updateCurrentTrack.bind(this);
     this.createPlaylist = this.createPlaylist.bind(this);
     this.changePlaylistName = this.changePlaylistName.bind(this);
-    this.changeEditMode = this.changeEditMode.bind(this)
+    this.changeEditMode = this.changeEditMode.bind(this);
+    this.deletePlaylist = this.deletePlaylist.bind(this);
   }
 
   componentDidMount() {
@@ -98,6 +99,15 @@ export default class Root extends React.Component {
 
   }
 
+  deletePlaylist(playlistIndex) {
+
+    const playlists = [...this.state.playlists];
+    console.info(playlists);
+   playlists.splice(playlistIndex, 1);
+console.info(playlists);
+    this.setState({playlists: playlists})
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -130,10 +140,10 @@ export default class Root extends React.Component {
                     <Route path={"/Playlists"} render={(props) => {
                       return < Playlists playlists={this.state.playlists}
                                          updateCurrentTrack={this.updateCurrentTrack}
-                                         createEmptyPlaylist={this.createEmptyPlaylist}
                                          createPlaylist={this.createPlaylist}
                                          changePlaylistName={this.changePlaylistName}
                                          changeEditMode={this.changeEditMode}
+                                         deletePlaylist={this.deletePlaylist}
                                          {...props}/>
                     }}/>
 

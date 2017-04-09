@@ -1,0 +1,42 @@
+@import "assets/styles/colors";
+@import "assets/styles/general";
+
+.playlists-wrap {
+  padding-top: 64px;
+  display: flex;
+}
+
+.playlists-bar {
+  flex: 0 0 200px;
+  height: 90vh;
+  padding: 10px;
+  border-right: 1px solid #D8D8D8 ;
+}
+
+.add-playlist-btn {
+  background-color: #2196F3;
+  color: #ffffff;
+  border-radius: 2px ;
+  outline: none;
+  border: none;
+  height: 30px;
+  width: 180px;
+  margin: 25px 10px;
+
+}
+
+.playlists-bar-top {
+  border-bottom: 1px solid #D8D8D8;
+}
+
+.playlists-bar-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.right-playlists {
+
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}

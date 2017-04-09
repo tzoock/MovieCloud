@@ -1,6 +1,8 @@
 import React from "react";
-import SongCard from "../SongCard";
+import SongCard from "../songCard/SongCard";
 import uuid from "uuid";
+
+import './playlist.scss'
 
 export default class Playlist extends React.Component {
   constructor(props) {
@@ -20,7 +22,7 @@ export default class Playlist extends React.Component {
 
   inputToName(event) {
 
-    if (event.key === 'Enter' || event.type==='blur') {
+    if (event.key === 'Enter' || event.type === 'blur') {
 
       this.props.changeEditMode(this.props.playlistIndex);
 
@@ -49,6 +51,9 @@ export default class Playlist extends React.Component {
     }
   }
 
+  deleteHendle() {
+    this.props.deletePlaylist(this.props.playlistIndex)
+  }
 
   render() {
     return (
@@ -56,22 +61,24 @@ export default class Playlist extends React.Component {
 
 
         { this.props.playlist.editMode ?
-                   <div className="playlist-header">
+          <div className="playlist-header">
             <input type="text"
                    className='input-playlist-name'
                    onKeyDown={(event) => {
                      this.inputToName(event)
                    }}
-                   placeholder ={this.props.playlist.title}
+                   placeholder={this.props.playlist.title}
                    onChange={() => {
                      this.handlePlaylistNameChange(event)
                    }}
-                   onBlur={(event)=>{this.inputToName(event)}}
+                   onBlur={(event) => {
+                     this.inputToName(event)
+                   }}
                    ref={(inpElm) => {
                      this.focusMe = inpElm
                    }}/>
           </div>
-        :
+          :
           <div className="playlist-header">
             <div className='playlist-name'
                  onClick={() => {
@@ -80,6 +87,13 @@ export default class Playlist extends React.Component {
               {this.props.playlist.title}
             </div>
             <span className="song-count">{this.props.playlist.songs.length}</span>
+            <butten className="deleteBtn"
+                    onClick={() => {
+                      this.deleteHendle()
+                    }
+                    }>
+              Delete
+            </butten>
           </div>}
 
         <div className="playlist-content">

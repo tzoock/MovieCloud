@@ -1,0 +1,43 @@
+
+
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+html,
+body {
+  font-size: 100%;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  /*outline: red 1px solid;*/
+}
+
+a:link,
+a:visited {
+  color: $myWhite;
+  text-decoration: none;
+}
+
+a:active,
+a:focus,
+a:hover {
+  color: $myWhite;
+  outline: none;
+}
+
+li {
+  list-style: none;
+}

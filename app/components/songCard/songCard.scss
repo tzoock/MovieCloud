@@ -1,0 +1,111 @@
+@import "assets/styles/colors";
+@import "assets/styles/general";
+
+
+
+
+.song-cards-wrapper {
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.song-card {
+  margin: 10px;
+  position: relative;
+  padding: 10px;
+  border: 1px solid ;
+  //background-color: #fff;
+  //display: inline-flex;
+  width: 220px;
+  height: 140px;
+}
+
+.song-card-img {
+  display: block;
+  border: 1px solid #0a0b0d;
+  width: 200px;
+  height: 85px;
+  object-fit: cover;
+  //margin-bottom: 10px;
+  //background-size: auto;
+
+}
+
+.song-card-info {
+  margin: 7px 0 10px 0;
+}
+
+.song-title {
+  //display: block;
+  font-size: 0.69rem;
+  width: 100%;
+}
+
+.song-duration {
+  font-size: 10px;
+}
+
+.heart-font {
+  font-size: 14px;
+  color: #D8D8D8;
+  transition: all .2s ease-in-out;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.heart-font:hover {
+  color: $blue;
+
+}
+
+.hide {
+  display: none;
+}
+
+.dropdown-heart {
+  //display: none;
+  padding: 10px;
+  position: absolute;
+  z-index: 15;
+  width: 130px;
+  //color: #000;
+  right: 0;
+  box-shadow: 0px 2px 8px 0px #000;
+  background-color: #fff;
+}
+
+.drop-heart-header {
+  border-bottom: 1px solid #E0E0E0 ;
+  padding: 3px;
+}
+
+.dropdown-heart h6 {
+  color: #4A4A4A;
+  font-size: 11px;
+  margin: 0;
+}
+
+.dropdown-heart a {
+  color: #2196F3;
+  font-size: 9px;
+}
+
+.check-h {
+  color: #2196F3;
+}
+
+.playlist-list-of-checkbox {
+  padding: 0;
+  font-size: 9px;
+  color: #4A4A4A;
+  margin: 5px;
+}
+
+.pager {
+  display:flex;
+  align-items: center;
+  justify-content: center
+}
