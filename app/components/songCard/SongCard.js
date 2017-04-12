@@ -3,9 +3,10 @@ import {
   NavLink,
   Link
 } from "react-router-dom"
-
+import uuid from "uuid";
 
 import './songCard.scss'
+
 
 export default class SongCard extends React.Component {
   constructor(props) {
@@ -13,9 +14,11 @@ export default class SongCard extends React.Component {
     this.state = {
       heartMode: '',
       dropDownMode: false,
-      checkMe: false
-    }
+      value: '',
+      checker: ''
+    };
 
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   componentDidMount() {
@@ -43,12 +46,6 @@ export default class SongCard extends React.Component {
 
   }
 
-  heartClick() {
-
-
-    this.toggleDropHeart();
-
-  }
 
   // componentDidMount() {
   //   if (this.state.dropDownMode) {
@@ -91,29 +88,55 @@ export default class SongCard extends React.Component {
   }
 
 
-//   isInPlaylist(songs) {
-// console.info(songs);
-//     songs.forEach((song) => {
-//
-//       if (song.id === this.props.song.id) {
-//         this.setState({ checkMe: true})
-//
-//       }
-//       else {
-//         this.setState({ checkMe: false})
-//       }
-//     });
-//
-//   }
 
-// componentDidUpdate() {
-//
-// }
+  // componentDidMount() {
+  //
+  // }
+
 
   // hendleCheckChange(songs) {
+  //   console.info(this);
   //   console.info(songs);
-  //  this.isInPlaylist(songs)
+  //   songs.forEach((song) => {
+  //     if (song.id === this.props.song.id) {
+  //       // this.checkboxElm.checked=true;
+  //       console.info('gfgf');
+  //       // console.info(this.props.song.id);
+  //       this.setState({checkMe: true})
+  //
+  //     }
+  //     else {
+  //       // this.checkboxElm.checked=false;
+  //       this.setState({checkMe: false})
+  //     }
+  //   });
+  //   // console.info(event);
+  //   // console.info(this.checkboxElm);
+  //
   // }
+
+componentWillReceiveProps() {
+this.props.checkMe===true? this.setState({checker: true}) : this.setState({checker: false})
+  }
+
+  componentWillMount() {
+
+  }
+
+  handleInputChange(event) {
+    this.props.isInPlaylist(this.props.song);
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    console.info(target.checked);
+    console.info(name);
+
+    // this.setState({
+    //   value: !this.state.value
+    // });
+  }
+
 
   render() {
 
@@ -135,8 +158,8 @@ export default class SongCard extends React.Component {
         </div>
 
         <i className="heart-font fa fa-heart-o"
-           onClick={(u) => {
-             this.heartClick(u)
+           onClick={() => {
+             this.toggleDropHeart()
            }}/>
 
 
@@ -149,18 +172,24 @@ export default class SongCard extends React.Component {
             <div className="playlist-list-of-checkbox">
 
               {this.props.playlists.map((playlist) => {
-                return <div key={playlist.id}>
-                  <label htmlFor={playlist.id}>
-                    {playlist.title}
+                return (
+                  <div key={uuid()}
+                       className="playlist-list-of-checkbox">
 
-                  <input type="checkbox"
-                         id={playlist.id}
-                         // onChange={this.hendleCheckChange(playlist.songs)}
-                         checked={this.state.checkMe}
-                  ref={(checkboxElm)=>{this.checkboxElm = checkboxElm}}/>
-                  </label>
-                </div>;
 
+                    <label key={playlist.id}>
+                      {playlist.title}
+                      <input type="checkbox"
+                             onChange={this.handleInputChange}
+                             // name={playlist.title}
+                             checked={this.state.checker}
+                             ref={(checkboxElm) => {
+                               this.checkboxElm = checkboxElm
+                             }}/>
+                    </label>
+
+
+                  </div>)
               })}
 
             </div>
@@ -182,3 +211,5 @@ export default class SongCard extends React.Component {
 //     checked={this.state.isGoing}
 //     onChange={this.handleInputChange} />
 // </label>
+
+// songCard.propTypes()

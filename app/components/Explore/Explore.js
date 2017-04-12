@@ -117,7 +117,9 @@ export default class Explore extends React.Component {
                               updateCurrentTrack={this.props.updateCurrentTrack}
                               playlists={this.props.playlists}
                               createPlaylist={this.props.createPlaylist}
-                              from={this.props.match.path}/>
+                              from={this.props.match.path}
+                              checkMe={this.props.checkMe}
+                              isInPlaylist={this.props.isInPlaylist}/>
                   </div>
                 )}
               </div>

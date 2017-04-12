@@ -17,6 +17,7 @@ export default class Root extends React.Component {
     super();
     this.state = {
       currentTrack: {},
+      checkMe: false,
       playlists: [
         {
           editMode: false,
@@ -54,11 +55,32 @@ export default class Root extends React.Component {
     this.changePlaylistName = this.changePlaylistName.bind(this);
     this.changeEditMode = this.changeEditMode.bind(this);
     this.deletePlaylist = this.deletePlaylist.bind(this);
+    this.addSongToPlaylist = this.addSongToPlaylist.bind(this);
+    this.isInPlaylist = this.isInPlaylist.bind(this);
+
   }
 
   componentDidMount() {
 
   }
+
+  isInPlaylist(songCard) {
+    console.info(songCard);
+    this.state.playlists.forEach((playlist) => {
+      playlist.songs.forEach((song) => {
+        console.info(song);
+        if (song.id === songCard.id) {
+          this.setState({checkMe: true})
+        }
+        else {
+          this.setState({checkMe: false})
+        }
+      })
+
+    });
+
+  }
+
 
   updateCurrentTrack(song) {
     const newSong = Object.assign({}, song);
@@ -70,23 +92,30 @@ export default class Root extends React.Component {
 
     const newPlaylist = {
       editMode: true,
-      id: song? song.id : uuid(),
+      id: song ? song.id : uuid(),
       title: 'Untitled playlist',
-      songs: song? [song] : []
+      songs: song ? [song] : []
     };
 
-    const copyOfPlaylist = [...this.state.playlists];
-    copyOfPlaylist.push(newPlaylist);
+    const copyOfPlaylists = [...this.state.playlists];
+    copyOfPlaylists.push(newPlaylist);
 
-    this.setState({playlists: copyOfPlaylist})
+    this.setState({playlists: copyOfPlaylists})
 
+  }
+
+  addSongToPlaylist(playlistIndex, song) {
+    const copyOfPlaylists = [...this.state.playlists];
+    copyOfPlaylists[playlistIndex].songs.push(song);
+
+    this.setState({playlists: copyOfPlaylists})
   }
 
 
   changePlaylistName(playlistName, playlistIndex) {
 
     const playlists = [...this.state.playlists];
-    playlists[playlistIndex].title = playlistName===''? 'Untitled playlist' : playlistName;
+    playlists[playlistIndex].title = playlistName === '' ? 'Untitled playlist' : playlistName;
 
     this.setState({playlists: playlists})
   }
@@ -103,8 +132,8 @@ export default class Root extends React.Component {
 
     const playlists = [...this.state.playlists];
     console.info(playlists);
-   playlists.splice(playlistIndex, 1);
-console.info(playlists);
+    playlists.splice(playlistIndex, 1);
+    console.info(playlists);
     this.setState({playlists: playlists})
   }
 
@@ -130,6 +159,8 @@ console.info(playlists);
                       return <Explore updateCurrentTrack={this.updateCurrentTrack}
                                       playlists={this.state.playlists}
                                       createPlaylist={this.createPlaylist}
+                                      checkMe={this.state.checkMe}
+                                      isInPlaylist={this.isInPlaylist}
                                       {...props}/>
                     }}/>
 

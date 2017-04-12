@@ -30,7 +30,9 @@ createPlaylistHandler() {
           </div>
           <div className="playlists-bar-bottom">
             <div>
-              {this.props.playlists.map((playlist, i) => <div key={playlist.id? playlist.id : uuid()}>
+              {this.props.playlists.map((playlist, i) => <div key={playlist.id? playlist.id : uuid()}
+                onClick={()=>{this.props.changeEditMode(i)}}
+                className="playlist-bar-titles">
                   {playlist.title? playlist.title : "Untitled playlist"}
                 </div>
               )}
@@ -38,7 +40,7 @@ createPlaylistHandler() {
           </div>
         </div>
         <div className="right-playlists">
-          {this.props.playlists.map((playlist, i) => <div key={playlist.id} className="user-playlist">
+          {this.props.playlists.map((playlist, i) => <div key={uuid()} className="user-playlist">
 
               < Playlist
               playlist = {playlist}

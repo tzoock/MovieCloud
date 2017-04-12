@@ -41,13 +41,15 @@ export default class Playlist extends React.Component {
 
   componentDidUpdate() {
     if (this.props.playlist.editMode) {
-      this.focusMe.focus()
+      this.focusMe.focus();
+      this.focusMe.scrollIntoView(true);
     }
   }
 
   componentDidMount() {
     if (this.props.playlist.editMode) {
-      this.focusMe.focus()
+      this.focusMe.focus();
+      this.focusMe.scrollIntoView(true);
     }
   }
 
