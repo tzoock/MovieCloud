@@ -7,6 +7,8 @@ import uuid from "uuid";
 
 import './songCard.scss'
 
+import store from "../../store";
+
 
 export default class SongCard extends React.Component {
   constructor(props) {
@@ -143,7 +145,12 @@ this.props.checkMe===true? this.setState({checker: true}) : this.setState({check
     return (<div>
         <div className="song-card-img-holder"
              onClick={() => {
-               this.props.updateCurrentTrack(this.props.song)
+               store.dispatch({
+                 type: 'UPDATE_CURRENT_TRACK',
+                 song: this.props.song
+               })
+               {/*this.props.updateCurrentTrack(this.props.song)*/}
+
              }}>
           <img className="song-card-img"
                src={this.props.song.artwork_url ?
