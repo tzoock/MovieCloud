@@ -50,7 +50,7 @@ export default class Root extends React.Component {
       ]
     };
 
-    this.updateCurrentTrack = this.updateCurrentTrack.bind(this);
+
     this.createPlaylist = this.createPlaylist.bind(this);
     this.changePlaylistName = this.changePlaylistName.bind(this);
     this.changeEditMode = this.changeEditMode.bind(this);
@@ -81,11 +81,6 @@ export default class Root extends React.Component {
 
   }
 
-
-  updateCurrentTrack(song) {
-    const newSong = Object.assign({}, song);
-    this.setState({currentTrack: newSong})
-  }
 
 
   createPlaylist(song) {
@@ -156,7 +151,7 @@ export default class Root extends React.Component {
                     }}/>
 
                     <Route path="/Explore/:genre" render={(props) => {
-                      return <Explore updateCurrentTrack={this.updateCurrentTrack}
+                      return <Explore
                                       playlists={this.state.playlists}
                                       createPlaylist={this.createPlaylist}
                                       checkMe={this.state.checkMe}
@@ -169,13 +164,7 @@ export default class Root extends React.Component {
                     }}/>
 
                     <Route path={"/Playlists"} render={(props) => {
-                      return < Playlists playlists={this.state.playlists}
-                                         updateCurrentTrack={this.updateCurrentTrack}
-                                         createPlaylist={this.createPlaylist}
-                                         changePlaylistName={this.changePlaylistName}
-                                         changeEditMode={this.changeEditMode}
-                                         deletePlaylist={this.deletePlaylist}
-                                         {...props}/>
+                      return < Playlists {...props}/>
                     }}/>
 
                   </Switch>

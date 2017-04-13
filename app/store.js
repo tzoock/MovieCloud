@@ -1,16 +1,14 @@
-import { createStore, combineReducers } from 'redux';
+import {createStore, combineReducers} from 'redux';
 
 
 import currentTrack from './reducers/current-track';
-
+import playlists from './reducers/playlists'
 
 
 const reducers = combineReducers({
-    currentTrack
-  });
-
-
-
+  currentTrack,
+  playlists
+});
 
 
 const store = createStore(reducers);

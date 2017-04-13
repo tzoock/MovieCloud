@@ -3,19 +3,18 @@ import Playlist from "../playlist/Playlist";
 import uuid from "uuid";
 
 import './playlists.scss'
+import store from "../../store";
+import {connect} from "react-redux";
 
-export default class Playlists extends React.Component {
+class Playlists extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
 
   }
 
 
-createPlaylistHandler() {
-  this.props.createPlaylist()
-}
+
 
 
 
@@ -26,13 +25,18 @@ createPlaylistHandler() {
         <div className="playlists-bar">
 
           <div className="playlists-bar-top">
-            <button className="add-playlist-btn" onClick={ ()=>(this.createPlaylistHandler()) }>Add new playlist</button>
+            <button className="add-playlist-btn" onClick={ ()=>(this.props.createPlaylistHandler()) }>Add new playlist</button>
           </div>
           <div className="playlists-bar-bottom">
             <div>
               {this.props.playlists.map((playlist, i) => <div key={playlist.id? playlist.id : uuid()}
-                onClick={()=>{this.props.changeEditMode(i)}}
-                className="playlist-bar-titles">
+                                                             onClick={()=>{
+                                                               store.dispatch({
+                                                                 type: 'CHANGE_EDIT_MODE',
+                                                                 playlistIndex: i
+                                                               })
+                                                             }}
+                                                             className="playlist-bar-titles">
                   {playlist.title? playlist.title : "Untitled playlist"}
                 </div>
               )}
@@ -43,14 +47,9 @@ createPlaylistHandler() {
           {this.props.playlists.map((playlist, i) => <div key={uuid()} className="user-playlist">
 
               < Playlist
-              playlist = {playlist}
-              changePlaylistName = {this.props.changePlaylistName}
-              changeEditMode = {this.props.changeEditMode}
-              playlistIndex = {i}
-              playlists={this.props.playlists}
-              updateCurrentTrack={this.props.updateCurrentTrack}
-              from={this.props.match.path}
-              deletePlaylist={this.props.deletePlaylist}
+                playlist = {playlist}
+                playlistIndex = {i}
+                from={this.props.match.path}
               />
 
 
@@ -61,3 +60,24 @@ createPlaylistHandler() {
     );
   };
 }
+
+function mapDispatchToProps(dispatch) {
+
+  return {
+    createPlaylistHandler() {
+      dispatch({
+        type: 'CREATE_PLAYLIST',
+      })
+    },
+
+  }
+}
+
+function mapStateToProps(store) {
+  return {
+    playlists: store.playlists
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Playlists);

@@ -9,15 +9,15 @@ import React from 'react';
 import Root from './components/root/Root';
 import Routes from "./components/routes/Routes";
 import store from './store'
+import {Provider} from "react-redux";
 
-function renderApp() {
+
   ReactDOM.render(
-    <Routes/>,
+    <Provider store={ store }>
+    <Routes/>
+    </Provider>,
     document.querySelector('#root'));
-}
 
-renderApp();
 
-store.subscribe(()=>{
-  renderApp();
-});
+// renderApp();
+

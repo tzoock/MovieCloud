@@ -8,9 +8,10 @@ import uuid from "uuid";
 import './songCard.scss'
 
 import store from "../../store";
+import {connect} from "react-redux";
 
 
-export default class SongCard extends React.Component {
+class SongCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,10 +63,6 @@ export default class SongCard extends React.Component {
   //   }
   // }
 
-  handleNewPlaylist() {
-
-    this.props.createPlaylist(this.props.song)
-  }
 
   whereFrom() {
     if (this.props.from === '/Playlists') {
@@ -81,14 +78,13 @@ export default class SongCard extends React.Component {
           <Link className='create-playlist'
                 to='/Playlists'
                 onClick={() => {
-                  this.handleNewPlaylist()
+                  this.props.handleNewPlaylist(this.props.song)
                 }}>
             Create playlist +
           </Link>
         </div>)
     }
   }
-
 
 
   // componentDidMount() {
@@ -117,8 +113,8 @@ export default class SongCard extends React.Component {
   //
   // }
 
-componentWillReceiveProps() {
-this.props.checkMe===true? this.setState({checker: true}) : this.setState({checker: false})
+  componentWillReceiveProps() {
+    this.props.checkMe === true ? this.setState({checker: true}) : this.setState({checker: false})
   }
 
   componentWillMount() {
@@ -145,12 +141,7 @@ this.props.checkMe===true? this.setState({checker: true}) : this.setState({check
     return (<div>
         <div className="song-card-img-holder"
              onClick={() => {
-               store.dispatch({
-                 type: 'UPDATE_CURRENT_TRACK',
-                 song: this.props.song
-               })
-               {/*this.props.updateCurrentTrack(this.props.song)*/}
-
+               this.props.handleCurrentSong(this.props.song)
              }}>
           <img className="song-card-img"
                src={this.props.song.artwork_url ?
@@ -188,7 +179,7 @@ this.props.checkMe===true? this.setState({checker: true}) : this.setState({check
                       {playlist.title}
                       <input type="checkbox"
                              onChange={this.handleInputChange}
-                             // name={playlist.title}
+                        // name={playlist.title}
                              checked={this.state.checker}
                              ref={(checkboxElm) => {
                                this.checkboxElm = checkboxElm
@@ -209,14 +200,22 @@ this.props.checkMe===true? this.setState({checker: true}) : this.setState({check
   }
 }
 
-//
-// <label>
-//   Is going:
-//   <input
-//     name="isGoing"
-//     type="checkbox"
-//     checked={this.state.isGoing}
-//     onChange={this.handleInputChange} />
-// </label>
+function mapDispatchToProps(dispatch) {
+  return {
+    handleCurrentSong(song) {
+      dispatch({
+        type: 'UPDATE_CURRENT_TRACK',
+        song: song
+      })
+    },
+    handleNewPlaylist(song) {
+      dispatch({
+        type: 'CREATE_PLAYLIST',
+        song: song
+      })
+      // this.props.createPlaylist(this.props.song)
+    }
+  }
+}
 
-// songCard.propTypes()
+export default connect(null, mapDispatchToProps)(SongCard);

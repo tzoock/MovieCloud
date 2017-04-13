@@ -2,9 +2,13 @@ import React from "react";
 import SongCard from "../songCard/SongCard";
 import uuid from "uuid";
 
+
+import store from "../../store";
+import {connect} from "react-redux";
 import './playlist.scss'
 
-export default class Playlist extends React.Component {
+
+class Playlist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,19 +18,25 @@ export default class Playlist extends React.Component {
 
   }
 
-  playlistNameToInput() {
-    this.props.changeEditMode(this.props.playlistIndex);
 
-  }
 
 
   inputToName(event) {
-
     if (event.key === 'Enter' || event.type === 'blur') {
 
-      this.props.changeEditMode(this.props.playlistIndex);
+      // this.props.changeEditMode(this.props.playlistIndex);
+      // this.props.changePlaylistName(event.target.value, this.props.playlistIndex);
 
-      this.props.changePlaylistName(event.target.value, this.props.playlistIndex)
+      store.dispatch({
+        type: 'CHANGE_PLAYLIST_NAME',
+        playlistName: event.target.value,
+        playlistIndex: this.props.playlistIndex
+      });
+
+      store.dispatch({
+        type: 'CHANGE_EDIT_MODE',
+        playlistIndex: this.props.playlistIndex
+      })
 
     }
 
@@ -53,23 +63,20 @@ export default class Playlist extends React.Component {
     }
   }
 
-  deleteHendle() {
-    this.props.deletePlaylist(this.props.playlistIndex)
-  }
+
 
   render() {
+    const storeData = store.getState();
     return (
       <div>
-
-
-        { this.props.playlist.editMode ?
+        { storeData.playlists[this.props.playlistIndex].editMode ?
           <div className="playlist-header">
             <input type="text"
                    className='input-playlist-name'
                    onKeyDown={(event) => {
                      this.inputToName(event)
                    }}
-                   placeholder={this.props.playlist.title}
+                   placeholder={storeData.playlists[this.props.playlistIndex].title}
                    onChange={() => {
                      this.handlePlaylistNameChange(event)
                    }}
@@ -84,14 +91,14 @@ export default class Playlist extends React.Component {
           <div className="playlist-header">
             <div className='playlist-name'
                  onClick={() => {
-                   this.playlistNameToInput()
+                   this.props.playlistNameToInput(this.props.playlistIndex)
                  }}>
-              {this.props.playlist.title}
+              {storeData.playlists[this.props.playlistIndex].title}
             </div>
-            <span className="song-count">{this.props.playlist.songs.length}</span>
+            <span className="song-count">{storeData.playlists[this.props.playlistIndex].songs.length}</span>
             <butten className="deleteBtn"
                     onClick={() => {
-                      this.deleteHendle()
+                      this.props.deleteHendle(this.props.playlistIndex)
                     }
                     }>
               Delete
@@ -99,13 +106,12 @@ export default class Playlist extends React.Component {
           </div>}
 
         <div className="playlist-content">
-          {this.props.playlist.songs.length > 0 ?
-            this.props.playlist.songs.map((song, i) => (
+          {storeData.playlists[this.props.playlistIndex].songs.length > 0 ?
+            storeData.playlists[this.props.playlistIndex].songs.map((song, i) => (
               <div key={uuid()} className="song-card">
                 <SongCard song={song}
-                          updateCurrentTrack={this.props.updateCurrentTrack}
-                          playlists={this.props.playlists}
-                          from={this.props.from}/>
+                          from={this.props.from}
+                          songIndex={i}/>
               </div>)
             )
             :
@@ -120,3 +126,35 @@ export default class Playlist extends React.Component {
 
   }
 }
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    playlistNameToInput(playlistIndex) {
+      // this.props.changeEditMode(this.props.playlistIndex);
+console.info('sss');
+      dispatch({
+        type: 'CHANGE_EDIT_MODE',
+        playlistIndex: playlistIndex
+      })
+    },
+    deleteHendle(playlistIndex) {
+
+      dispatch({
+        type: 'DELETE_PLAYLIST',
+        playlistIndex: playlistIndex
+      });
+      // this.props.deletePlaylist(this.props.playlistIndex)
+    }
+
+  }
+}
+
+function mapStateToProps(store) {
+  return {
+    playlist: store.playlists
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

@@ -1,9 +1,10 @@
 import React from "react"
-
+import {connect} from "react-redux";
 import './player.scss'
-import store from "../../store";
 
-export default class Player extends React.Component {
+
+
+class Player extends React.Component {
   constructor(props) {
     super(props);
 
@@ -50,19 +51,19 @@ export default class Player extends React.Component {
 
 
   render() {
-    const storeData = store.getState();
-    console.info(storeData.currentTrack);
+    // const storeData = store.getState();
+    // console.info(storeData.currentTrack);
 
 
-    if (storeData.currentTrack) {
-      const songUrl = `${storeData.currentTrack.stream_url}?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z`;
+    if (this.props.currentTrack) {
+      const songUrl = `${this.props.currentTrack.stream_url}?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z`;
 
       return (
 
         <footer className="player-footer">
           <div className="player-song-info">
-            <img src={storeData.currentTrack.artwork_url}/>
-            <div>{this.songTitleLimiter(storeData.currentTrack.title)}</div>
+            <img src={this.props.currentTrack.artwork_url}/>
+            <div>{this.songTitleLimiter(this.props.currentTrack.title)}</div>
           </div>
           <div className="player-audio">
             <audio controls
@@ -79,3 +80,13 @@ export default class Player extends React.Component {
 
   }
 }
+
+function mapStateToProps(store) {
+  return {
+    currentTrack: store.currentTrack
+  }
+}
+
+export default connect(mapStateToProps)(Player);
+
+
