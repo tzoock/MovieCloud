@@ -27,7 +27,7 @@ export default function Topar() {
           <input type="text" className="nav-search-input" placeholder="SEARCH"/>
         </div>
         <div className="nav-log">
-          <Link to="login">Sign Out</Link>
+          <Link to="/signin">Sign Out</Link>
         </div>
       </div>
       {/*<nav className="nav-style">*/}

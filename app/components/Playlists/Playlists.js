@@ -3,19 +3,21 @@ import Playlist from "../playlist/Playlist";
 import uuid from "uuid";
 
 import './playlists.scss'
-import store from "../../store";
 import {connect} from "react-redux";
 
 class Playlists extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      scrollTo: null
+    }
 
   }
 
-
-
-
+  handleScrool(playlistId) {
+    console.info(playlistId);
+    this.setState({scrollTo:playlistId})
+  }
 
 
   render() {
@@ -25,31 +27,34 @@ class Playlists extends React.Component {
         <div className="playlists-bar">
 
           <div className="playlists-bar-top">
-            <button className="add-playlist-btn" onClick={ ()=>(this.props.createPlaylistHandler()) }>Add new playlist</button>
+            <button className="add-playlist-btn" onClick={ () => (this.props.createPlaylistHandler()) }>Add new
+              playlist
+            </button>
           </div>
           <div className="playlists-bar-bottom">
             <div>
-              {this.props.playlists.map((playlist, i) => <div key={playlist.id? playlist.id : uuid()}
-                                                             onClick={()=>{
-                                                               store.dispatch({
-                                                                 type: 'CHANGE_EDIT_MODE',
-                                                                 playlistIndex: i
-                                                               })
-                                                             }}
-                                                             className="playlist-bar-titles">
-                  {playlist.title? playlist.title : "Untitled playlist"}
+              {this.props.playlists.map((playlist, i) =>
+                <div key={playlist.id}
+                     onClick={() => {
+                       this.handleScrool(playlist.id)
+                     }}
+                     className="playlist-bar-titles">
+                  {playlist.title }
                 </div>
               )}
             </div>
           </div>
         </div>
         <div className="right-playlists">
-          {this.props.playlists.map((playlist, i) => <div key={uuid()} className="user-playlist">
+          {this.props.playlists.map((playlist, i) =>
+            <div key={playlist.id ? playlist.id : uuid()}
+                 className="user-playlist">
 
               < Playlist
-                playlist = {playlist}
-                playlistIndex = {i}
+                playlist={playlist}
+                playlistIndex={i}
                 from={this.props.match.path}
+                scroller={this.state.scrollTo}
               />
 
 

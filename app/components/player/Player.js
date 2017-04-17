@@ -26,14 +26,14 @@ class Player extends React.Component {
   //   this.didSongArrive();
   // }
 
-  didSongArrive() {
-    if (typeof this.storeData.currentTrack.title === 'undefined') {
-      this.setState({gotSong: false})
-    }
-    else {
-      this.setState({gotSong: true})
-    }
-  }
+  // didSongArrive() {
+  //   if (typeof this.storeData.currentTrack.title === 'undefined') {
+  //     this.setState({gotSong: false})
+  //   }
+  //   else {
+  //     this.setState({gotSong: true})
+  //   }
+  // }
 
   songTitleLimiter(title) {
     if (title) {
@@ -57,7 +57,7 @@ class Player extends React.Component {
 
     if (this.props.currentTrack) {
       const songUrl = `${this.props.currentTrack.stream_url}?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z`;
-
+console.info(songUrl);
       return (
 
         <footer className="player-footer">

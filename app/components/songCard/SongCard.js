@@ -17,8 +17,7 @@ class SongCard extends React.Component {
     this.state = {
       heartMode: '',
       dropDownMode: false,
-      value: '',
-      checker: ''
+      value: ''
     };
 
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -114,7 +113,7 @@ class SongCard extends React.Component {
   // }
 
   componentWillReceiveProps() {
-    this.props.checkMe === true ? this.setState({checker: true}) : this.setState({checker: false})
+
   }
 
   componentWillMount() {
@@ -135,6 +134,29 @@ class SongCard extends React.Component {
     // });
   }
 
+  checkMe() {
+
+      return this.props.playlists.map((playlist) => {
+        let checkMe = false;
+    
+        playlist.songs.forEach((song) => {
+          if (song.id === this.props.song.id) {
+            console.info('gotcha');
+            checkMe = true;
+          }
+        });
+
+        return (<label key={playlist.id}>
+              {playlist.title}
+              <input type="checkbox"
+                     defaultChecked={checkMe}
+              />
+            {console.info(checkMe)}
+            </label>
+
+          )
+      })
+  }
 
   render() {
 
@@ -162,33 +184,13 @@ class SongCard extends React.Component {
 
 
         {this.state.dropDownMode ?
-          <div className='dropdown-heart'
-               ref={(droper) => (this.droper = droper)}>
+          <div className='dropdown-heart'>
 
             {this.whereFrom()}
 
             <div className="playlist-list-of-checkbox">
 
-              {this.props.playlists.map((playlist) => {
-                return (
-                  <div key={uuid()}
-                       className="playlist-list-of-checkbox">
-
-
-                    <label key={playlist.id}>
-                      {playlist.title}
-                      <input type="checkbox"
-                             onChange={this.handleInputChange}
-                        // name={playlist.title}
-                             checked={this.state.checker}
-                             ref={(checkboxElm) => {
-                               this.checkboxElm = checkboxElm
-                             }}/>
-                    </label>
-
-
-                  </div>)
-              })}
+              {this.checkMe()}
 
             </div>
           </div>
@@ -218,4 +220,10 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(SongCard);
+function mapStateToProps(store) {
+  return {
+    playlists: store.playlists
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongCard);

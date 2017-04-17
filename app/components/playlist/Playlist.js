@@ -2,100 +2,108 @@ import React from "react";
 import SongCard from "../songCard/SongCard";
 import uuid from "uuid";
 
-
-import store from "../../store";
 import {connect} from "react-redux";
 import './playlist.scss'
-
+require('smoothscroll-polyfill').polyfill();
 
 class Playlist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: '',
-      elm: this.focusMe
+      editMode: false
     };
 
   }
 
+  componentDidUpdate() {
+   // if (this.props.playlists.editMode) {
+   //   this.setState({editMode: true})
+   // }
+   // else {
+   //   this.setState({editMode: false})
+   // }
 
-
-
-  inputToName(event) {
-    if (event.key === 'Enter' || event.type === 'blur') {
-
-      // this.props.changeEditMode(this.props.playlistIndex);
-      // this.props.changePlaylistName(event.target.value, this.props.playlistIndex);
-
-      store.dispatch({
-        type: 'CHANGE_PLAYLIST_NAME',
-        playlistName: event.target.value,
-        playlistIndex: this.props.playlistIndex
-      });
-
-      store.dispatch({
-        type: 'CHANGE_EDIT_MODE',
-        playlistIndex: this.props.playlistIndex
-      })
-
+    if (this.props.scroller === this.props.playlist.id) {
+      console.info('scrooling');
+      this.scroolMe.scrollIntoView({ block: "start" , behavior: "smooth"});
+      this.scroolMe.scrollIntoView({ top:100})
     }
 
-  }
-
-
-  handlePlaylistNameChange(event) {
-
-    this.setState(Object.assign({}, {value: event.target.value}));
-
-  }
-
-  componentDidUpdate() {
-    if (this.props.playlist.editMode) {
+    else if (this.state.editMode) {
       this.focusMe.focus();
-      this.focusMe.scrollIntoView(true);
+      // this.focusMe.scrollIntoView(true);
     }
   }
 
   componentDidMount() {
+
     if (this.props.playlist.editMode) {
-      this.focusMe.focus();
-      this.focusMe.scrollIntoView(true);
+
+      this.setState({editMode: true})
     }
+    // else {
+    //   this.setState({editMode: false})
+    // }
+
+    // if (this.state.editMode) {
+    //   this.focusMe.focus();
+    //   // this.focusMe.scrollIntoView(true);
+    // }
+  }
+
+  inputToName(event) {
+    if (event.key === 'Enter' || event.type === 'blur') {
+      this.props.changeName(this.props.playlistIndex, event.target.value);
+      this.togglePlaylistTitle()
+    }
+  }
+
+  handlePlaylistNameChange(event) {
+    this.setState( {value: event.target.value});
+  }
+
+  togglePlaylistTitle() {
+    this.setState({editMode: !this.state.editMode})
   }
 
 
 
   render() {
-    const storeData = store.getState();
+
     return (
       <div>
-        { storeData.playlists[this.props.playlistIndex].editMode ?
+        { this.state.editMode ?
           <div className="playlist-header">
             <input type="text"
                    className='input-playlist-name'
                    onKeyDown={(event) => {
                      this.inputToName(event)
                    }}
-                   placeholder={storeData.playlists[this.props.playlistIndex].title}
+                   placeholder={this.props.playlists[this.props.playlistIndex].title}
                    onChange={() => {
                      this.handlePlaylistNameChange(event)
                    }}
                    onBlur={(event) => {
                      this.inputToName(event)
                    }}
-                   ref={(inpElm) => {
-                     this.focusMe = inpElm
-                   }}/>
+                   ref={(ref) => {
+                     this.focusMe = ref
+                   }}
+                   />
           </div>
           :
           <div className="playlist-header">
             <div className='playlist-name'
                  onClick={() => {
-                   this.props.playlistNameToInput(this.props.playlistIndex)
+                   this.togglePlaylistTitle()
+                 }}
+                 ref={(ref) => {
+                   this.scroolMe = ref
                  }}>
-              {storeData.playlists[this.props.playlistIndex].title}
+              {this.props.playlists[this.props.playlistIndex].title}
             </div>
-            <span className="song-count">{storeData.playlists[this.props.playlistIndex].songs.length}</span>
+            <span className="song-count">{this.props.playlists[this.props.playlistIndex].songs.length}</span>
             <butten className="deleteBtn"
                     onClick={() => {
                       this.props.deleteHendle(this.props.playlistIndex)
@@ -106,8 +114,8 @@ class Playlist extends React.Component {
           </div>}
 
         <div className="playlist-content">
-          {storeData.playlists[this.props.playlistIndex].songs.length > 0 ?
-            storeData.playlists[this.props.playlistIndex].songs.map((song, i) => (
+          {this.props.playlists[this.props.playlistIndex].songs.length > 0 ?
+            this.props.playlists[this.props.playlistIndex].songs.map((song, i) => (
               <div key={uuid()} className="song-card">
                 <SongCard song={song}
                           from={this.props.from}
@@ -131,20 +139,24 @@ class Playlist extends React.Component {
 function mapDispatchToProps(dispatch) {
   return {
     playlistNameToInput(playlistIndex) {
-      // this.props.changeEditMode(this.props.playlistIndex);
-console.info('sss');
       dispatch({
         type: 'CHANGE_EDIT_MODE',
         playlistIndex: playlistIndex
       })
     },
     deleteHendle(playlistIndex) {
-
       dispatch({
         type: 'DELETE_PLAYLIST',
         playlistIndex: playlistIndex
       });
-      // this.props.deletePlaylist(this.props.playlistIndex)
+    },
+    changeName(playlistIndex, playlistName) {
+      dispatch({
+        type: 'CHANGE_PLAYLIST_NAME',
+        playlistIndex: playlistIndex,
+        playlistName: playlistName,
+
+      })
     }
 
   }
@@ -152,7 +164,7 @@ console.info('sss');
 
 function mapStateToProps(store) {
   return {
-    playlist: store.playlists
+    playlists: store.playlists
   }
 }
 
