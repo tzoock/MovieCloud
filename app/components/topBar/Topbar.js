@@ -7,6 +7,11 @@ import './topBar.scss'
 
 export default function Topar() {
 
+  function searchSubmit(event) {
+    event.preventDefault();
+    console.info(event);
+  }
+
   return (
     <header className="top-bar">
       <nav className="nav-style">
@@ -22,10 +27,11 @@ export default function Topar() {
         </NavLink>
       </nav>
       <div className="right-top-bar">
-        <div className="search-nav">
+        <form className="search-nav"
+        onSubmit={(event)=>this.searchSubmit(event)}>
           <i className="fa fa-search"/>
           <input type="text" className="nav-search-input" placeholder="SEARCH"/>
-        </div>
+        </form>
         <div className="nav-log">
           <Link to="/signin">Sign Out</Link>
         </div>

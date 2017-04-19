@@ -1,4 +1,5 @@
 import uuid from "uuid";
+
 const damiPlaylists = [
   {
     editMode: false,
@@ -21,17 +22,23 @@ const damiPlaylists = [
     songs: []
   }
 ];
-export default function playlists(playlists = damiPlaylists, action) {
+
+export default function playlists(playlists = [], action) {
   const copyOfPlaylists = [...playlists];
 
+  if (action.type === 'GOT_DATA') {
+    if (playlists>0) {
+      return playlists
+    }
+else {
+      return action.data
+    }
+
+  }
+
   if (action.type === 'CREATE_PLAYLIST') {
-    const newPlaylist = {
-      editMode: true,
-      id: uuid(),
-      title: 'Untitled',
-      songs: action.song ? [action.song] : []
-    };
-    copyOfPlaylists.push(newPlaylist);
+
+    copyOfPlaylists.push(action.newPlaylist);
     return copyOfPlaylists;
   }
 
@@ -49,6 +56,23 @@ export default function playlists(playlists = damiPlaylists, action) {
   if (action.type === 'DELETE_PLAYLIST') {
     copyOfPlaylists.splice(action.playlistIndex, 1);
     return copyOfPlaylists;
+  }
+
+  if (action.type === 'UPDATE_SONG') {
+    if (action.checked) {
+      copyOfPlaylists[action.playlistIndex].songs.push(action.song);
+    }
+    else {
+      const songIndex = copyOfPlaylists[action.playlistIndex].songs.indexOf(action.song);
+      copyOfPlaylists[action.playlistIndex].songs.splice(songIndex);
+    }
+
+    return copyOfPlaylists
+  }
+
+  if (action.type === 'RMV_SONG') {
+
+
   }
 
   return playlists;

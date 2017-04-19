@@ -20,5 +20,5 @@ import {Provider} from "react-redux";
     document.querySelector('#root'));
 
 
-// renderApp();
+
 

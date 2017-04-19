@@ -19,8 +19,6 @@ class SongCard extends React.Component {
       dropDownMode: false,
       value: ''
     };
-
-    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   componentDidMount() {
@@ -44,7 +42,9 @@ class SongCard extends React.Component {
 
   toggleDropHeart() {
 
-    this.setState({dropDownMode: !this.state.dropDownMode})
+    this.setState({
+      dropDownMode: !this.state.dropDownMode
+    })
 
   }
 
@@ -120,42 +120,36 @@ class SongCard extends React.Component {
 
   }
 
-  handleInputChange(event) {
-    this.props.isInPlaylist(this.props.song);
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+  handleInputChange(event, playlistIndex) {
 
-    console.info(target.checked);
-    console.info(name);
+    const checked = event.target.checked;
+  this.props.updateSong(this.props.song, playlistIndex, checked)
 
-    // this.setState({
-    //   value: !this.state.value
-    // });
+
   }
 
   checkMe() {
 
-      return this.props.playlists.map((playlist) => {
-        let checkMe = false;
-    
-        playlist.songs.forEach((song) => {
-          if (song.id === this.props.song.id) {
-            console.info('gotcha');
-            checkMe = true;
-          }
-        });
+    return this.props.playlists.map((playlist, i) => {
+      let checkMe = false;
 
-        return (<label key={playlist.id}>
-              {playlist.title}
-              <input type="checkbox"
-                     defaultChecked={checkMe}
-              />
-            {console.info(checkMe)}
-            </label>
+      playlist.songs.forEach((song) => {
+        if (song.id === this.props.song.id) {
+          console.info('gotcha');
+          checkMe = true;
+        }
+      });
 
-          )
-      })
+      return (<label key={playlist.id}>
+          {playlist.title}
+          <input type="checkbox"
+                 checked={checkMe}
+                 onChange={(event)=>{this.handleInputChange(event, i)}}
+          />
+        </label>
+
+      )
+    })
   }
 
   render() {
@@ -216,6 +210,21 @@ function mapDispatchToProps(dispatch) {
         song: song
       })
       // this.props.createPlaylist(this.props.song)
+    },
+    updateSong(song, playlistIndex, checked) {
+      dispatch({
+        type: 'UPDATE_SONG',
+        song: song,
+        playlistIndex: playlistIndex,
+        checked: checked
+      })
+    },
+    rmvSong(song, playlistIndex) {
+      dispatch({
+        type: 'RMV_SONG',
+        song: song,
+        playlistIndex: playlistIndex
+      })
     }
   }
 }

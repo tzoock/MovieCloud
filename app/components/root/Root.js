@@ -10,13 +10,33 @@ import {
   Route,
   Redirect
 } from 'react-router-dom'
+import {connect} from "react-redux";
 
 
-export default class Root extends React.Component {
+
+class Root extends React.Component {
   constructor() {
     super();
 
   }
+
+  GetXhr() {
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'http://localhost:3000/playlists');
+
+    xhr.addEventListener('load', () => {
+      this.props.gotData(JSON.parse(xhr.responseText));
+    });
+
+
+    xhr.send();
+  }
+
+  componentDidMount() {
+    this.GetXhr()
+  }
+
 
   // componentDidMount() {
   //
@@ -91,7 +111,7 @@ export default class Root extends React.Component {
 
   render() {
     return ( <div>
-        <Topbar/>
+        <Topbar history={this.props.history}/>
         <main>
 
 
@@ -111,3 +131,15 @@ export default class Root extends React.Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    gotData(data) {
+      dispatch({
+        type: 'GOT_DATA',
+        data: data
+      })
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Root);

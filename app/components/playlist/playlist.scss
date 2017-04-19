@@ -106,5 +106,7 @@ input[type=text].input-playlist-name {
 
 .playlist-content {
   padding: 20px;
-  height: 250px;
+  min-height: 250px;
+  display: flex;
+  flex-wrap: wrap;
 }

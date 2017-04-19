@@ -12,11 +12,51 @@ class Playlists extends React.Component {
       scrollTo: null
     }
 
+    this.handleCreatePlaylist = this.handleCreatePlaylist.bind(this)
+
   }
 
   handleScrool(playlistId) {
     console.info(playlistId);
-    this.setState({scrollTo:playlistId})
+    this.setState({scrollTo: playlistId})
+  }
+
+
+  serverAddPlaylist(newPlaylist) {
+    console.log('adding Playlist...');
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:3000/playlists');
+
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.addEventListener('load', () => {
+      console.info('loaded...');
+      // document.querySelector('input[type=text]').value = ''
+      // readData();
+    });
+
+    xhr.addEventListener('error', () => {
+      console.info('problem!');
+    });
+
+    xhr.send(JSON.stringify(newPlaylist));
+
+    return false;
+  }
+
+
+  handleCreatePlaylist() {
+
+    const newPlaylist = {
+      editMode: "false",
+      id: uuid(),
+      title: 'Untitled',
+      songs: []
+    };
+
+    this.serverAddPlaylist(newPlaylist);
+    this.props.createPlaylist(newPlaylist)
   }
 
 
@@ -27,7 +67,7 @@ class Playlists extends React.Component {
         <div className="playlists-bar">
 
           <div className="playlists-bar-top">
-            <button className="add-playlist-btn" onClick={ () => (this.props.createPlaylistHandler()) }>Add new
+            <button className="add-playlist-btn" onClick={ () => (this.handleCreatePlaylist()) }>Add new
               playlist
             </button>
           </div>
@@ -69,11 +109,12 @@ class Playlists extends React.Component {
 function mapDispatchToProps(dispatch) {
 
   return {
-    createPlaylistHandler() {
+    createPlaylist(newPlaylist) {
       dispatch({
         type: 'CREATE_PLAYLIST',
+        newPlaylist: newPlaylist
       })
-    },
+    }
 
   }
 }

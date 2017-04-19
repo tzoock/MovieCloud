@@ -54,6 +54,8 @@ class Playlist extends React.Component {
 
   inputToName(event) {
     if (event.key === 'Enter' || event.type === 'blur') {
+      
+      this.serverPlaylistNameChange(this.props.playlist);
       this.props.changeName(this.props.playlistIndex, event.target.value);
       this.togglePlaylistTitle()
     }
@@ -67,7 +69,28 @@ class Playlist extends React.Component {
     this.setState({editMode: !this.state.editMode})
   }
 
+  serverPlaylistNameChange(playlist) {
+    console.info(playlist);
+    console.log('PlaylistNameChange...');
 
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:3000/playlistNameChange');
+
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.addEventListener('load', () => {
+      console.info('loaded...');
+
+    });
+
+    xhr.addEventListener('error', () => {
+      console.info('problem!');
+    });
+
+    xhr.send(JSON.stringify(playlist));
+
+    return false;
+  }
 
   render() {
 
