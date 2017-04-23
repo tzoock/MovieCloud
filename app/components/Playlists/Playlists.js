@@ -64,7 +64,7 @@ class Playlists extends React.Component {
     this.setState({scrollTo: ''})
   }
 
-  componentWillRecieveProps {
+  componentDidMount() {
     console.info(this);
   }
 

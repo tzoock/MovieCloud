@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89072340-01ae-4947-bc38-f6c17ac17827" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Explore/Explore.js" afterPath="$PROJECT_DIR$/app/components/Explore/Explore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Explore/explore.scss" afterPath="$PROJECT_DIR$/app/components/Explore/explore.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Playlists/Playlists.js" afterPath="$PROJECT_DIR$/app/components/Playlists/Playlists.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/playlist/Playlist.js" afterPath="$PROJECT_DIR$/app/components/playlist/Playlist.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/songCard/SongCard.js" afterPath="$PROJECT_DIR$/app/components/songCard/SongCard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/reducers/playlistsReducer.js" afterPath="$PROJECT_DIR$/app/reducers/playlistsReducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/playlist.json" afterPath="$PROJECT_DIR$/server/playlist.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/server.js" afterPath="$PROJECT_DIR$/server/server.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -94,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/app/components/Playlists/Playlists.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="66" column="27" lean-forward="false" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
+              <caret line="66" column="21" lean-forward="false" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="21" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -642,12 +634,12 @@
       <workItem from="1491902281074" duration="43512000" />
       <workItem from="1492157211379" duration="8168000" />
       <workItem from="1492433673543" duration="16153000" />
-      <workItem from="1492492206403" duration="59969000" />
+      <workItem from="1492492206403" duration="60573000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="404654000" />
+    <option name="totallyTimeSpent" value="405258000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1378" height="735" extended-state="0" />
@@ -1040,7 +1032,7 @@
     <entry file="file://$PROJECT_DIR$/app/components/Playlists/Playlists.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="66" column="27" lean-forward="false" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="27" />
+          <caret line="66" column="21" lean-forward="false" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="21" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
