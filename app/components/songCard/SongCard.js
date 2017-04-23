@@ -64,7 +64,8 @@ class SongCard extends React.Component {
 
 
   whereFrom() {
-    if (this.props.from === '/Playlists') {
+    console.info(this.props.from);
+    if (this.props.from.location.pathname.includes('/Playlists')) {
       return (
         <div className="drop-heart-header">
           <h6>Edit Playlists</h6>
@@ -74,18 +75,51 @@ class SongCard extends React.Component {
       return (
         <div className="drop-heart-header">
           <h6>Add to Playlist</h6>
-          <Link className='create-playlist'
-                to='/Playlists'
+          <div className='create-playlist'
                 onClick={() => {
-                  this.props.handleNewPlaylist(this.props.song)
+                  this.handleNewPlaylist()
                 }}>
             Create playlist +
-          </Link>
+          </div>
         </div>)
     }
   }
 
+handleNewPlaylist() {
+  this.toggleDropHeart();
+  const newPlaylist = {
+    editMode: true,
+    id: uuid(),
+    title: 'Untitled',
+    songs: [this.props.song]
+  };
 
+
+  this.props.createPlaylistWithSong(this.props.song);
+  this.serverAddPlaylist(newPlaylist);
+
+}
+
+  serverAddPlaylist(data) {
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:3000/serverAddPlaylistWithSong');
+
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.addEventListener('load', () => {
+      console.info('loaded...');
+     this.props.from.push('/Playlists')
+    });
+
+    xhr.addEventListener('error', () => {
+      console.info('problem!');
+    });
+
+    xhr.send(JSON.stringify(data));
+
+    return false;
+  }
   // componentDidMount() {
   //
   // }
@@ -113,29 +147,52 @@ class SongCard extends React.Component {
   // }
 
   componentWillReceiveProps() {
-
   }
 
   componentWillMount() {
 
   }
 
-  handleInputChange(event, playlistIndex) {
+  serverAddSong(playlistIndex, checked) {
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:3000/serverAddSong');
+
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.addEventListener('load', () => {
+      console.info('loaded...');
+    });
+
+    xhr.addEventListener('error', () => {
+      console.info('problem!');
+    });
+
+    xhr.send(JSON.stringify({
+      song: this.props.song,
+      playlistIndex: playlistIndex,
+      checked: checked
+    }));
+
+    return false;
+  }
+
+  handleplaylistChecking(event, playlistIndex) {
 
     const checked = event.target.checked;
-  this.props.updateSong(this.props.song, playlistIndex, checked)
+  this.props.updateSong(this.props.song, playlistIndex, checked);
+    this.serverAddSong(playlistIndex, checked)
 
 
   }
 
   checkMe() {
-
+console.info(this.props.playlists);
     return this.props.playlists.map((playlist, i) => {
       let checkMe = false;
 
       playlist.songs.forEach((song) => {
         if (song.id === this.props.song.id) {
-          console.info('gotcha');
           checkMe = true;
         }
       });
@@ -144,7 +201,7 @@ class SongCard extends React.Component {
           {playlist.title}
           <input type="checkbox"
                  checked={checkMe}
-                 onChange={(event)=>{this.handleInputChange(event, i)}}
+                 onChange={(event)=>{this.handleplaylistChecking(event, i)}}
           />
         </label>
 
@@ -204,9 +261,9 @@ function mapDispatchToProps(dispatch) {
         song: song
       })
     },
-    handleNewPlaylist(song) {
+    createPlaylistWithSong(song) {
       dispatch({
-        type: 'CREATE_PLAYLIST',
+        type: 'CREATE_PLAYLIST_WITH_SONG',
         song: song
       })
       // this.props.createPlaylist(this.props.song)

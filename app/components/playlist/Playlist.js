@@ -17,52 +17,40 @@ class Playlist extends React.Component {
   }
 
   componentDidUpdate() {
-   // if (this.props.playlists.editMode) {
-   //   this.setState({editMode: true})
-   // }
-   // else {
-   //   this.setState({editMode: false})
-   // }
+
+    if (this.state.editMode === true) {
+      this.focusMe.focus();
+    }
 
     if (this.props.scroller === this.props.playlist.id) {
       console.info('scrooling');
-      this.scroolMe.scrollIntoView({ block: "start" , behavior: "smooth"});
-      this.scroolMe.scrollIntoView({ top:100})
+      this.scroolMe.scrollIntoView({block: "start", behavior: "smooth"});
+      this.props.handleScroolBlur()
     }
 
-    else if (this.state.editMode) {
-      this.focusMe.focus();
-      // this.focusMe.scrollIntoView(true);
-    }
   }
 
   componentDidMount() {
-
-    if (this.props.playlist.editMode) {
-
-      this.setState({editMode: true})
+if (this.props.editMode) {
+  this.setState({editMode: true})
+}
+    if (this.state.editMode === true) {
+      this.focusMe.focus();
     }
-    // else {
-    //   this.setState({editMode: false})
-    // }
 
-    // if (this.state.editMode) {
-    //   this.focusMe.focus();
-    //   // this.focusMe.scrollIntoView(true);
-    // }
   }
 
   inputToName(event) {
     if (event.key === 'Enter' || event.type === 'blur') {
-      
-      this.serverPlaylistNameChange(this.props.playlist);
+
       this.props.changeName(this.props.playlistIndex, event.target.value);
-      this.togglePlaylistTitle()
+      this.setState({editMode: false});
+      this.serverPlaylistNameChange(this.props.playlist);
     }
   }
 
   handlePlaylistNameChange(event) {
-    this.setState( {value: event.target.value});
+    this.setState({value: event.target.value});
   }
 
   togglePlaylistTitle() {
@@ -70,8 +58,6 @@ class Playlist extends React.Component {
   }
 
   serverPlaylistNameChange(playlist) {
-    console.info(playlist);
-    console.log('PlaylistNameChange...');
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:3000/playlistNameChange');
@@ -80,7 +66,6 @@ class Playlist extends React.Component {
 
     xhr.addEventListener('load', () => {
       console.info('loaded...');
-
     });
 
     xhr.addEventListener('error', () => {
@@ -90,6 +75,31 @@ class Playlist extends React.Component {
     xhr.send(JSON.stringify(playlist));
 
     return false;
+  }
+
+  serverDeletePlaylist (playlistIndex) {
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:3000/serverDeletePlaylist');
+
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.addEventListener('load', () => {
+      console.info('loaded...');
+    });
+
+    xhr.addEventListener('error', () => {
+      console.info('problem!');
+    });
+
+    xhr.send(JSON.stringify(playlistIndex));
+
+    return false;
+  }
+
+  deletePlaylistHandler(playlistIndex) {
+    this.props.deletePlaylist(playlistIndex);
+    this.serverDeletePlaylist({playlistIndex})
   }
 
   render() {
@@ -113,13 +123,13 @@ class Playlist extends React.Component {
                    ref={(ref) => {
                      this.focusMe = ref
                    }}
-                   />
+            />
           </div>
           :
           <div className="playlist-header">
             <div className='playlist-name'
                  onClick={() => {
-                   this.togglePlaylistTitle()
+                   this.setState({editMode: true})
                  }}
                  ref={(ref) => {
                    this.scroolMe = ref
@@ -129,7 +139,7 @@ class Playlist extends React.Component {
             <span className="song-count">{this.props.playlists[this.props.playlistIndex].songs.length}</span>
             <butten className="deleteBtn"
                     onClick={() => {
-                      this.props.deleteHendle(this.props.playlistIndex)
+                      this.deletePlaylistHandler(this.props.playlistIndex)
                     }
                     }>
               Delete
@@ -167,7 +177,7 @@ function mapDispatchToProps(dispatch) {
         playlistIndex: playlistIndex
       })
     },
-    deleteHendle(playlistIndex) {
+    deletePlaylist(playlistIndex) {
       dispatch({
         type: 'DELETE_PLAYLIST',
         playlistIndex: playlistIndex

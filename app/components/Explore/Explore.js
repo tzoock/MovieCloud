@@ -66,10 +66,10 @@ export default class Explore extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     // console.info(this.props.updateCurrentTrack);
     if (prevProps.match.params.genre !== this.props.match.params.genre) {
-      this.setState( {
+      this.setState({
         offset: 0,
         Loading: "loading"
-      }, ()=>{
+      }, () => {
         this.GetXhr();
       })
     }
@@ -80,7 +80,7 @@ export default class Explore extends React.Component {
 
 
   render() {
-
+console.info(this.props.history);
     switch (this.state.Loading) {
       case 'loading':
         return (
@@ -92,7 +92,7 @@ export default class Explore extends React.Component {
         return (
           <div className="midMe">
 
-              <h1>Error!</h1>
+            <h1>Error!</h1>
 
           </div>
         );
@@ -102,14 +102,34 @@ export default class Explore extends React.Component {
             <div className="genres-section">
               <p>Genres:</p>
               <ul className="genere-style">
-                <li><NavLink to="/Explore/trance" className="genre-tab">Trance</NavLink></li>
-                <li><NavLink to="/Explore/dubstep">Dub-Step</NavLink></li>
-                <li><NavLink to="/Explore/house">House</NavLink></li>
-                <li><NavLink to="/Explore/metal">Metal</NavLink></li>
-                <li><NavLink to="/Explore/ballads">ballads</NavLink></li>
+                <li>
+                  <NavLink to="/Explore/trance" className="genre-tab">
+                    Trance
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/Explore/dubstep" className="genre-tab">
+                    Dub-Step
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/Explore/house" className="genre-tab">
+                    House
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/Explore/metal" className="genre-tab">
+                    Metal
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/Explore/ballads" className="genre-tab">
+                    ballads
+                  </NavLink>
+                </li>
               </ul>
             </div>
-            <p>Genre:</p>
+            <p>Genre: {this.props.match.params.genre}</p>
             <div>
               <div className="song-cards-wrapper">
                 {this.state.tracks.map((song, i) => <div key={song.id} className="song-card">
@@ -117,7 +137,7 @@ export default class Explore extends React.Component {
                               updateCurrentTrack={this.props.updateCurrentTrack}
                               playlists={this.props.playlists}
                               createPlaylist={this.props.createPlaylist}
-                              from={this.props.match.path}
+                              from={this.props.history}
                               checkMe={this.props.checkMe}
                               isInPlaylist={this.props.isInPlaylist}/>
                   </div>
@@ -126,10 +146,10 @@ export default class Explore extends React.Component {
             </div>
             <div className="pager">
               <div>
-              <button className="page-btn" onClick={ this.prevPage.bind(this)} disabled={this.state.offset === 0}>Prev
-              </button>
-              <p>page: {(this.state.offset / this.state.limit) + 1}</p>
-              <button className="page-btn" onClick={ this.nextPage.bind(this)}>Next</button>
+                <button className="page-btn" onClick={ this.prevPage.bind(this)} disabled={this.state.offset === 0}>Prev
+                </button>
+                <p>page: {(this.state.offset / this.state.limit) + 1}</p>
+                <button className="page-btn" onClick={ this.nextPage.bind(this)}>Next</button>
               </div>
             </div>
 

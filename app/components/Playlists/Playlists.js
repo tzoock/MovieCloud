@@ -9,11 +9,11 @@ class Playlists extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      scrollTo: null
-    }
+      scrollTo: ''
+    };
 
-    this.handleCreatePlaylist = this.handleCreatePlaylist.bind(this)
-
+    this.handleCreatePlaylist = this.handleCreatePlaylist.bind(this);
+    this.handleScroolBlur = this.handleScroolBlur.bind(this);
   }
 
   handleScrool(playlistId) {
@@ -26,7 +26,7 @@ class Playlists extends React.Component {
     console.log('adding Playlist...');
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/playlists');
+    xhr.open('POST', 'http://localhost:3000/serverAddPlaylist');
 
     xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -48,20 +48,28 @@ class Playlists extends React.Component {
 
   handleCreatePlaylist() {
 
-    const newPlaylist = {
-      editMode: "false",
+    const newPlaylistNoSong = {
+      editMode: true,
       id: uuid(),
       title: 'Untitled',
       songs: []
     };
 
-    this.serverAddPlaylist(newPlaylist);
-    this.props.createPlaylist(newPlaylist)
+    this.serverAddPlaylist(newPlaylistNoSong);
+    this.props.createPlaylist(newPlaylistNoSong)
   }
 
+  handleScroolBlur() {
+    console.info('bluuur');
+    this.setState({scrollTo: ''})
+  }
+
+  componentWillRecieveProps {
+    console.info(this);
+  }
 
   render() {
-
+console.info(this);
     return (
       <div className="playlists-wrap">
         <div className="playlists-bar">
@@ -78,6 +86,9 @@ class Playlists extends React.Component {
                      onClick={() => {
                        this.handleScrool(playlist.id)
                      }}
+                     // onBlur={() => {
+                     //   this.handleScroolBlur
+                     // }}
                      className="playlist-bar-titles">
                   {playlist.title }
                 </div>
@@ -93,8 +104,9 @@ class Playlists extends React.Component {
               < Playlist
                 playlist={playlist}
                 playlistIndex={i}
-                from={this.props.match.path}
+                from={this.props.history}
                 scroller={this.state.scrollTo}
+                handleScroolBlur={this.handleScroolBlur}
               />
 
 

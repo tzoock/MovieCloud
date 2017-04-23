@@ -11,10 +11,10 @@
 .genres-section {
   display: flex;
   background-color: $genereBg;
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 20;
+  //position: fixed;
+  //right: 0;
+  //left: 0;
+  //z-index: 20;
   height: 40px;
   align-content: center;
 }
@@ -26,7 +26,7 @@
 
 .genere-style {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0;
   margin: 0;
   //height: 40px;
@@ -38,7 +38,7 @@
   margin: 16px 10px 0 10px;
 }
 
-.genere-style li:hover {
+.genere-style li a:hover {
   //color: #2d2d11;
   box-shadow: inset 0 -2px 0 ;
   transition: all .2s ease-in-out;
@@ -46,6 +46,10 @@
 
 .genere-style li > a {
   color: $allmostBlack;
+}
+
+.genere-style li > a:active {
+  box-shadow: inset 0 -2px 0 $allmostBlack ;
 }
 
 

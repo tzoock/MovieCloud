@@ -42,14 +42,19 @@ else {
     return copyOfPlaylists;
   }
 
+  if (action.type === 'CREATE_PLAYLIST_WITH_SONG') {
+    copyOfPlaylists.push(action.newPlaylist);
+    return copyOfPlaylists;
+  }
+
   if (action.type === 'CHANGE_EDIT_MODE') {
     copyOfPlaylists[action.playlistIndex].editMode = !playlists[action.playlistIndex].editMode;
     return copyOfPlaylists;
   }
 
   if (action.type === 'CHANGE_PLAYLIST_NAME') {
-    copyOfPlaylists[action.playlistIndex].title = action.playlistName === '' ? 'Untitled' : action.playlistName;
-    copyOfPlaylists[action.playlistIndex].editMode = !playlists[action.playlistIndex].editMode;
+    copyOfPlaylists[action.playlistIndex].title = action.playlistName;
+    copyOfPlaylists[action.playlistIndex].editMode = false;
     return copyOfPlaylists;
   }
 

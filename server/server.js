@@ -28,7 +28,22 @@ app.get('/playlists', function(req, res) {
   res.sendFile(__dirname + '/playlist.json');
 });
 
-app.post('/playlists', (req, res) => {
+app.post('/serverAddPlaylist', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+  console.info('yaaaaaaaaaaaa');
+  const data = fs.readFileSync(__dirname + '/playlist.json');
+
+  const playlists = JSON.parse(data);
+
+  playlists.push(req.body);
+
+  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlists));
+
+  res.send('OK')
+
+});
+
+app.post('/serverAddPlaylistWithSong', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   console.info('yaaaaaaaaaaaa');
   const data = fs.readFileSync(__dirname + '/playlist.json');
@@ -49,14 +64,55 @@ app.post('/playlistNameChange', (req, res) => {
   console.info('change name');
   const data = fs.readFileSync(__dirname + '/playlist.json');
 
-  const playlist = JSON.parse(data);
+  const playlists = JSON.parse(data);
 
- const foo = playlist.find((playlist)=> req.body.id === playlist.id);
-console.info(foo);
+ const foo = playlists.find((playlist)=> req.body.id === playlist.id);
+// console.info(foo);
+console.info(req.body.title);
 
   foo.title = req.body.title;
 
-  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlist));
+  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlists));
+
+  res.send('OK')
+
+});
+
+
+app.post('/serverDeletePlaylist', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+  console.info(req.body);
+  const data = fs.readFileSync(__dirname + '/playlist.json');
+
+  const playlists = JSON.parse(data);
+
+
+
+  playlists.splice(req.body.playlistIndex, 1);
+
+  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlists));
+
+  res.send('OK')
+
+});
+
+app.post('/serverAddSong', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+
+  const data = fs.readFileSync(__dirname + '/playlist.json');
+
+  const playlists = JSON.parse(data);
+
+
+  if (req.body.checked) {
+    playlists[req.body.playlistIndex].songs.push(req.body.song);
+  }
+  else {
+    const songIndex = playlists[req.body.playlistIndex].songs.indexOf(req.body.song);
+    playlists[req.body.playlistIndex].songs.splice(songIndex);
+  }
+
+  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlists));
 
   res.send('OK')
 
