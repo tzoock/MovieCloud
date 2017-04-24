@@ -112,7 +112,7 @@ class Root extends React.Component {
   render() {
     return ( <div>
         <Topbar history={this.props.history}/>
-        <main>
+
 
 
             <Route exact path="/" component={() => {
@@ -123,7 +123,7 @@ class Root extends React.Component {
             <Route path="/Explore/:genre" component={ Explore }/>
             <Route path={"/Playlists"} component={ Playlists }/>
 
-        </main>
+
         <Player/>
       </div>
     )

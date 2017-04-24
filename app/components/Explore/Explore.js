@@ -78,9 +78,41 @@ export default class Explore extends React.Component {
     }
   }
 
+  Geners() {
+
+
+    return <div className="genere-style">
+      <div className="genre-tab">
+        <Link to="/Explore/Trance" className="genre-link">
+          Trance
+        </Link>
+      </div>
+      <div className="genre-tab">
+        <Link to="/Explore/Dub-Step" className="genre-link">
+          Dub-Step
+        </Link>
+      </div>
+      <div className="genre-tab">
+        <Link to="/Explore/House" className="genre-link">
+          House
+        </Link>
+      </div>
+      <div className="genre-tab">
+        <Link to="/Explore/Metal" className="genre-link">
+          Metal
+        </Link>
+      </div>
+      <div className="genre-tab">
+        <Link to="/Explore/Ballads" className="genre-link">
+          Ballads
+        </Link>
+      </div>
+    </div>
+  }
 
   render() {
-console.info(this.props.history);
+
+console.info(this.props.match.params);
     switch (this.state.Loading) {
       case 'loading':
         return (
@@ -100,37 +132,11 @@ console.info(this.props.history);
         return (
           <div className="explore-wrap">
             <div className="genres-section">
-              <p>Genres:</p>
-              <ul className="genere-style">
-                <li>
-                  <NavLink to="/Explore/trance" className="genre-tab">
-                    Trance
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/Explore/dubstep" className="genre-tab">
-                    Dub-Step
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/Explore/house" className="genre-tab">
-                    House
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/Explore/metal" className="genre-tab">
-                    Metal
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/Explore/ballads" className="genre-tab">
-                    ballads
-                  </NavLink>
-                </li>
-              </ul>
+              {this.Geners()}
             </div>
-            <p>Genre: {this.props.match.params.genre}</p>
+
             <div>
+              <div className="chosen-genre">Genre: {this.props.match.params.genre}</div>
               <div className="song-cards-wrapper">
                 {this.state.tracks.map((song, i) => <div key={song.id} className="song-card">
                     <SongCard song={song}

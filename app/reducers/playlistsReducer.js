@@ -38,12 +38,12 @@ else {
 
   if (action.type === 'CREATE_PLAYLIST') {
 
-    copyOfPlaylists.push(action.newPlaylist);
+    copyOfPlaylists.push(action.newPlaylistData);
     return copyOfPlaylists;
   }
 
   if (action.type === 'CREATE_PLAYLIST_WITH_SONG') {
-    copyOfPlaylists.push(action.newPlaylist);
+    copyOfPlaylists.push(action.newPlaylistData);
     return copyOfPlaylists;
   }
 

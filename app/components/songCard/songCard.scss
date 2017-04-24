@@ -4,18 +4,13 @@
 
 
 
-.song-cards-wrapper {
-  padding: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
+
 
 .song-card {
   margin: 10px;
   position: relative;
   padding: 10px;
-  border: 1px solid ;
+  border: 1px solid #D8D8D8;
   //background-color: #fff;
   //display: inline-flex;
   width: 220px;
@@ -24,7 +19,7 @@
 
 .song-card-img {
   display: block;
-  border: 1px solid #0a0b0d;
+  border: 1px solid #D8D8D8;
   width: 200px;
   height: 85px;
   object-fit: cover;
@@ -91,6 +86,7 @@
 .dropdown-heart .create-playlist {
   color: #2196F3;
   font-size: 9px;
+  cursor: pointer;
 }
 
 .check-h {

@@ -7,8 +7,9 @@
 }
 
 .playlists-bar {
-  flex: 0 0 200px;
-  height: 90vh;
+  position: fixed;
+  min-height: 100%;
+  width: 25%;
   padding: 10px;
   border-right: 1px solid #D8D8D8 ;
 }
@@ -20,7 +21,7 @@
   outline: none;
   border: none;
   height: 30px;
-  width: 180px;
+  width: 90%;
   margin: 25px 10px;
 
 }
@@ -31,16 +32,19 @@
 
 .playlists-bar-bottom {
   display: flex;
-  justify-content: center;
+  //justify-content: center;
 }
 
 .playlist-bar-titles {
   cursor: pointer;
+  padding: 8px 10px;
 }
 
 .right-playlists {
 
   padding: 20px;
-  width: 100%;
+  position: absolute;
+  left: 25%;
+  width: 75%;
   height: 100%;
 }

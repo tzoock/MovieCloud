@@ -124,7 +124,7 @@ function mapDispatchToProps(dispatch) {
     createPlaylist(newPlaylist) {
       dispatch({
         type: 'CREATE_PLAYLIST',
-        newPlaylist: newPlaylist
+        newPlaylistData: newPlaylist
       })
     }
 
