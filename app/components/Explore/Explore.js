@@ -78,37 +78,37 @@ export default class Explore extends React.Component {
     }
   }
 
-  Geners() {
-
-
-    return <div className="genere-style">
-      <div className="genre-tab">
-        <Link to="/Explore/Trance" className="genre-link">
-          Trance
-        </Link>
-      </div>
-      <div className="genre-tab">
-        <Link to="/Explore/Dub-Step" className="genre-link">
-          Dub-Step
-        </Link>
-      </div>
-      <div className="genre-tab">
-        <Link to="/Explore/House" className="genre-link">
-          House
-        </Link>
-      </div>
-      <div className="genre-tab">
-        <Link to="/Explore/Metal" className="genre-link">
-          Metal
-        </Link>
-      </div>
-      <div className="genre-tab">
-        <Link to="/Explore/Ballads" className="genre-link">
-          Ballads
-        </Link>
-      </div>
-    </div>
-  }
+  // Geners() {
+  //
+  //
+  //   return <div className="genere-style">
+  //     <div className="genre-tab">
+  //       <Link to="/Explore/Trance" className="genre-link">
+  //         Trance
+  //       </Link>
+  //     </div>
+  //     <div className="genre-tab">
+  //       <Link to="/Explore/Dub-Step" className="genre-link">
+  //         Dub-Step
+  //       </Link>
+  //     </div>
+  //     <div className="genre-tab">
+  //       <Link to="/Explore/House" className="genre-link">
+  //         House
+  //       </Link>
+  //     </div>
+  //     <div className="genre-tab">
+  //       <Link to="/Explore/Metal" className="genre-link">
+  //         Metal
+  //       </Link>
+  //     </div>
+  //     <div className="genre-tab">
+  //       <Link to="/Explore/Ballads" className="genre-link">
+  //         Ballads
+  //       </Link>
+  //     </div>
+  //   </div>
+  // }
 
   render() {
 
@@ -132,7 +132,33 @@ console.info(this.props.match.params);
         return (
           <div className="explore-wrap">
             <div className="genres-section">
-              {this.Geners()}
+              <div className="genere-style">
+                <div className="genre-tab">
+                  <Link to="/Explore/Trance" className="genre-link">
+                    Trance
+                  </Link>
+                </div>
+                <div className="genre-tab">
+                  <Link to="/Explore/Dub-Step" className="genre-link">
+                    Dub-Step
+                  </Link>
+                </div>
+                <div className="genre-tab">
+                  <Link to="/Explore/House" className="genre-link">
+                    House
+                  </Link>
+                </div>
+                <div className="genre-tab">
+                  <Link to="/Explore/Metal" className="genre-link">
+                    Metal
+                  </Link>
+                </div>
+                <div className="genre-tab">
+                  <Link to="/Explore/Ballads" className="genre-link">
+                    Ballads
+                  </Link>
+                </div>
+              </div>
             </div>
 
             <div>
@@ -140,12 +166,7 @@ console.info(this.props.match.params);
               <div className="song-cards-wrapper">
                 {this.state.tracks.map((song, i) => <div key={song.id} className="song-card">
                     <SongCard song={song}
-                              updateCurrentTrack={this.props.updateCurrentTrack}
-                              playlists={this.props.playlists}
-                              createPlaylist={this.props.createPlaylist}
-                              from={this.props.history}
-                              checkMe={this.props.checkMe}
-                              isInPlaylist={this.props.isInPlaylist}/>
+                              from={this.props.history}/>
                   </div>
                 )}
               </div>

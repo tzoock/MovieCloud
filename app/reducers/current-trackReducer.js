@@ -1,6 +1,8 @@
 export default function currentTrack(currentTrack = null, action) {
+
   if (action.type === 'UPDATE_CURRENT_TRACK') {
-currentTrack = action.song;
+
+    currentTrack = action.song;
 
     return currentTrack;
   }

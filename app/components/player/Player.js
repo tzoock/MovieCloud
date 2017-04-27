@@ -9,31 +9,26 @@ class Player extends React.Component {
     super(props);
 
     this.state = {
-      gotSong: true
+      gotSong: true,
     }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.currentTrack.title !== this.props.currentTrack.title) {
-  //     this.didSongArrive()
-  //   }
-  //   if (prevState.gotSong !== this.state.gotSong) {
-  //     this.didSongArrive();
-  //   }
-  // }
-  //
-  // componentDidMount() {
-  //   this.didSongArrive();
-  // }
 
-  // didSongArrive() {
-  //   if (typeof this.storeData.currentTrack.title === 'undefined') {
-  //     this.setState({gotSong: false})
-  //   }
-  //   else {
-  //     this.setState({gotSong: true})
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+
+    if (!this.props.playinMode) {
+      this.myPlayer.pause();
+    }
+    if (this.props.playinMode) {
+      this.myPlayer.play();
+    }
+  }
+
+  componentDidMount() {
+
+
+  }
+
 
   songTitleLimiter(title) {
     if (title) {
@@ -49,29 +44,38 @@ class Player extends React.Component {
     }
   }
 
+  handlePauseAudio() {
+// if (this.myPlayer)
+    this.props.togglePlayin()
+  }
+
+  handlePauseAudio() {
+// if (this.myPlayer)
+    this.props.togglePlayin()
+  }
 
   render() {
-    // const storeData = store.getState();
-    // console.info(storeData.currentTrack);
-
-
     if (this.props.currentTrack) {
       const songUrl = `${this.props.currentTrack.stream_url}?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z`;
-console.info(songUrl);
-      return (
 
-        <footer className="player-footer">
-          <div className="player-song-info">
-            <img src={this.props.currentTrack.artwork_url}/>
-            <div>{this.songTitleLimiter(this.props.currentTrack.title)}</div>
-          </div>
-          <div className="player-audio">
-            <audio controls
-                   src={songUrl}
-                   type="audio/ogg"
-                   autoPlay/>
-          </div>
-        </footer>)
+      return <footer className="player-footer">
+        <div className="player-song-info">
+          <img src={this.props.currentTrack.artwork_url}/>
+          <div>{this.songTitleLimiter(this.props.currentTrack.title)}</div>
+        </div>
+        <div className="player-audio">
+          <audio controls
+                 src={songUrl}
+                 type="audio/ogg"
+                 autoPlay
+                 ref={(ref) => {
+                   this.myPlayer = ref
+                 }}
+                 onPlay={ this.props.playPlayin }
+                 onPause={ this.props.pausePlayin }
+          />
+        </div>
+      </footer>
     }
 
     else {
@@ -81,12 +85,29 @@ console.info(songUrl);
   }
 }
 
-function mapStateToProps(store) {
+function mapDispatchToProps(dispatch) {
   return {
-    currentTrack: store.currentTrack
+    pausePlayin() {
+      dispatch({
+        type: 'PAUSE_PLAYIN'
+      })
+    },
+    playPlayin() {
+      dispatch({
+        type: 'PLAY_PLAYIN'
+      })
+    }
   }
 }
 
-export default connect(mapStateToProps)(Player);
+
+function mapStateToProps(store) {
+  return {
+    currentTrack: store.currentTrack,
+    playinMode: store.playinMode
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Player);
 
 

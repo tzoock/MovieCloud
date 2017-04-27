@@ -7,7 +7,6 @@ import uuid from "uuid";
 
 import './songCard.scss'
 
-import store from "../../store";
 import {connect} from "react-redux";
 
 
@@ -22,6 +21,7 @@ class SongCard extends React.Component {
   }
 
   componentDidMount() {
+    this.props.song.playin === false
 
   }
 
@@ -76,29 +76,28 @@ class SongCard extends React.Component {
         <div className="drop-heart-header">
           <h6>Add to Playlist</h6>
           <div className='create-playlist'
-                onClick={() => {
-                  this.handleNewPlaylist()
-                }}>
+               onClick={() => {
+                 this.handleNewPlaylist()
+               }}>
             Create playlist +
           </div>
         </div>)
     }
   }
 
-handleNewPlaylist() {
-  this.toggleDropHeart();
-  const newPlaylist = {
-    editMode: true,
-    id: uuid(),
-    title: 'Untitled',
-    songs: [this.props.song]
-  };
+  handleNewPlaylist() {
+    this.toggleDropHeart();
+    const newPlaylist = {
+      editMode: true,
+      id: uuid(),
+      title: 'Untitled',
+      songs: [this.props.song]
+    };
 
+    this.serverAddPlaylist(newPlaylist);
+    this.props.createPlaylistWithSong(newPlaylist);
 
-  this.props.createPlaylistWithSong(this.props.song);
-  this.serverAddPlaylist(newPlaylist);
-
-}
+  }
 
   serverAddPlaylist(data) {
 
@@ -109,7 +108,7 @@ handleNewPlaylist() {
 
     xhr.addEventListener('load', () => {
       console.info('loaded...');
-     this.props.from.push('/Playlists')
+      this.props.from.push('/Playlists')
     });
 
     xhr.addEventListener('error', () => {
@@ -120,6 +119,7 @@ handleNewPlaylist() {
 
     return false;
   }
+
   // componentDidMount() {
   //
   // }
@@ -180,14 +180,14 @@ handleNewPlaylist() {
   handleplaylistChecking(event, playlistIndex) {
 
     const checked = event.target.checked;
-  this.props.updateSong(this.props.song, playlistIndex, checked);
+    this.props.updateSong(this.props.song, playlistIndex, checked);
     this.serverAddSong(playlistIndex, checked)
 
 
   }
 
   checkMe() {
-console.info(this.props.playlists);
+    console.info(this.props.playlists);
     return this.props.playlists.map((playlist, i) => {
       let checkMe = false;
 
@@ -201,7 +201,9 @@ console.info(this.props.playlists);
           {playlist.title}
           <input type="checkbox"
                  checked={checkMe}
-                 onChange={(event)=>{this.handleplaylistChecking(event, i)}}
+                 onChange={(event) => {
+                   this.handleplaylistChecking(event, i)
+                 }}
           />
         </label>
 
@@ -209,17 +211,52 @@ console.info(this.props.playlists);
     })
   }
 
-  render() {
+  clickSongHandler() {
+    console.info(this.props.song);
+    if (this.props.currentTrack === null) {
+      this.props.handleCurrentSong(this.props.song);
+      this.props.togglePlayin()
+    }
+    if (this.props.currentTrack !== this.props.song) {
+      this.props.handleCurrentSong(this.props.song);
+    }
+    else {
 
-    return (<div>
-        <div className="song-card-img-holder"
+      this.props.togglePlayin()
+    }
+
+  }
+
+  componentDidUpdate() {
+    if (this.props.playinMode) {
+
+    }
+  }
+
+  render() {
+    const plyMod = this.props.playinMode &&
+    this.props.currentTrack === this.props.song ?
+      'fa fa-pause-circle-o' :
+      'fa fa-play-circle-o';
+
+    const songImg = this.props.song.artwork_url ?
+      this.props.song.artwork_url.replace("large", "t300x300") :
+      this.props.song.artwork_url;
+
+    const inPlayer = this.props.currentTrack === this.props.song ?
+      'song-view-mode playin' :
+      'song-view-mode';
+
+    return (
+      <div>
+        <div className="song-card-img"
+             style={{backgroundImage: `url(${songImg})`}}
              onClick={() => {
-               this.props.handleCurrentSong(this.props.song)
+               this.clickSongHandler()
              }}>
-          <img className="song-card-img"
-               src={this.props.song.artwork_url ?
-                 this.props.song.artwork_url.replace("large", "t300x300") :
-                 this.props.song.artwork_url}/>
+          <div className={inPlayer}>
+            <span className={plyMod}/>
+          </div>
         </div>
         <div className="song-card-info">
           <div className="song-title">{this.songTitleLimiter(this.props.song.title)}</div>
@@ -261,10 +298,15 @@ function mapDispatchToProps(dispatch) {
         song: song
       })
     },
-    createPlaylistWithSong(song) {
+    togglePlayin() {
+      dispatch({
+        type: 'TOGGLE_PLAYIN'
+      })
+    },
+    createPlaylistWithSong(newPlaylist) {
       dispatch({
         type: 'CREATE_PLAYLIST_WITH_SONG',
-        song: song
+        newPlaylistData: newPlaylist
       })
       // this.props.createPlaylist(this.props.song)
     },
@@ -288,7 +330,9 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(store) {
   return {
-    playlists: store.playlists
+    playlists: store.playlists,
+    currentTrack: store.currentTrack,
+    playinMode: store.playinMode
   }
 }
 
