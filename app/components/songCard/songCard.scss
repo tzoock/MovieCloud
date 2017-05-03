@@ -28,9 +28,9 @@
   background-repeat: no-repeat;
 }
 
-.song-card-img:hover .song-view-mode {
-  background-color: rgba(0, 0, 0, 0.5);
-}
+//.song-card-img:hover .song-view-mode {
+//  background-color: rgba(0, 0, 0, 0.5);
+//}
 
 .song-view-mode {
 width: 100%;
@@ -101,6 +101,8 @@ width: 100%;
   font-size: 11px;
   margin: 0;
 }
+
+
 
 .dropdown-heart .create-playlist {
   color: #2196F3;

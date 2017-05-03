@@ -11,6 +11,7 @@ import {
   Redirect
 } from 'react-router-dom'
 import {connect} from "react-redux";
+import {serverLocation} from '../../serverLocation';
 
 
 
@@ -23,7 +24,7 @@ class Root extends React.Component {
   GetXhr() {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', 'http://localhost:3000/playlists');
+    xhr.open('GET', `${serverLocation}/playlists`);
 
     xhr.addEventListener('load', () => {
       this.props.gotData(JSON.parse(xhr.responseText));

@@ -5,6 +5,7 @@ import uuid from "uuid";
 import {connect} from "react-redux";
 import './playlist.scss'
 require('smoothscroll-polyfill').polyfill();
+import {serverLocation} from '../../serverLocation';
 
 class Playlist extends React.Component {
   constructor(props) {
@@ -60,7 +61,7 @@ if (this.props.editMode) {
   serverPlaylistNameChange(playlist) {
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/playlistNameChange');
+    xhr.open('POST', `${serverLocation}/playlistNameChange`);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -80,7 +81,7 @@ if (this.props.editMode) {
   serverDeletePlaylist (playlistIndex) {
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/serverDeletePlaylist');
+    xhr.open('POST', `${serverLocation}/serverDeletePlaylist`);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
 

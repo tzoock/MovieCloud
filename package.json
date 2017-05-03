@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "FED Bootcamp 3nd project - React SPA",
   "scripts": {
-    "start": "webpack-dev-server --hot --progress",
-    "build": "NODE_ENV=production webpack -p --progress",
-    "buildwin": "set NODE_ENV=production&webpack -p --progress"
+    "start": "node server/server.js",
+    "start:dev": "webpack-dev-server --hot --progress",
+    "build": "NODE_ENV=production webpack --progress",
+    "buildwin": "set NODE_ENV=production&webpack --progress"
   },
   "license": "ISC",
   "dependencies": {
@@ -42,5 +43,8 @@
     "url-loader": "0.5.8",
     "webpack": "2.2.1",
     "webpack-dev-server": "2.4.2"
+  },
+  "now": {
+    "alias": "songcloud-tzoock"
   }
 }

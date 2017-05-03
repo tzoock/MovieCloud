@@ -8,6 +8,7 @@ import uuid from "uuid";
 import './songCard.scss'
 
 import {connect} from "react-redux";
+import {serverLocation} from '../../serverLocation';
 
 
 class SongCard extends React.Component {
@@ -102,7 +103,7 @@ class SongCard extends React.Component {
   serverAddPlaylist(data) {
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/serverAddPlaylistWithSong');
+    xhr.open('POST', `${serverLocation}/serverAddPlaylistWithSong`);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -156,7 +157,7 @@ class SongCard extends React.Component {
   serverAddSong(playlistIndex, checked) {
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/serverAddSong');
+    xhr.open('POST', `${serverLocation}/serverAddSong`);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -234,18 +235,22 @@ class SongCard extends React.Component {
   }
 
   render() {
-    const plyMod = this.props.playinMode &&
-    this.props.currentTrack === this.props.song ?
-      'fa fa-pause-circle-o' :
-      'fa fa-play-circle-o';
-
     const songImg = this.props.song.artwork_url ?
-      this.props.song.artwork_url.replace("large", "t300x300") :
+      this.props.song.artwork_url.replace("large", "t300x300")
+      :
       this.props.song.artwork_url;
 
     const inPlayer = this.props.currentTrack === this.props.song ?
-      'song-view-mode playin' :
+      'song-view-mode playin'
+      :
       'song-view-mode';
+
+    const plyMod = this.props.playinMode &&
+    inPlayer === 'song-view-mode playin' ?
+      'fa fa-pause-circle-o'
+      :
+      'fa fa-play-circle-o';
+
 
     return (
       <div>
@@ -254,9 +259,13 @@ class SongCard extends React.Component {
              onClick={() => {
                this.clickSongHandler()
              }}>
-          <div className={inPlayer}>
-            <span className={plyMod}/>
-          </div>
+          {this.props.currentTrack === this.props.song ?
+            <div className={inPlayer}>
+              <span className={plyMod}/>
+            </div> : null
+          }
+
+
         </div>
         <div className="song-card-info">
           <div className="song-title">{this.songTitleLimiter(this.props.song.title)}</div>

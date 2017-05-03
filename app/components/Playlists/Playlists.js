@@ -4,6 +4,7 @@ import uuid from "uuid";
 
 import './playlists.scss'
 import {connect} from "react-redux";
+import {serverLocation} from '../../serverLocation';
 
 class Playlists extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class Playlists extends React.Component {
     console.log('adding Playlist...');
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/serverAddPlaylist');
+    xhr.open('POST', `${serverLocation}/serverAddPlaylist`);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
 

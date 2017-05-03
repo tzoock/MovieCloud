@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const os = require('os');
+
+fs.writeFileSync(os.tmpdir() + '/playlist.json', fs.readFileSync(__dirname + '/playlist.json'));
 
 // BASE SETUP
 // ==============================================
@@ -25,19 +28,19 @@ app.use(bodyParser.json());
 // sample route with a route the way we're used to seeing it
 app.get('/playlists', function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-  res.sendFile(__dirname + '/playlist.json');
+  res.sendFile(os.tmpdir() + '/playlist.json');
 });
 
 app.post('/serverAddPlaylist', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   console.info('yaaaaaaaaaaaa');
-  const data = fs.readFileSync(__dirname + '/playlist.json');
+  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
 
   const playlists = JSON.parse(data);
 
   playlists.push(req.body);
 
-  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
 
   res.send('OK')
 
@@ -46,13 +49,13 @@ app.post('/serverAddPlaylist', (req, res) => {
 app.post('/serverAddPlaylistWithSong', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   console.info('yaaaaaaaaaaaa');
-  const data = fs.readFileSync(__dirname + '/playlist.json');
+  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
 
   const playlists = JSON.parse(data);
 
   playlists.push(req.body);
 
-  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
 
   res.send('OK')
 
@@ -62,7 +65,7 @@ app.post('/serverAddPlaylistWithSong', (req, res) => {
 app.post('/playlistNameChange', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   console.info('change name');
-  const data = fs.readFileSync(__dirname + '/playlist.json');
+  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
 
   const playlists = JSON.parse(data);
 
@@ -72,7 +75,7 @@ console.info(req.body.title);
 
   foo.title = req.body.title;
 
-  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
 
   res.send('OK')
 
@@ -82,7 +85,7 @@ console.info(req.body.title);
 app.post('/serverDeletePlaylist', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   console.info(req.body);
-  const data = fs.readFileSync(__dirname + '/playlist.json');
+  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
 
   const playlists = JSON.parse(data);
 
@@ -90,7 +93,7 @@ app.post('/serverDeletePlaylist', (req, res) => {
 
   playlists.splice(req.body.playlistIndex, 1);
 
-  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
 
   res.send('OK')
 
@@ -99,7 +102,7 @@ app.post('/serverDeletePlaylist', (req, res) => {
 app.post('/serverAddSong', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
 
-  const data = fs.readFileSync(__dirname + '/playlist.json');
+  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
 
   const playlists = JSON.parse(data);
 
@@ -112,45 +115,18 @@ app.post('/serverAddSong', (req, res) => {
     playlists[req.body.playlistIndex].songs.splice(songIndex);
   }
 
-  fs.writeFileSync(__dirname + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
 
   res.send('OK')
 
 });
 
+const path = require('path');
+app.get('/app.js', (req, res) => res.sendFile(path.resolve(__dirname, '../dist/app.js')));
+app.use('/_', express.static(path.resolve(__dirname, '../dist/_')));
+app.get('/**', (req, res) => res.sendFile(path.resolve(__dirname, '../dist/index.html')));
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
 
-// server.js
 
-// // we'll create our routes here
-//
-// // get an instance of router
-// var router = express.Router();
-//
-// // home page route (http://localhost:8080)
-// router.get('/', function(req, res) {
-//   res.send('im the home page!');
-// });
-//
-// // about page route (http://localhost:8080/about)
-// router.get('/about', function(req, res) {
-//   res.send('im the about page!');
-// });
-//
-// // apply the routes to our application
-// app.use('/', router);
-//
-// app.route('/login')
-//
-// // show the form (GET http://localhost:8080/login)
-//   .get(function(req, res) {
-//     res.send('this is the login form');
-//   })
-//
-//   // process the form (POST http://localhost:8080/login)
-//   .post(function(req, res) {
-//     console.log('processing');
-//     res.send('processing the login form!');
-//   });
