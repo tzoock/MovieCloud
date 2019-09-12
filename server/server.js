@@ -4,7 +4,8 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const os = require('os');
 
-fs.writeFileSync(os.tmpdir() + '/playlist.json', fs.readFileSync(__dirname + '/playlist.json'));
+fs.writeFileSync(os.tmpdir() + '/playlist.json',
+fs.readFileSync(__dirname + '/playlist.json'));
 
 // BASE SETUP
 // ==============================================
@@ -22,18 +23,17 @@ app.use(cors({
 }))
 
 app.use(bodyParser.json());
+
 // ROUTES
 // ==============================================
 
-// sample route with a route the way we're used to seeing it
 app.get('/playlists', function(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+
   res.sendFile(os.tmpdir() + '/playlist.json');
 });
 
 app.post('/serverAddPlaylist', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-  console.info('yaaaaaaaaaaaa');
+
   const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
 
   const playlists = JSON.parse(data);
@@ -48,7 +48,6 @@ app.post('/serverAddPlaylist', (req, res) => {
 
 app.post('/serverAddPlaylistWithSong', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-  console.info('yaaaaaaaaaaaa');
   const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
 
   const playlists = JSON.parse(data);

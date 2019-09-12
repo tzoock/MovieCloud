@@ -18,23 +18,18 @@ class Playlists extends React.Component {
   }
 
   handleScrool(playlistId) {
-    console.info(playlistId);
     this.setState({scrollTo: playlistId})
   }
 
 
   serverAddPlaylist(newPlaylist) {
-    console.log('adding Playlist...');
-
-    const xhr = new XMLHttpRequest();
+      const xhr = new XMLHttpRequest();
     xhr.open('POST', `${serverLocation}/serverAddPlaylist`);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.addEventListener('load', () => {
       console.info('loaded...');
-      // document.querySelector('input[type=text]').value = ''
-      // readData();
     });
 
     xhr.addEventListener('error', () => {

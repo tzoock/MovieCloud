@@ -1,27 +1,27 @@
-import uuid from "uuid";
+// import uuid from "uuid";
 
-const damiPlaylists = [
-  {
-    editMode: false,
-    id: uuid(),
-    title: 'my 1st playlist',
-    songs: [
-      {
-        id: uuid(),
-        title: "The Chainsmokers - Don't Let Me Down (Illenium Remix)",
-        duration: 219082,
-        stream_url: "https://api.soundcloudcom/tracks/250711755/stream",
-        uri: "https://api.soundcloud.com/tracks/250711755",
-        artwork_url: "https://i1.sndcdn.com/artworks-000150027827-4exjil-large.jpg"
-      }]
-  },
-  {
-    editMode: false,
-    id: uuid(),
-    title: 'my 2nd playlist',
-    songs: []
-  }
-];
+// const damiPlaylists = [
+//   {
+//     editMode: false,
+//     id: uuid(),
+//     title: 'my 1st playlist',
+//     songs: [
+//       {
+//         id: uuid(),
+//         title: "The Chainsmokers - Don't Let Me Down (Illenium Remix)",
+//         duration: 219082,
+//         stream_url: "https://api.soundcloudcom/tracks/250711755/stream",
+//         uri: "https://api.soundcloud.com/tracks/250711755",
+//         artwork_url: "https://i1.sndcdn.com/artworks-000150027827-4exjil-large.jpg"
+//       }]
+//   },
+//   {
+//     editMode: false,
+//     id: uuid(),
+//     title: 'my 2nd playlist',
+//     songs: []
+//   }
+// ];
 
 export default function playlists(playlists = [], action) {
   const copyOfPlaylists = [...playlists];

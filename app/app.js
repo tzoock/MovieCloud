@@ -18,7 +18,3 @@ import {Provider} from "react-redux";
     <Routes/>
     </Provider>,
     document.querySelector('#root'));
-
-
-
-

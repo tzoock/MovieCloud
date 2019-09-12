@@ -49,21 +49,6 @@ class SongCard extends React.Component {
 
   }
 
-
-  // componentDidMount() {
-  //   if (this.state.dropDownMode) {
-  //     this.droper.focus();
-  //
-  //   }
-  // }
-  //
-  // componentDidUpdate() {
-  //   if (this.state.dropDownMode) {
-  //     this.droper.blur();
-  //   }
-  // }
-
-
   whereFrom() {
     console.info(this.props.from);
     if (this.props.from.location.pathname.includes('/Playlists')) {
@@ -121,39 +106,6 @@ class SongCard extends React.Component {
     return false;
   }
 
-  // componentDidMount() {
-  //
-  // }
-
-
-  // hendleCheckChange(songs) {
-  //   console.info(this);
-  //   console.info(songs);
-  //   songs.forEach((song) => {
-  //     if (song.id === this.props.song.id) {
-  //       // this.checkboxElm.checked=true;
-  //       console.info('gfgf');
-  //       // console.info(this.props.song.id);
-  //       this.setState({checkMe: true})
-  //
-  //     }
-  //     else {
-  //       // this.checkboxElm.checked=false;
-  //       this.setState({checkMe: false})
-  //     }
-  //   });
-  //   // console.info(event);
-  //   // console.info(this.checkboxElm);
-  //
-  // }
-
-  componentWillReceiveProps() {
-  }
-
-  componentWillMount() {
-
-  }
-
   serverAddSong(playlistIndex, checked) {
 
     const xhr = new XMLHttpRequest();
@@ -183,12 +135,9 @@ class SongCard extends React.Component {
     const checked = event.target.checked;
     this.props.updateSong(this.props.song, playlistIndex, checked);
     this.serverAddSong(playlistIndex, checked)
-
-
   }
 
   checkMe() {
-    console.info(this.props.playlists);
     return this.props.playlists.map((playlist, i) => {
       let checkMe = false;
 
@@ -213,7 +162,6 @@ class SongCard extends React.Component {
   }
 
   clickSongHandler() {
-    console.info(this.props.song);
     if (this.props.currentTrack === null) {
       this.props.handleCurrentSong(this.props.song);
       this.props.togglePlayin()
@@ -222,7 +170,6 @@ class SongCard extends React.Component {
       this.props.handleCurrentSong(this.props.song);
     }
     else {
-
       this.props.togglePlayin()
     }
 
@@ -235,7 +182,8 @@ class SongCard extends React.Component {
   }
 
   render() {
-    const songImg = this.props.song.artwork_url ?
+    const songImg =
+      this.props.song.artwork_url ?
       this.props.song.artwork_url.replace("large", "t300x300")
       :
       this.props.song.artwork_url;

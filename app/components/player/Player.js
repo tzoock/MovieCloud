@@ -56,7 +56,7 @@ class Player extends React.Component {
 
   render() {
     if (this.props.currentTrack) {
-      const songUrl = `${this.props.currentTrack.stream_url}?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z`;
+      const songUrl = `${this.props.currentTrack.stream_url}?client_id=Jx6UQUTeG43DMdLLbYutFJlXazNXAHHd`;
 
       return <footer className="player-footer">
         <div className="player-song-info">

@@ -1,8 +1,5 @@
 import React from "react"
-import {
-  NavLink,
-  Link
-} from "react-router-dom"
+import {Link} from "react-router-dom"
 import MDSpinner from "react-md-spinner";
 import SongCard from "../songCard/SongCard"
 
@@ -42,7 +39,7 @@ export default class Explore extends React.Component {
   GetXhr() {
 
     const genre = this.props.match.params.genre;
-    const clientId = '2t9loNQH90kzJcsFCODdigxfp325aq4z';
+    const clientId = 'Jx6UQUTeG43DMdLLbYutFJlXazNXAHHd';
 
     const xhr = new XMLHttpRequest();
 
@@ -112,7 +109,6 @@ export default class Explore extends React.Component {
 
   render() {
 
-console.info(this.props.match.params);
     switch (this.state.Loading) {
       case 'loading':
         return (
