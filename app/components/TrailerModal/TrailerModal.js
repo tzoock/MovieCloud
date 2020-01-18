@@ -77,8 +77,7 @@ class TrailerModal extends React.Component {
 
     return <div className={showModalClassName}>
       <header>
-        {/* <h3>{this.props.movie.title}</h3> */}
-        <h2>Test title</h2>
+        <h3>{this.props.currentTrailer !== null ? this.props.currentTrailer.title : "Error"}</h3>
         <i className="close-modal fa fa-close"
           onClick={() => {
             this.handleCloseModal()
