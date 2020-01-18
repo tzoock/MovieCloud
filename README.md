@@ -1,17 +1,21 @@
-SongCloud - React/Redux Project
-================================
+# MovieCloud - React/Redux Project
 
-This project is part of the Front-End Development Bootcamp at Create.
 
-Challenges
------------
+## A Single page application movies explorer built using React and Redux that uses a REST back-end NODE.js server and "the Movie DB" API.
 
-- Custom Material Design UI built as a team effort
-- Components driven architecture
-- Reusable components
-- Routing with dynamic routes (React Router)
-- Authentication with a server - Signup/Login
-- Songs data from a public API
-- CRUD for playlists data with a server
-- Custom Flux implementation
-- Refactor to Redux
+===================================
+
+#### This Demo implementing a youtube iframe for showing trailers.
+
+
+### Install via command line
+
+1. `git clone git@github.com:tzoock/MovieCloud.git`
+2. `cd MovieCloud/`
+3. `npm install`
+4. `npm run build`
+5. `npm start`
+6. open browser in http://localhost:3000
+
+
+
