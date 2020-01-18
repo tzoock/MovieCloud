@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server/server.js",
     "start:dev": "webpack-dev-server --hot --progress",
-    "build": "NODE_ENV=production webpack --progress",
+    "build": "NODE_ENV=production webpack",
     "build:dev": "NODE_ENV=development webpack --progress"
   },
   "license": "ISC",
@@ -47,8 +47,5 @@
     "webpack": "2.2.1",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.10.1"
-  },
-  "now": {
-    "alias": "moviecloud-tzoock"
   }
 }
