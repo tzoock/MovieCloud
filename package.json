@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server/server.js",
     "start:dev": "webpack-dev-server --hot --progress",
-    "build": "NODE_ENV=production webpack",
+    "build": "NODE_ENV=production webpack --progress",
     "build:dev": "NODE_ENV=development webpack --progress"
   },
   "license": "ISC",

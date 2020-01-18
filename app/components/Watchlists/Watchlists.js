@@ -2,7 +2,7 @@ import React from "react";
 import Watchlist from "../Watchlist/Watchlist";
 import uuid from "uuid";
 
-import './watchlists.css'
+import './Watchlists.css'
 import {connect} from "react-redux";
 import {serverLocation} from '../../serverLocation';
 
