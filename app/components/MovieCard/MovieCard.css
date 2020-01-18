@@ -1,41 +1,34 @@
-@import "assets/styles/colors";
-@import "assets/styles/general";
 
 
 
-
-
-
-.song-card {
+.movie-card {
   margin: 10px;
   position: relative;
   padding: 10px;
   border: 1px solid #D8D8D8;
-  //background-color: #fff;
-  //display: inline-flex;
   width: 220px;
   height: 140px;
 }
 
-.song-card-img {
+.movie-card-img {
   display: block;
   border: 1px solid #D8D8D8;
   width: 200px;
   height: 85px;
-  //object-fit: cover;
   margin-bottom: 10px;
-  background-size: 300px;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
-//.song-card-img:hover .song-view-mode {
-//  background-color: rgba(0, 0, 0, 0.5);
-//}
-
-.song-view-mode {
-width: 100%;
-  height: 100%;
+.movie-card-img:hover .movie-view-mode {
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
+}
+
+.movie-view-mode {
+  width: 100%;
+  height: 100%;
+  display: none;
   justify-content: center;
   align-items: center;
   font-size: 2.5rem;
@@ -47,18 +40,42 @@ width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.song-card-info {
+.movie-card-info {
   margin: 7px 0 10px 0;
 }
 
-.song-title {
-  //display: block;
-  font-size: 0.69rem;
+.movie-title {
+  font-size: 0.70rem;
+  font-weight: bold;
   width: 100%;
 }
 
-.song-duration {
-  font-size: 10px;
+.overview-font {
+  font-size: 14px;
+  color: #D8D8D8;
+  transition: all .2s ease-in-out;
+  position: absolute;
+  bottom: 5px;
+  right: 24px;
+}
+
+.overview-font:hover {
+  color: #2196F3;
+}
+
+.movie-overview {
+  font-size: 0.65rem;
+  line-height: 1.3rem;
+}
+
+.dropdown-overview {
+  padding: 10px;
+  position: absolute;
+  z-index: 15;
+  font-size: .4rem;
+  right: 0;
+  box-shadow: 0px 2px 8px 0px #000;
+  background-color: #fff;
 }
 
 .heart-font {
@@ -71,7 +88,7 @@ width: 100%;
 }
 
 .heart-font:hover {
-  color: $blue;
+  color: #2196F3;
 
 }
 
@@ -80,12 +97,10 @@ width: 100%;
 }
 
 .dropdown-heart {
-  //display: none;
   padding: 10px;
   position: absolute;
   z-index: 15;
   width: 130px;
-  //color: #000;
   right: 0;
   box-shadow: 0px 2px 8px 0px #000;
   background-color: #fff;
@@ -104,7 +119,7 @@ width: 100%;
 
 
 
-.dropdown-heart .create-playlist {
+.dropdown-heart .create-watchlist {
   color: #2196F3;
   font-size: 9px;
   cursor: pointer;
@@ -114,13 +129,17 @@ width: 100%;
   color: #2196F3;
 }
 
-.playlist-list-of-checkbox {
+.watchlist-list-of-checkbox {
   padding: 0;
   font-size: 9px;
   color: #4A4A4A;
   margin: 5px;
   display:flex;
   flex-direction: column;
+}
+
+.watchlist-list-of-checkbox [type="checkbox"] {
+  margin-right: 0.3rem;
 }
 
 .pager {

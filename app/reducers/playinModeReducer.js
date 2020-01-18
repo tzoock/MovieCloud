@@ -3,17 +3,13 @@ export default function playinMode(playinMode = false, action) {
   if (action.type === 'TOGGLE_PLAYIN') {
 
     if (playinMode) {
-      console.info('false');
       playinMode = false;
       return playinMode
     }
     if (!playinMode) {
-      console.info('true');
-
       playinMode = true;
       return playinMode
     }
-    console.info('playinMode');
     return playinMode
   }
 

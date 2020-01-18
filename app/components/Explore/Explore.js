@@ -1,53 +1,49 @@
 import React from "react"
 import {Link} from "react-router-dom"
 import MDSpinner from "react-md-spinner";
-import SongCard from "../songCard/SongCard"
+import MovieCard from "../MovieCard/MovieCard"
 
-import "./explore.scss";
+import "./explore.css";
 
 
 export default class Explore extends React.Component {
   constructor() {
     super();
     this.state = {
-      tracks: [],
+      genres: [],
       Loading: "loading",
-      offset: 0,
-      limit: 20
+      page: 1,
+      limit: 1,
+      movies: []
     };
 
   }
 
   nextPage() {
-    console.info('next');
     this.setState({
-      offset: this.state.offset + this.state.limit,
+      page: this.state.page + 1,
       Loading: "loading"
     })
 
   }
 
   prevPage() {
-    console.info('prev');
     this.setState({
-      offset: this.state.offset - this.state.limit,
+      page: this.state.page - 1,
       Loading: "loading"
     })
 
   }
 
-  GetXhr() {
-
-    const genre = this.props.match.params.genre;
-    const clientId = 'Jx6UQUTeG43DMdLLbYutFJlXazNXAHHd';
+  GetGenres() {
+    const APIkey = '986d1ab5ee8970693590530f5b28f785';
 
     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', `https://api.soundcloud.com/tracks?client_id=${clientId}&limit=${this.state.limit}&offset=${this.state.offset}&tags=${genre}`);
-
+    xhr.open('GET', `https://api.themoviedb.org/3/genre/movie/list?api_key=${APIkey}&language=en-US`);
 
     xhr.addEventListener('load', () => {
-      this.setState({tracks: JSON.parse(xhr.responseText), Loading: 'loaded'});
+      this.setState({genres: JSON.parse(xhr.responseText), Loading: 'loaded'});
     });
     xhr.addEventListener('error', () => {
       this.setState({Loading: 'error'});
@@ -55,60 +51,54 @@ export default class Explore extends React.Component {
     xhr.send();
   }
 
-  componentDidMount() {
+  GetMovies(isGenere = true) {
+    const action = isGenere ? "discover" : "search"
+    const genre = this.props.match.params.genre === "Most-Popular" ? "" : isGenere ? "&with_genres=" + this.props.match.params.genre : "&query=" + this.props.match.params.genre.replace("search=", "");
+    const APIkey = '986d1ab5ee8970693590530f5b28f785';
 
-    this.GetXhr();
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('GET', `https://api.themoviedb.org/3/${action}/movie?api_key=${APIkey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.page}${genre}`);
+
+    xhr.addEventListener('load', () => {
+      const resJson = JSON.parse(xhr.responseText);
+      this.setState({
+        movies: resJson.results,
+        limit: resJson.total_pages,
+        Loading: 'loaded'});
+    });
+    xhr.addEventListener('error', () => {
+      this.setState({Loading: 'error'});
+    });
+    xhr.send();
+  }
+
+
+
+  componentDidMount() {
+    this.GetGenres();
+    this.GetMovies();
+    
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.info(this.props.updateCurrentTrack);
+    const isGenre = !(this.props.match.params.genre.substring(0, 7) === ('search='));
     if (prevProps.match.params.genre !== this.props.match.params.genre) {
-      this.setState({
-        offset: 0,
-        Loading: "loading"
-      }, () => {
-        this.GetXhr();
-      })
+        this.setState({
+          page: 1,
+          Loading: "loading"
+        }, () => {
+          this.GetMovies(isGenre);
+        })
+  
     }
-    if (prevState.offset !== this.state.offset) {
-      this.GetXhr();
+    if (prevState.page !== this.state.page) {
+        this.GetMovies(isGenre);
     }
   }
 
-  // Geners() {
-  //
-  //
-  //   return <div className="genere-style">
-  //     <div className="genre-tab">
-  //       <Link to="/Explore/Trance" className="genre-link">
-  //         Trance
-  //       </Link>
-  //     </div>
-  //     <div className="genre-tab">
-  //       <Link to="/Explore/Dub-Step" className="genre-link">
-  //         Dub-Step
-  //       </Link>
-  //     </div>
-  //     <div className="genre-tab">
-  //       <Link to="/Explore/House" className="genre-link">
-  //         House
-  //       </Link>
-  //     </div>
-  //     <div className="genre-tab">
-  //       <Link to="/Explore/Metal" className="genre-link">
-  //         Metal
-  //       </Link>
-  //     </div>
-  //     <div className="genre-tab">
-  //       <Link to="/Explore/Ballads" className="genre-link">
-  //         Ballads
-  //       </Link>
-  //     </div>
-  //   </div>
-  // }
 
   render() {
-
     switch (this.state.Loading) {
       case 'loading':
         return (
@@ -129,39 +119,24 @@ export default class Explore extends React.Component {
           <div className="explore-wrap">
             <div className="genres-section">
               <div className="genere-style">
-                <div className="genre-tab">
-                  <Link to="/Explore/Trance" className="genre-link">
-                    Trance
+
+              {this.state.genres.genres.map((genre, i) => i<=10 ? <div key={genre.id} className="genre-tab">
+                  <Link to={`/Explore/${genre.id}`} className="genre-link">
+                    {genre.name}
                   </Link>
                 </div>
-                <div className="genre-tab">
-                  <Link to="/Explore/Dub-Step" className="genre-link">
-                    Dub-Step
-                  </Link>
-                </div>
-                <div className="genre-tab">
-                  <Link to="/Explore/House" className="genre-link">
-                    House
-                  </Link>
-                </div>
-                <div className="genre-tab">
-                  <Link to="/Explore/Metal" className="genre-link">
-                    Metal
-                  </Link>
-                </div>
-                <div className="genre-tab">
-                  <Link to="/Explore/Ballads" className="genre-link">
-                    Ballads
-                  </Link>
-                </div>
+                :
+                null
+              )}
+              
               </div>
             </div>
 
             <div>
-              <div className="chosen-genre">Genre: {this.props.match.params.genre}</div>
-              <div className="song-cards-wrapper">
-                {this.state.tracks.map((song, i) => <div key={song.id} className="song-card">
-                    <SongCard song={song}
+              {/* <div className="chosen-genre">Genre: {this.props.match.params.genre}</div> */}
+              <div className="movie-cards-wrapper">
+                {this.state.movies.map((movie, i) => <div key={movie.id} className="movie-card">
+                    <MovieCard movie={movie}
                               from={this.props.history}/>
                   </div>
                 )}
@@ -169,10 +144,9 @@ export default class Explore extends React.Component {
             </div>
             <div className="pager">
               <div>
-                <button className="page-btn" onClick={ this.prevPage.bind(this)} disabled={this.state.offset === 0}>Prev
-                </button>
-                <p>page: {(this.state.offset / this.state.limit) + 1}</p>
-                <button className="page-btn" onClick={ this.nextPage.bind(this)}>Next</button>
+                <button className="page-btn" onClick={ this.prevPage.bind(this)} disabled={this.state.page === 1}>Prev</button>
+                <p>page: {this.state.page}</p>
+                <button className="page-btn" onClick={ this.nextPage.bind(this)} disabled={ this.state.page === this.state.limit}>Next</button>
               </div>
             </div>
 

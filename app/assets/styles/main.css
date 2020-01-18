@@ -1,6 +1,4 @@
 
-
-
 html {
   font-family: 'Roboto', sans-serif;
 }
@@ -27,17 +25,30 @@ html {
 
 a:link,
 a:visited {
-  color: $myWhite;
+  color: #f7fcff;
   text-decoration: none;
 }
 
 a:active,
 a:focus,
 a:hover {
-  color: $myWhite;
+  color: #f7fcff;
   outline: none;
 }
 
 li {
   list-style: none;
 }
+
+.midMe {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+}
+
+.midMe  * {
+align-self: center;
+}
+
+

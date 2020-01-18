@@ -1,14 +1,9 @@
 import React from 'react';
-import {
-  NavLink,
-  Link
-} from "react-router-dom"
 import uuid from "uuid";
-
 import './songCard.scss'
-
 import {connect} from "react-redux";
 import {serverLocation} from '../../serverLocation';
+import {NavLink} from "react-router-dom";
 
 
 class SongCard extends React.Component {
@@ -19,11 +14,6 @@ class SongCard extends React.Component {
       dropDownMode: false,
       value: ''
     };
-  }
-
-  componentDidMount() {
-    this.props.song.playin === false
-
   }
 
   msToTime(duration) {
@@ -50,7 +40,6 @@ class SongCard extends React.Component {
   }
 
   whereFrom() {
-    console.info(this.props.from);
     if (this.props.from.location.pathname.includes('/Playlists')) {
       return (
         <div className="drop-heart-header">
@@ -61,11 +50,14 @@ class SongCard extends React.Component {
       return (
         <div className="drop-heart-header">
           <h6>Add to Playlist</h6>
-          <div className='create-playlist'
-               onClick={() => {
+          <div onClick={() => {
                  this.handleNewPlaylist()
                }}>
-            Create playlist +
+            <NavLink to="/Playlists"
+                     className='create-playlist'>
+              Create playlist +
+            </NavLink>
+
           </div>
         </div>)
     }
@@ -106,6 +98,8 @@ class SongCard extends React.Component {
     return false;
   }
 
+
+
   serverAddSong(playlistIndex, checked) {
 
     const xhr = new XMLHttpRequest();
@@ -135,6 +129,8 @@ class SongCard extends React.Component {
     const checked = event.target.checked;
     this.props.updateSong(this.props.song, playlistIndex, checked);
     this.serverAddSong(playlistIndex, checked)
+
+
   }
 
   checkMe() {
@@ -170,6 +166,7 @@ class SongCard extends React.Component {
       this.props.handleCurrentSong(this.props.song);
     }
     else {
+
       this.props.togglePlayin()
     }
 
@@ -182,9 +179,8 @@ class SongCard extends React.Component {
   }
 
   render() {
-    const songImg =
-      this.props.song.artwork_url ?
-      this.props.song.artwork_url.replace("large", "t300x300")
+    const songImg = this.props.song.artwork_url ?
+      this.props.song.artwork_url.replace("large", "t200x200")
       :
       this.props.song.artwork_url;
 
@@ -265,7 +261,6 @@ function mapDispatchToProps(dispatch) {
         type: 'CREATE_PLAYLIST_WITH_SONG',
         newPlaylistData: newPlaylist
       })
-      // this.props.createPlaylist(this.props.song)
     },
     updateSong(song, playlistIndex, checked) {
       dispatch({

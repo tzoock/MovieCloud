@@ -2,8 +2,7 @@ import React from 'react';
 import uuid from 'uuid';
 import Topbar from '../topBar/Topbar';
 import Explore from '../Explore/Explore';
-import Playlists from '../Playlists/Playlists';
-import Player from '../player/Player';
+import Watchlists from '../Watchlists/Watchlists';
 import {
   BrowserRouter,
   Switch,
@@ -12,6 +11,7 @@ import {
 } from 'react-router-dom'
 import {connect} from "react-redux";
 import {serverLocation} from '../../serverLocation';
+import TrailerModal from '../TrailerModal/TrailerModal';
 
 
 
@@ -24,7 +24,7 @@ class Root extends React.Component {
   GetXhr() {
     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', `${serverLocation}/playlists`);
+    xhr.open('GET', `${serverLocation}/watchlists`);
 
     xhr.addEventListener('load', () => {
       this.props.gotData(JSON.parse(xhr.responseText));
@@ -44,10 +44,10 @@ class Root extends React.Component {
             <Route exact path="/" component={() => {
               return <Redirect to="/Explore"/>
             }}/>
-            <Route exact path="/Explore" component={() => {return <Redirect to="/Explore/trance"/>}}/>
+            <Route exact path="/Explore" component={() => {return <Redirect to="/Explore/Most-Popular"/>}}/>
             <Route path="/Explore/:genre" component={ Explore }/>
-            <Route path={"/Playlists"} component={ Playlists }/>
-        <Player/>
+            <Route path={"/Watchlists"} component={ Watchlists }/>
+        <TrailerModal/>
       </div>
     )
 

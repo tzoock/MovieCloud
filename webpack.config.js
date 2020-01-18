@@ -76,24 +76,12 @@ const config = {
         exclude
       },
 
-      // Allow `require`ing SCSS files
-      {
-        test: /\.scss$/,
-        loaders: [
-          'style-loader',
-          'css-loader?root=' + encodeURIComponent(appPath),
-          'postcss-loader',
-          'sass-loader?includePaths[]=' + encodeURIComponent(appPath)
-        ],
-        exclude: exclude
-      },
 
       // Allow `require`ing CSS files
       {
         test: /\.css$/,
-        loaders: [
-          'style-loader',
-          'css-loader?root=' + encodeURIComponent(appPath)
+        loaders: ['style-loader',
+        'css-loader'
         ]
       },
 

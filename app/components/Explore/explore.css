@@ -1,7 +1,4 @@
 
-@import "assets/styles/colors";
-@import "assets/styles/general";
-
 
 .explore-wrap {
   padding-top: 64px;
@@ -10,7 +7,7 @@
 
 .genres-section {
   display: flex;
-  background-color: $genereBg;
+  background-color: #DDE4E6;
   position: fixed;
   right: 0;
   left: 0;
@@ -28,9 +25,6 @@
   width: 100%;
   padding: 0;
   margin: 0;
-  //height: 40px;
-  //align-items: center;
-
 }
 
 .genre-tab {
@@ -42,7 +36,6 @@
 }
 
 .genre-link:hover {
-  //color: #2d2d11;
   box-shadow: inset 0 -2px 0 ;
   transition: all .2s ease-in-out;
 }
@@ -57,8 +50,8 @@ margin: 40px 0 0 40px;
   font-size: 23px;
 }
 
-.song-cards-wrapper {
-  padding: 30px;
+.movie-cards-wrapper {
+  padding: 60px 30px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -66,7 +59,6 @@ margin: 40px 0 0 40px;
 }
 
 .pager {
-  margin-top: 40px;
   display: flex;
   align-content: center;
   height: 40px;
@@ -78,14 +70,6 @@ margin: 40px 0 0 40px;
   justify-content: space-around;
   width: 50%;
 }
-//.page-btn {
-//  background: #2196F3;
-//  border-radius: 2px;
-//  color: #fff;
-//  border: none;
-//  width: 87px;
-//  height: 30px;
-//}
 
 .page-btn {
   border: none;
@@ -98,7 +82,6 @@ margin: 40px 0 0 40px;
   background: #2196F3;
 }
 
-/* Ripple magic */
 .page-btn{
   position: relative;
   overflow: hidden;

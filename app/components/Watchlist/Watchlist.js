@@ -1,13 +1,13 @@
 import React from "react";
-import SongCard from "../songCard/SongCard";
+import MovieCard from "../MovieCard/MovieCard";
 import uuid from "uuid";
 
 import {connect} from "react-redux";
-import './playlist.scss'
+import './watchlist.css'
 require('smoothscroll-polyfill').polyfill();
 import {serverLocation} from '../../serverLocation';
 
-class Playlist extends React.Component {
+class Watchlist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,8 +23,7 @@ class Playlist extends React.Component {
       this.focusMe.focus();
     }
 
-    if (this.props.scroller === this.props.playlist.id) {
-      console.info('scrooling');
+    if (this.props.scroller === this.props.watchlists[this.props.watchlistIndex].id) {
       this.scroolMe.scrollIntoView({block: "start", behavior: "smooth"});
       this.props.handleScroolBlur()
     }
@@ -44,79 +43,78 @@ if (this.props.editMode) {
   inputToName(event) {
     if (event.key === 'Enter' || event.type === 'blur') {
 
-      this.props.changeName(this.props.playlistIndex, event.target.value);
+      this.props.changeName(this.props.watchlistIndex, event.target.value);
       this.setState({editMode: false});
-      this.serverPlaylistNameChange(this.props.playlist);
+      this.serverWatchlistsNameChange(this.props.watchlist);
     }
   }
 
-  handlePlaylistNameChange(event) {
+  handleWatchlistsNameChange(event) {
     this.setState({value: event.target.value});
   }
 
-  togglePlaylistTitle() {
+  toggleWatchlistsTitle() {
     this.setState({editMode: !this.state.editMode})
   }
 
-  serverPlaylistNameChange(playlist) {
+  serverWatchlistsNameChange(watchlist) {
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', `${serverLocation}/playlistNameChange`);
+    xhr.open('POST', `${serverLocation}/watchlistNameChange`);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.addEventListener('load', () => {
-      console.info('loaded...');
+      
     });
 
     xhr.addEventListener('error', () => {
-      console.info('problem!');
+      
     });
 
-    xhr.send(JSON.stringify(playlist));
+    xhr.send(JSON.stringify(watchlist));
 
     return false;
   }
 
-  serverDeletePlaylist (playlistIndex) {
+  serverDeleteWatchlists (watchlistIndex) {
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', `${serverLocation}/serverDeletePlaylist`);
+    xhr.open('POST', `${serverLocation}/serverDeleteWatchlists`);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.addEventListener('load', () => {
-      console.info('loaded...');
+      
     });
 
     xhr.addEventListener('error', () => {
-      console.info('problem!');
+      
     });
 
-    xhr.send(JSON.stringify(playlistIndex));
+    xhr.send(JSON.stringify(watchlistIndex));
 
     return false;
   }
 
-  deletePlaylistHandler(playlistIndex) {
-    this.props.deletePlaylist(playlistIndex);
-    this.serverDeletePlaylist({playlistIndex})
+  deleteWatchlistsHandler(watchlistIndex) {
+    this.props.deleteWatchlists(watchlistIndex);
+    this.serverDeleteWatchlists({watchlistIndex})
   }
 
   render() {
-
     return (
       <div>
         { this.state.editMode ?
-          <div className="playlist-header">
+          <div className="watchlist-header">
             <input type="text"
-                   className='input-playlist-name'
+                   className='input-watchlist-name'
                    onKeyDown={(event) => {
                      this.inputToName(event)
                    }}
-                   placeholder={this.props.playlists[this.props.playlistIndex].title}
+                   placeholder={this.props.watchlists[this.props.watchlistIndex].title}
                    onChange={() => {
-                     this.handlePlaylistNameChange(event)
+                     this.handleWatchlistsNameChange(event)
                    }}
                    onBlur={(event) => {
                      this.inputToName(event)
@@ -127,38 +125,38 @@ if (this.props.editMode) {
             />
           </div>
           :
-          <div className="playlist-header">
-            <div className='playlist-name'
+          <div className="watchlist-header">
+            <div className='watchlist-name'
                  onClick={() => {
                    this.setState({editMode: true})
                  }}
                  ref={(ref) => {
                    this.scroolMe = ref
                  }}>
-              {this.props.playlists[this.props.playlistIndex].title}
+              {this.props.watchlists[this.props.watchlistIndex].title}
             </div>
-            <span className="song-count">{this.props.playlists[this.props.playlistIndex].songs.length}</span>
+            <span className="movie-count">{this.props.watchlists[this.props.watchlistIndex].movies.length}</span>
             <butten className="deleteBtn"
                     onClick={() => {
-                      this.deletePlaylistHandler(this.props.playlistIndex)
+                      this.deleteWatchlistsHandler(this.props.watchlistIndex)
                     }
                     }>
               Delete
             </butten>
           </div>}
 
-        <div className="playlist-content">
-          {this.props.playlists[this.props.playlistIndex].songs.length > 0 ?
-            this.props.playlists[this.props.playlistIndex].songs.map((song, i) => (
-              <div key={uuid()} className="song-card">
-                <SongCard song={song}
+        <div className="watchlist-content">
+          {this.props.watchlists[this.props.watchlistIndex].movies.length > 0 ?
+            this.props.watchlists[this.props.watchlistIndex].movies.map((movie, i) => (
+              <div key={uuid()} className="movie-card">
+                <MovieCard movie={movie}
                           from={this.props.from}
-                          songIndex={i}/>
+                          movieIndex={i}/>
               </div>)
             )
             :
-            <div className="emptyPlaylist">
-              <h3>Please add some song to the playList</h3>
+            <div className="emptyWatchlists">
+              <h3>Please add some movie to the watchlist</h3>
             </div>
           }
 
@@ -172,23 +170,23 @@ if (this.props.editMode) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    playlistNameToInput(playlistIndex) {
+    watchlistNameToInput(watchlistIndex) {
       dispatch({
         type: 'CHANGE_EDIT_MODE',
-        playlistIndex: playlistIndex
+        watchlistIndex: watchlistIndex
       })
     },
-    deletePlaylist(playlistIndex) {
+    deleteWatchlists(watchlistIndex) {
       dispatch({
-        type: 'DELETE_PLAYLIST',
-        playlistIndex: playlistIndex
+        type: 'DELETE_WATCHLIST',
+        watchlistIndex: watchlistIndex
       });
     },
-    changeName(playlistIndex, playlistName) {
+    changeName(watchlistIndex, watchlistName) {
       dispatch({
-        type: 'CHANGE_PLAYLIST_NAME',
-        playlistIndex: playlistIndex,
-        playlistName: playlistName,
+        type: 'CHANGE_WATCHLIST_NAME',
+        watchlistIndex: watchlistIndex,
+        watchlistName: watchlistName,
 
       })
     }
@@ -198,9 +196,9 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(store) {
   return {
-    playlists: store.playlists
+    watchlist: store.watchlist
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Playlist);
+export default connect(mapStateToProps, mapDispatchToProps)(Watchlist);

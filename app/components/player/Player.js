@@ -24,11 +24,6 @@ class Player extends React.Component {
     }
   }
 
-  componentDidMount() {
-
-
-  }
-
 
   songTitleLimiter(title) {
     if (title) {
@@ -45,18 +40,16 @@ class Player extends React.Component {
   }
 
   handlePauseAudio() {
-// if (this.myPlayer)
     this.props.togglePlayin()
   }
 
   handlePauseAudio() {
-// if (this.myPlayer)
     this.props.togglePlayin()
   }
 
   render() {
     if (this.props.currentTrack) {
-      const songUrl = `${this.props.currentTrack.stream_url}?client_id=Jx6UQUTeG43DMdLLbYutFJlXazNXAHHd`;
+      const songUrl = `${this.props.currentTrack.stream_url}?client_id=OmTFHKYSMLFqnu2HHucmclAptedxWXkq`;
 
       return <footer className="player-footer">
         <div className="player-song-info">

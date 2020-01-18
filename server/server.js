@@ -4,8 +4,8 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const os = require('os');
 
-fs.writeFileSync(os.tmpdir() + '/playlist.json',
-fs.readFileSync(__dirname + '/playlist.json'));
+fs.writeFileSync(os.tmpdir() + '/watchlists.json',
+fs.readFileSync(__dirname + '/watchlists.json'));
 
 // BASE SETUP
 // ==============================================
@@ -27,94 +27,92 @@ app.use(bodyParser.json());
 // ROUTES
 // ==============================================
 
-app.get('/playlists', function(req, res) {
+app.get('/watchlists', function(req, res) {
 
-  res.sendFile(os.tmpdir() + '/playlist.json');
+  res.sendFile(os.tmpdir() + '/watchlists.json');
 });
 
-app.post('/serverAddPlaylist', (req, res) => {
+app.post('/serverAddWatchlists', (req, res) => {
 
-  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
+  const data = fs.readFileSync(os.tmpdir() + '/watchlists.json');
 
-  const playlists = JSON.parse(data);
+  const watchlists = JSON.parse(data);
 
-  playlists.push(req.body);
+  watchlists.push(req.body);
 
-  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/watchlists.json', JSON.stringify(watchlists));
 
   res.send('OK')
 
 });
 
-app.post('/serverAddPlaylistWithSong', (req, res) => {
+app.post('/serverAddWatchlistsWithmovie', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
+  const data = fs.readFileSync(os.tmpdir() + '/watchlists.json');
 
-  const playlists = JSON.parse(data);
+  const watchlists = JSON.parse(data);
 
-  playlists.push(req.body);
+  watchlists.push(req.body);
 
-  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/watchlists.json', JSON.stringify(watchlists));
 
   res.send('OK')
 
 });
 
 
-app.post('/playlistNameChange', (req, res) => {
+app.post('/watchlistNameChange', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-  console.info('change name');
-  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
 
-  const playlists = JSON.parse(data);
+  const data = fs.readFileSync(os.tmpdir() + '/watchlists.json');
 
- const foo = playlists.find((playlist)=> req.body.id === playlist.id);
-// console.info(foo);
-console.info(req.body.title);
+  const watchlists = JSON.parse(data);
+
+ const foo = watchlists.find((watchlist)=> req.body.id === watchlist.id);
 
   foo.title = req.body.title;
 
-  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/watchlists.json', JSON.stringify(watchlists));
 
   res.send('OK')
 
 });
 
 
-app.post('/serverDeletePlaylist', (req, res) => {
+app.post('/serverDeleteWatchlists', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-  console.info(req.body);
-  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
 
-  const playlists = JSON.parse(data);
+  const data = fs.readFileSync(os.tmpdir() + '/watchlists.json');
+
+  const watchlists = JSON.parse(data);
 
 
 
-  playlists.splice(req.body.playlistIndex, 1);
+  watchlists.splice(req.body.watchlistIndex, 1);
 
-  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/watchlists.json', JSON.stringify(watchlists));
 
   res.send('OK')
 
 });
 
-app.post('/serverAddSong', (req, res) => {
+app.post('/serverAddmovie', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
 
-  const data = fs.readFileSync(os.tmpdir() + '/playlist.json');
+  const data = fs.readFileSync(os.tmpdir() + '/watchlists.json');
 
-  const playlists = JSON.parse(data);
+  const watchlists = JSON.parse(data);
 
 
   if (req.body.checked) {
-    playlists[req.body.playlistIndex].songs.push(req.body.song);
+    watchlists[req.body.watchlistIndex].movies.push(req.body.movie);
   }
   else {
-    const songIndex = playlists[req.body.playlistIndex].songs.indexOf(req.body.song);
-    playlists[req.body.playlistIndex].songs.splice(songIndex);
+    const movieIndex = watchlists[req.body.watchlistIndex].movies.indexOf(req.body.movie);
+    watchlists[req.body.watchlistIndex].movies.splice(movieIndex);
   }
 
-  fs.writeFileSync(os.tmpdir() + '/playlist.json', JSON.stringify(playlists));
+  fs.writeFileSync(os.tmpdir() + '/watchlists.json', JSON.stringify(watchlists));
 
   res.send('OK')
 

@@ -1,0 +1,45 @@
+
+.trailer-modal{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-flow: column;
+    
+}
+
+.trailer-modal>header{
+    color: #D8D8D8;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 2rem;
+}
+
+.hide{
+    display: none;
+}
+
+.yt-iframe-wrapper{
+    display: flex;
+    height: 100%;
+    padding: 21px;
+}
+
+.close-modal{
+    font-size: 34px;
+    transition: all .2s ease-in-out;
+    position: absolute;
+    top: 13px;
+    right: 13px;
+}
+
+.close-modal:hover{
+    color: #2196F3;
+}

@@ -1,12 +1,10 @@
-@import "assets/styles/colors";
-@import "assets/styles/general";
 
-.playlists-wrap {
+.watchlists-wrap {
   padding-top: 64px;
   display: flex;
 }
 
-.playlists-bar {
+.watchlists-bar {
   position: fixed;
   min-height: 100%;
   width: 25%;
@@ -14,7 +12,7 @@
   border-right: 1px solid #D8D8D8 ;
 }
 
-.add-playlist-btn {
+.add-watchlist-btn {
   background-color: #2196F3;
   color: #ffffff;
   border-radius: 2px ;
@@ -26,21 +24,20 @@
 
 }
 
-.playlists-bar-top {
+.watchlists-bar-top {
   border-bottom: 1px solid #D8D8D8;
 }
 
-.playlists-bar-bottom {
+.watchlists-bar-bottom {
   display: flex;
-  //justify-content: center;
 }
 
-.playlist-bar-titles {
+.watchlist-bar-titles {
   cursor: pointer;
   padding: 8px 10px;
 }
 
-.right-playlists {
+.right-watchlists {
 
   padding: 20px;
   position: absolute;

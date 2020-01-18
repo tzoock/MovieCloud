@@ -1,10 +1,7 @@
-@import "assets/styles/colors";
-@import "assets/styles/general";
 
 
 
-
-.playlist-header {
+.watchlist-header {
   display: flex;
   align-content: center;
   height: 64px;
@@ -28,7 +25,7 @@
   overflow: hidden;
 }
 
-.playlist-header:hover .deleteBtn {
+.watchlist-header:hover .deleteBtn {
   display: flex;
 }
 
@@ -65,7 +62,7 @@
   animation: ripple 1s ease-out;
 }
 
-.playlist-name {
+.watchlist-name {
 
   align-self: center;
   font-family: Roboto-Light, serif;
@@ -73,12 +70,11 @@
   color: #000000;
 }
 
-.playlist-name-hide {
+.watchlist-name-hide {
   display: none;
 }
 
-.song-count {
-  //align-self: center;
+.movie-count {
   text-align: center;
   background-color: #2196F3;
   width: 22px;
@@ -91,7 +87,7 @@
 }
 
 
-input[type=text].input-playlist-name {
+input[type=text].input-watchlist-name {
   display: block;
   border: 0;
   border-bottom: 1px solid #2196F3;
@@ -100,11 +96,11 @@ input[type=text].input-playlist-name {
   font-size: 16px;
 }
 
-.input-playlist-name-hide {
+.input-watchlist-name-hide {
   display: none;
 }
 
-.playlist-content {
+.watchlist-content {
   padding: 20px;
   min-height: 250px;
   display: flex;

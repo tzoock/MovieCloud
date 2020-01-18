@@ -23,7 +23,7 @@ class Playlists extends React.Component {
 
 
   serverAddPlaylist(newPlaylist) {
-      const xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open('POST', `${serverLocation}/serverAddPlaylist`);
 
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -56,23 +56,18 @@ class Playlists extends React.Component {
   }
 
   handleScroolBlur() {
-    console.info('bluuur');
     this.setState({scrollTo: ''})
   }
 
-  componentDidMount() {
-    console.info(this);
-  }
-
   render() {
-console.info(this);
     return (
       <div className="playlists-wrap">
         <div className="playlists-bar">
 
           <div className="playlists-bar-top">
-            <button className="add-playlist-btn" onClick={ () => (this.handleCreatePlaylist()) }>Add new
-              playlist
+            <button className="add-playlist-btn"
+                    onClick={() => (this.handleCreatePlaylist())}>
+              Add new playlist
             </button>
           </div>
           <div className="playlists-bar-bottom">
@@ -82,11 +77,9 @@ console.info(this);
                      onClick={() => {
                        this.handleScrool(playlist.id)
                      }}
-                     // onBlur={() => {
-                     //   this.handleScroolBlur
-                     // }}
+
                      className="playlist-bar-titles">
-                  {playlist.title }
+                  {playlist.title}
                 </div>
               )}
             </div>

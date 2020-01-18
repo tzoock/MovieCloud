@@ -1,0 +1,254 @@
+[
+  {
+    "editMode": false,
+    "id": "7878",
+    "title": "Awesome",
+    "movies": [
+      {
+        "popularity": 238.305,
+        "vote_count": 7858,
+        "video": false,
+        "poster_path": "/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
+        "id": 475557,
+        "adult": false,
+        "backdrop_path": "/n6bUvigpRFqSwmPp1m2YADdbRBc.jpg",
+        "original_language": "en",
+        "original_title": "Joker",
+        "genre_ids": [
+          80,
+          18,
+          53
+        ],
+        "title": "Joker",
+        "vote_average": 8.3,
+        "overview": "During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.",
+        "release_date": "2019-10-02"
+      },
+      {
+        "popularity": 43.925,
+        "vote_count": 20544,
+        "video": false,
+        "poster_path": "/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg",
+        "id": 157336,
+        "adult": false,
+        "backdrop_path": "/xu9zaAevzQ5nnrsXN6JcahLnG4i.jpg",
+        "original_language": "en",
+        "original_title": "Interstellar",
+        "genre_ids": [
+          12,
+          18,
+          878
+        ],
+        "title": "Interstellar",
+        "vote_average": 8.3,
+        "overview": "Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+        "release_date": "2014-11-05"
+      },
+      {
+        "popularity": 30.906,
+        "id": 98,
+        "video": false,
+        "vote_count": 10775,
+        "vote_average": 8.1,
+        "title": "Gladiator",
+        "release_date": "2000-05-01",
+        "original_language": "en",
+        "original_title": "Gladiator",
+        "genre_ids": [
+          28,
+          18,
+          12
+        ],
+        "backdrop_path": "/5vZw7ltCKI0JiOYTtRxaIC3DX0e.jpg",
+        "adult": false,
+        "overview": "In the year 180, the death of emperor Marcus Aurelius throws the Roman Empire into chaos.  Maximus is one of the Roman army's most capable and trusted generals and a key advisor to the emperor.  As Marcus' devious son Commodus ascends to the throne, Maximus is set to be executed.  He escapes, but is captured by slave traders.  Renamed Spaniard and forced to become a gladiator, Maximus must battle to the death with other men for the amusement of paying audiences.",
+        "poster_path": "/6WBIzCgmDCYrqh64yDREGeDk9d3.jpg"
+      }
+    ]
+  },
+  {
+    "editMode": false,
+    "id": "111",
+    "title": "For my kids",
+    "movies": [
+      {
+        "popularity": 185.437,
+        "vote_count": 1079,
+        "video": false,
+        "poster_path": "/jyw8VKYEiM1UDzPB7NsisUgBeJ8.jpg",
+        "id": 512200,
+        "adult": false,
+        "backdrop_path": "/zTxHf9iIOCqRbxvl8W5QYKrsMLq.jpg",
+        "original_language": "en",
+        "original_title": "Jumanji: The Next Level",
+        "genre_ids": [
+          28,
+          12,
+          35,
+          14
+        ],
+        "title": "Jumanji: The Next Level",
+        "vote_average": 6.7,
+        "overview": "As the gang return to Jumanji to rescue one of their own, they discover that nothing is as they expect. The players will have to brave parts unknown and unexplored in order to escape the world’s most dangerous game.",
+        "release_date": "2019-12-04"
+      },
+      {
+        "popularity": 111.181,
+        "vote_count": 1789,
+        "video": false,
+        "poster_path": "/pjeMs3yqRmFL3giJy4PMXWZTTPa.jpg",
+        "id": 330457,
+        "adult": false,
+        "backdrop_path": "/xJWPZIYOEFIjZpBL7SVBGnzRYXp.jpg",
+        "original_language": "en",
+        "original_title": "Frozen II",
+        "genre_ids": [
+          12,
+          16,
+          10402,
+          10751
+        ],
+        "title": "Frozen II",
+        "vote_average": 7,
+        "overview": "Elsa, Anna, Kristoff and Olaf head far into the forest to learn the truth about an ancient mystery of their kingdom.",
+        "release_date": "2019-11-20"
+      },
+      {
+        "popularity": 57.005,
+        "vote_count": 8574,
+        "video": false,
+        "poster_path": "/jpfkzbIXgKZqCZAkEkFH2VYF63s.jpg",
+        "id": 920,
+        "adult": false,
+        "backdrop_path": "/a1MlbLBk5Sy6YvMbSuKfwGlDVlb.jpg",
+        "original_language": "en",
+        "original_title": "Cars",
+        "genre_ids": [
+          12,
+          16,
+          35,
+          10751
+        ],
+        "title": "Cars",
+        "vote_average": 6.7,
+        "overview": "Lightning McQueen, a hotshot rookie race car driven to succeed, discovers that life is about the journey, not the finish line, when he finds himself unexpectedly detoured in the sleepy Route 66 town of Radiator Springs. On route across the country to the big Piston Cup Championship in California to compete against two seasoned pros, McQueen gets to know the town's offbeat characters.",
+        "release_date": "2006-06-08"
+      },
+      {
+        "popularity": 61.102,
+        "vote_count": 4619,
+        "video": false,
+        "poster_path": "/3iYQTLGoy7QnjcUYRJy4YrAgGvp.jpg",
+        "id": 420817,
+        "adult": false,
+        "backdrop_path": "/rVqY0Bo4Npf6EIONUROxjYAJfmD.jpg",
+        "original_language": "en",
+        "original_title": "Aladdin",
+        "genre_ids": [
+          12,
+          35,
+          14,
+          10749,
+          10751
+        ],
+        "title": "Aladdin",
+        "vote_average": 7,
+        "overview": "A kindhearted street urchin named Aladdin embarks on a magical adventure after finding a lamp that releases a wisecracking genie while a power-hungry Grand Vizier vies for the same lamp that has the power to make their deepest wishes come true.",
+        "release_date": "2019-05-22"
+      },
+      {
+        "popularity": 45.264,
+        "vote_count": 10933,
+        "video": false,
+        "poster_path": "/eFnGmj63QPUpK7QUWSOUhypIQOT.jpg",
+        "id": 109445,
+        "adult": false,
+        "backdrop_path": "/cN9Nbwh66TRcj2gBE8cSEZulsx3.jpg",
+        "original_language": "en",
+        "original_title": "Frozen",
+        "genre_ids": [
+          12,
+          16,
+          10751
+        ],
+        "title": "Frozen",
+        "vote_average": 7.3,
+        "overview": "Young princess Anna of Arendelle dreams about finding true love at her sister Elsa’s coronation. Fate takes her on a dangerous journey in an attempt to end the eternal winter that has fallen over the kingdom. She's accompanied by ice delivery man Kristoff, his reindeer Sven, and snowman Olaf. On an adventure where she will find out what friendship, courage, family, and true love really means.",
+        "release_date": "2013-11-27"
+      }
+    ]
+  },
+  {
+    "editMode": false,
+    "id": "117f998a-3b86-459b-a142-ba9467f5632c",
+    "title": "Romantic",
+    "movies": [
+      {
+        "popularity": 22.624,
+        "vote_count": 6869,
+        "video": false,
+        "poster_path": "/gMfstesBXKdsHToAUXVPHujUDfb.jpg",
+        "id": 11036,
+        "adult": false,
+        "backdrop_path": "/7BBG6Kq5psKQByX0xgyTzoGhT3v.jpg",
+        "original_language": "en",
+        "original_title": "The Notebook",
+        "genre_ids": [
+          18,
+          10749
+        ],
+        "title": "The Notebook",
+        "vote_average": 7.9,
+        "overview": "An epic love story centered around an older man who reads aloud to a woman with Alzheimer's. From a faded notebook, the old man's words bring to life the story about a couple who is separated by World War II, and is then passionately reunited, seven years later, after they have taken different paths.",
+        "release_date": "2004-06-25"
+      }
+    ]
+  },
+  {
+    "editMode": false,
+    "id": "f729674b-d7b6-4f9f-b9c8-76ea234eea88",
+    "title": "Funny",
+    "movies": [
+      {
+        "popularity": 26.906,
+        "vote_count": 870,
+        "video": false,
+        "poster_path": "/m2ttWZ8rMRwIMT7zA48Jo6mTkDS.jpg",
+        "id": 459992,
+        "adult": false,
+        "backdrop_path": "/88r25ghJzVYKq0vaOApqEOZsQlD.jpg",
+        "original_language": "en",
+        "original_title": "Long Shot",
+        "genre_ids": [
+          35,
+          10749
+        ],
+        "title": "Long Shot",
+        "vote_average": 6.7,
+        "overview": "Fred Flarsky is a gifted and free-spirited journalist who has a knack for getting into trouble. Charlotte Field is one of the most influential women in the world -- a smart, sophisticated and accomplished politician. When Fred unexpectedly runs into Charlotte, he soon realizes that she was his former baby sitter and childhood crush. When Charlotte decides to make a run for the presidency, she impulsively hires Fred as her speechwriter -- much to the dismay of her trusted advisers.",
+        "release_date": "2019-05-02"
+      },
+      {
+        "popularity": 43.552,
+        "vote_count": 5955,
+        "video": false,
+        "poster_path": "/v8x8p441l1Bep8p82pAG6rduBoK.jpg",
+        "id": 854,
+        "adult": false,
+        "backdrop_path": "/oYVf9gqxZduttG6HW2Qo4ZUxLWW.jpg",
+        "original_language": "en",
+        "original_title": "The Mask",
+        "genre_ids": [
+          35,
+          80,
+          14,
+          10749
+        ],
+        "title": "The Mask",
+        "vote_average": 6.8,
+        "overview": "When timid bank clerk Stanley Ipkiss discovers a magical mask containing the spirit of the Norse god Loki, his entire life changes. While wearing the mask, Ipkiss becomes a supernatural playboy exuding charm and confidence which allows him to catch the eye of local nightclub singer Tina Carlyle. Unfortunately, under the mask's influence, Ipkiss also robs a bank, which angers junior crime lord Dorian Tyrell, whose goons get blamed for the heist.",
+        "release_date": "1994-07-29"
+      }
+    ]
+  }
+]

@@ -1,15 +1,15 @@
 import {createStore, combineReducers} from 'redux';
 
 
-import currentTrack from './reducers/current-trackReducer';
-import playlists from './reducers/playlistsReducer';
-import playinMode from './reducers/playinModeReducer';
+import currentTrailer from './reducers/currentTrailerReducer';
+import watchlists from './reducers/watchlistsReducer';
+import showTrailerModal from './reducers/showTrailerModalReducer';
 
 
 const reducers = combineReducers({
-  currentTrack,
-  playlists,
-  playinMode
+  currentTrailer,
+  watchlists,
+  showTrailerModal
 });
 
 
